@@ -35,7 +35,8 @@ $orm=new Db::table('user');//创建参数和Orm构造函数的一致
 ## 基本操作 {#basic}
 
 ### 读取数据 \(query\) {#data-select}
-####  `select()`方法: 批量获取数据
+读取数据提供`select`，`find`,`get` 三种方法
+####  `select()`方法: 批量获取数据 {#select}
 
 ```php
 select([string $fields=''])
@@ -48,7 +49,7 @@ $list=$orm->select('*');//查询所有字段和所有数据
 $list=$orm->select('id AS uid,time');//查询id和time，在返回的数据中id用uid表示
 ```
 
-#### `find()` 方法: 单条数据读取
+#### `find()` 方法: 单条数据读取 {#find}
 ```php
 find([string $id=null])
 ```
@@ -59,7 +60,7 @@ find([string $id=null])
 $user=$orm->find(2);//查询id为2的数据
 ```
 
-#### `get()`方法：获取单条或者单个数据
+#### `get()`方法：获取单条或者单个数据 {#get}
 ```php
 get([string $key = '', boolean $auto_query = true])
 ```
@@ -75,8 +76,8 @@ $username=$orm->get('name');//查询用户的姓名，自动同步数据库
 ```
 
 ### 添加数据 \(insert\) {#data-insert}
-
-#### `insert()`方法： 插入单条数据
+添加数据提供 `add`,`insert`,`insertAll` 三种方法。
+#### `insert()`方法： 插入单条数据 {#insert}
 ```php
 insert(array $data)
 ```
@@ -95,7 +96,7 @@ if($orm->insert(['uid'=>1,'pid'=>2])===false){
 }
 ```
 
-#### `insertAll()`方法: 批量插入数据
+#### `insertAll()`方法: 批量插入数据 {#insertAll}
 ```php
 insertAll(array $data)
 ```
@@ -107,18 +108,30 @@ insertAll(array $data)
 $uid=$orm->insert(['name'=>'future','org'=>'nku']);//插入一条数据
 ```
 
-#### `add()`方法: 插入已经设置的数据
-
-
+#### `add()`方法: 插入已经设置的数据 {#add}
+```php
+add()
+```
+* 无参数
+* 返回 `int` ： 数据的id（同`insert()`）
+* 数据可以使用过滤`field()`对数据字段进行过滤
+* tips： 与 insert的区别是会使用之前set的数据
+* 示例代码
+```php
+$uid=$orm
+      ->set('name','future')
+      ->set('org','nku')
+      ->add();//插入之前set的数据
+```
 ### 跟新数据 \(update\) {#data-update}
-
-#### `update()`方法： 更新数据
-#### `save()`方法： 保存数据
+更新数据提供 `update`，`save`两种方法
+#### `update()`方法： 更新数据 {#update}
+#### `save()`方法： 保存数据 {#save}
 
 
 ### 删除数据 \(delete\) {#data-delete}
 
-#### `delete()`方法： 删除数据
+#### `delete()`方法： 删除数据 {#delete}
 
 
 ## 条件限制 (condition) {#condition}
