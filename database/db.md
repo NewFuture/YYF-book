@@ -68,9 +68,13 @@ Db::table('feedback')
 
 
 ## 数据库管理  {#db}
-Db 默认会自动使用配置中的默认的数据库进行调用
+
+Db 操作同时提供多数据库操作接口。
+
+Db 默认会自动使用配置中的默认的数据库进行调用，
 不会自动的进行读写分离或者切换。
 
+**方式Db切换数据库不会影响Model或者Orm中数据库的调用**
 
 ### `current`方法:获取当前数据库 {#db-current}
 
@@ -86,7 +90,7 @@ $db=Db::current();
 $db->query('some thing');
 ```
 
-### `use`方法：设定切换数据库 {#db-use}
+### `use`方法：设定并切换数据库 {#db-use}
 `use`方法手动切换Db方式调用的默认数据库，调用之后默认数据会采用此数据库
 
 注意： 此方法**不会影响** model和orm中数据的调用
@@ -115,4 +119,30 @@ Db::use([
    'dsn'=>'mysql:host=localhost;port=3306;dbname=yyf;charset=utf8',
    'username'=>'root'
  ]);
+```
+
+### `connect`方法：临时切换数据库 {#db-connect}
+`connect`方法手动切换数据库，而不影响之后或者其他的数据调用
+
+注意： 此方法为**一次性**调用，不会影响之后数据库切换
+
+```php
+Databse connect(mixed $config)
+```
+* 参数 `$config` (必填)： 可以是下列两项之一
+ - string 数据库`配置名称`如 "_read","mydb",只要在[database] 下配置了即可;
+ - array 数据库链接配置，包括dsn，username，password;
+* 返回 ： 数据库对象
+* 示例代码
+
+```php
+/*配置名称连接*/
+Db::use('_read')->query('query something');//切换到读数据库
+Db::user('mysql:host=localhost;port=3306;dbname=yyf;charset=utf8','root','root');
+/*array方式连接*/
+Db::connect([
+ 'dsn'=>'mysql:host=localhost;port=3306;dbname=yyf;charset=utf8',
+ 'username'=>'root'
+ ])->exec($sql);//切换数据库
+Db::query($sql);//此时任然是_read数据库
 ```

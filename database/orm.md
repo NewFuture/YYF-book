@@ -40,11 +40,12 @@ $orm=new Db::table('user');//创建参数和Orm构造函数的一致
 ####  `select()`方法: 批量获取数据 {#select}
 
 ```php
-select([string $fields=''])
+array select([string $fields=''])
 ``` 
 * 参数 `$fields`[可选] : 指定查询的字段 逗号`,`分隔符，别名用` AS `链接
 * 返回 `array`多维数组
 * 示例代码
+
 ```php
 $list=$orm->select('*');//查询所有字段和所有数据
 $list=$orm->select('id AS uid,time');//查询id和time，在返回的数据中id用uid表示
@@ -52,23 +53,25 @@ $list=$orm->select('id AS uid,time');//查询id和time，在返回的数据中id
 
 #### `find()` 方法: 单条数据读取 {#find}
 ```php
-find([string $id=null])
+object find([string $id=null])
 ```
 * 参数 `$id`[可选,`int`|`string` ] :  数据的主键值
-* 返回 `Orm` 指向调用的`Orm`对象自身(查询成功)或`null`(查询失败) 
+* 返回 `Orm` Object 指向调用的`Orm`对象自身(查询成功)或`null`(查询失败) 
 * 示例代码
+
 ```php
 $user=$orm->find(2);//查询id为2的数据
 ```
 
 #### `get()`方法：获取单条或者单个数据 {#get}
 ```php
-get([string $key = '', boolean $auto_query = true])
+mixed get([string $key = '', boolean $auto_query = true])
 ```
 * 参数 `$key`[可选] : 要查询的数据键值,默认获取全部数据
 * 参数 `$auto_query`[可选] : 数据不存在时是否自动查询数据库，默认自动查询
 * 返回 `mixed` (`array`|基本类型)：查询的数据
 * 示例代码
+
 ```php
 /*获取全部数据，返回数组或者null*/
 $user=$orm->where('id',2)->get();//查询id为2的全部数据数据
@@ -78,15 +81,17 @@ $username=$orm->get('name');//查询用户的姓名，自动同步数据库
 
 ### 添加数据 \(insert\) {#data-insert}
 添加数据提供 `add`,`insert`,`insertAll` 三种方法。
+
 #### `insert()`方法： 插入单条数据 {#insert}
 ```php
-insert(array $data)
+int|string insert(array $data)
 ```
 * 参数 `$data`[必须] : 要插入的数据(键值对)
 * 返回 `int` ： 插入成功的id(主键值)，适用于自增主键的数据表，操作失败返回`false`
 * tips: 数据可以使用过滤`field()`对数据字段进行过滤
 * tips: 之前set的数据对insert无影响
 * 示例代码
+
 ```php
 $uid=$orm->insert(['name'=>'future','org'=>'nku']);//插入一条数据
 /*对于无自增主键的数据表，不会返回id，可如下===判断插入结果*/
@@ -99,41 +104,93 @@ if($orm->insert(['uid'=>1,'pid'=>2])===false){
 
 #### `insertAll()`方法: 批量插入数据 {#insertAll}
 ```php
-insertAll(array $data)
+int insertAll(array $data)
 ```
 * 参数 `$data`[必须] : 要插入的数据二维数组
 * 返回 `int` ： 插入成功的条数
 * 数据可以使用过滤`field()`对数据字段进行过滤
 * 示例代码
+
 ```php
 $uid=$orm->insert(['name'=>'future','org'=>'nku']);//插入一条数据
 ```
 
 #### `add()`方法: 插入已经设置的数据 {#add}
 ```php
-add()
+object add()
 ```
 * 无参数
-* 返回 `int` ： 数据的id（同`insert()`）
+* 返回 `Orm`对象或者NULL： 操作成功返回自身，可以继续其他操作 
 * 数据可以使用过滤`field()`对数据字段进行过滤
 * tips： 与 insert的区别是会使用之前set的数据
 * 示例代码
+
 ```php
 $uid=$orm
       ->set('name','future')
       ->set('org','nku')
       ->add();//插入之前set的数据
 ```
+
 ### 跟新数据 \(update\) {#data-update}
 更新数据提供 `update`，`save`两种方法
+
 #### `update()`方法： 更新数据 {#update}
+```php
+int update(array $data)
+```
+* 参数 `$data`[必须] : 要跟新的数据二维数组
+* 返回 `int` ： 跟新成功的条数
+* 数据可以使用过滤`field()`对数据字段进行过滤
+* tips: 之前set的数据对update无影响
+* tips: 可以跟新多条 `limit`进行限制
+* 示例代码
+
+```php
+/*跟新全部是时间*/
+$orm->update(['time'=>date('Y-m-d h:i:s')]);
+/*字段过滤*/
+$data=['id'=>2,'name'=>'changed name','password'=>'secret'];
+$orm->where('id',1)
+    ->field('name')
+    ->update($data);//只有name字段被更新，其他被过滤
+```
+
+
 #### `save()`方法： 保存数据 {#save}
+```php
+object save([string $id])
+```
+* 参数 $id (可选): 保存的主键值
+* 返回 `Orm`对象或者NULL： 操作成功返回自身，可以继续其他操作
+* 数据可以使用过滤`field()`对数据字段进行过滤
+* tips： 与 insert的区别是会使用之前set的数据
+* 示例代码
 
-
+```php
+/*字段过滤*/
+$data=['id'=>2,'name'=>'changed name'];
+$orm->field('name')//只有name字段被更新,其他被过滤
+    ->set($data)
+    ->save(1);//跟新主键为1的name
+```
 ### 删除数据 \(delete\) {#data-delete}
 
 #### `delete()`方法： 删除数据 {#delete}
 
+```php
+int delete([string $id])
+```
+* 参数 $id (可选): 删除的主键值
+* 返回 `int` ： 删除成功的条数
+* tips: 可以跟新多条 `limit`进行限制
+* 示例代码
+
+```php
+$orm->delete(1);//删除id为1的
+//where限制
+$orm->where('id',1)->delete();
+```
 
 ## 条件限制 (condition) {#condition}
 

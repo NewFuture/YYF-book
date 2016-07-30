@@ -10,7 +10,7 @@ Model 数据库模型
 在目录`app/models/`下新建`User.php`
 文件中写入如下代码
 ```php
-class UserModel extends Model{}
+<?php class UserModel extends Model{} ?>
 ```
 然后就可以在其他地方，如controller里面通过`UserModel`来调用了
 ```php
@@ -28,6 +28,7 @@ $name=UserModel::where('id',2)->get('name');
 如果数据库中用户表命名为`User`,主键为`user_id`，可以如下定义
 
 ```php
+<?php
 class UserModel extends Model
 {
     protected $_name = 'User'; //数据库表
