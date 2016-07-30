@@ -1,4 +1,5 @@
-# ORM
+ORM 数据库操作对象
+============
 
 Object-Relational Mapping（对象关系映射）
 
@@ -29,7 +30,7 @@ $orm=new Db::table('user');//创建参数和Orm构造函数的一致
 ```
 
 ### 3. Model类创建 {#model}
-通过`UserModel`来直接调用，参见 [Model一节](model.md)
+通过`UserModel`来直接调用，参见 [Model一节](model.md#create)
 
 
 ## 基本操作 {#basic}
