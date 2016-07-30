@@ -194,20 +194,57 @@ $orm->where('id',1)->delete();
 
 ## 条件限制 (condition) {#condition}
 
-### 条件查询（where）
-#### `where()`方法： 添加选择条件
+### 条件查询（where）{#where}
+支持where操作如下表
+
+| 类型 | 表达式操作($op) | 值 |例子|
+|-----|------|-----|--|
+|值比较|=,<>,!=,>,>=,<,<=|基本类型| `where($key,>,10)`|
+|空值比较| `=`,`<>`,`IS`|`null`|`where($key,'<>',null)`|
+|字符串相似|`[NOT ]LIKE`, `[NOT ]LIKE BINARY`|string|`where($key,'LIKE','head%')`|
+|in|`IN`，`NOT IN`|`array`|`where($key,'in',[1,3,5])`|
+|between|`BETWEEN`, `NOT BETWEEN`|`array`或连续两个参数|`where($key,'BETWEEN',1,10)` , `where($key,'BETWEEN',[1,10])` |
+
+
+#### `where()`方法： 添加选择条件 {#where-method}
+
+```php
+object where(mixed $condition [...])
+```
+
+
 #### `orWhere()`方法： OR条件
-#### `exist` 子查询
+同where 连接条件变成OR
+
+示例代码
+```php
+/*where和orwhere限制*/
+$orm->where('id','<',10)
+    ->orWhere('id','>',1000)
+    ->select('name');//查询id<10或者id>1000的用户名
+```
+
+#### `exists()`方法
+
+#### `orExists()`方法
+
 
 ### 结果分组（group by）
+
 #### `group()`方法 
 
+
+```php
+$orm->group('name')
+    ->select('name,count(*) as count');
+```
 #### 计算条件（having）
 #### `having()`方法： 添加选择条件
 #### `orHaving()`方法： having条件 or 
 
 ### 字段
 #### `field()`方法： 设置字段
+
 
 ### 排序
 #### `order()`方法： 设置位置和偏移
@@ -237,6 +274,14 @@ $orm->where('id',1)->delete();
 ### 多表查询
 #### `join()`方法
 #### `has()`方法
+
+```php
+$feed=Db::table('user')
+    ->has('feedback AS fb')
+    ->where('user.id',1)
+    ->select('user.id,user.name,fb.title,fb.content as feedback');
+```
+
 #### `belongs()`方法
 
 ### 子查询
