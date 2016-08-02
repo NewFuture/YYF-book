@@ -211,12 +211,85 @@ $orm->where('id',1)->delete();
 ```php
 object where(mixed $condition [...])
 ```
+* 参数支持多种方式: 
 
+    - 三元比较: (参见wehre表) 
+     >`where($field,$operator,$value)`
 
-#### `orWhere()`方法： OR条件
+        1. `string` 字段名(`$field`): 字段名如`name`,`user.id`(多表查询存在同名字段时，需要加上表名)
+        2. `string` 比较符(`$oprater`): 支持 `=`,`<>`,`!=`,`>`,`>=`,`<`,`<=`,'LIKE`,`NOT LIKE`,等表中所有操作
+        3. `mixed` 比较的值(`$value`) : 数值或者字符串或者NULL等,`in`和`between`操作可以是数组
+
+    - 二元相当关系：(三元操作省略`"="`)
+    >`where($field,$value)`
+
+        1. `string` 字段名(`$field`): 字段名，多表查询存在同名字段时，需要加上表名
+        2. `scalar`(基本类型) 比较的值(`$value`) : 字段的值,`NULL`会被特殊处理变成IS NULL语句
+
+    - 一元数组：(数组批量条件)
+    >`where($array)`
+
+        1. 关联数组`array`(` $field=>$value`): 每一组键值对相当于二元相等条件
+        2. 二维索引数组`array`(`[$condition1,$condition2,...]`):每组条件相当于一组where条件(不递归)
+   
+    - 四元区间比较：(BETWEEN条件)
+    >`where($field,$BETWEEN,$min,$max)`
+
+        1. `string` 字段名(`$field`): 字段名，多表查询存在同名字段时，需要加上表名
+        2. `string`(基本类型) 条件 : `BETWEEN`或者`NOT BETWEEN`
+        3. `scalar`(基本类型) 最小值(`$min`) : 下界(或者上界)
+        4. `scalar`(基本类型) 最大值(`$max`) : 上界(或者下界)
+
+* 返回 `Object`(`Orm`对象) ： 返回$this继续操作 
+* tips: 
+    - `NULL`值(`NULL`类型,不是string`"NULL"`,后者会作字符串处理)会被特殊处理
+    - 字段值不能是计算表达式,表达式计算用[having](#having)
+    - 值不能是字段(会被字符串处理),多标联合可以用[join](#join)
+    - 关闭`safe`模式可以在where中使用原生sql条件**不推荐使用**（不安全，也可能造成编译的sql出错，不利于sql缓存）
+* 示例代码
+
+```php
+/*where 基本操作*/
+$orm->where('status','>',0);//大于0： WHERE `status`>0
+//null特殊处理
+$orm->where('a.status','!=',null);//非空: WHERE `a`.`status` IS NOT NULL
+
+/*where相等简化*/
+//缺省等于
+$orm->where('status',0);//status为0:W HERE `status`=0
+$orm->where('data',null);//查找NULL值: WHERE `data` IS NULL
+$orm->where('id',1)->where('status',1);//并列： WHERE `id`=1 AND `status`=1
+
+/*数组参数型*/
+//in array
+$orm->where('type','IN',[1,3,7]);// 为1，3或者7 : WHERE `type` IN (1,3,7);
+// between
+//在不范围之内<1或者>3: WHERE `status` NOT BETWEEN 1 AND 3
+$orm->where('status','NOT BETWEEN',[1,3]);
+
+/*四元between*/
+$orm->where('status','NOT BETWEEN',1,3);//同上
+
+/*关联数组*/
+$orm->where(['id'=>1,'status'=>1]);//WHERE `id`=1 AND `status`=1
+/*二维索引数组*/
+$condition=[
+    ['status','>',0],
+    ['name','LIKE','%future%'],
+];
+$orm->where($condition);//WHERE `status`>0 AND `name` LIKE "%future%"
+
+```
+
+#### `orWhere()`方法： OR条件  {#orwhere-method}
 同where 连接条件变成OR
 
+```php
+object orWhere(mixed $condition [...])
+```
+
 示例代码
+
 ```php
 /*where和orwhere限制*/
 $orm->where('id','<',10)
@@ -224,9 +297,9 @@ $orm->where('id','<',10)
     ->select('name');//查询id<10或者id>1000的用户名
 ```
 
-#### `exists()`方法
+#### `exists()`方法  {#exists-method}
 
-#### `orExists()`方法
+#### `orExists()`方法  {#orexists-method}
 
 
 ### 结果分组（group by）
@@ -238,7 +311,7 @@ $orm->where('id','<',10)
 $orm->group('name')
     ->select('name,count(*) as count');
 ```
-#### 计算条件（having）
+#### 计算条件（having） {#having}
 #### `having()`方法： 添加选择条件
 #### `orHaving()`方法： having条件 or 
 
