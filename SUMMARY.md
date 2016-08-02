@@ -1,6 +1,6 @@
 # Summary
 
-## Introduction
+## 介绍 (Introduction)
 * [简介](README.md)
 
 ## 数据库 \(Database\)

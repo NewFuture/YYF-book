@@ -5,9 +5,9 @@
         "search-jieba",
         "edit-link",
         "github",
-        "page-footer",
         "splitter",
-        "toggle-chapters"
+        "toggle-chapters",
+        "tbfed-pagefooter"
     ],
     "pluginsConfig": {
         "edit-link": {
@@ -17,21 +17,10 @@
         "github": {
             "url": "https://github.com/YunYinORG/YYF"
         },
-        "page-footer": {
-            "isShowIssues": false,
-            "wisdom": " ",
-            "copyright": "Copyright &#169; New Future",
-            "style": "normal",
-            "repo": "YunYinORG/YYF",
-            "isShowQRCode": true,
-            "timeColor": "#808080",
-            "utcOffset": "8",
-            "format": "yyyy-MM-dd hh:mm:ss",
-            "signature": "YYF",
-            "token": "",
-            "baseUri": "http://yyf.newfuture.cc/",
-            "copyrightColor": "#009fa6",
-            "description": "上次修改于"
+       "tbfed-pagefooter": {
+            "copyright":"Copyright &copy NewFuture 2016",
+            "modify_label": "此页修订时间：",
+            "modify_format": "YYYY-MM-DD HH:mm:ss"
         }
     },
     "author": "New Future",
@@ -40,7 +29,7 @@
     "links": {
         "sidebar": {
             "文档首页": "http://yyf.newfuture.cc",
-            "获取YYF": "https://github.com/YunYinORG/YYF"
+            "YYF": "https://github.com/YunYinORG/YYF"
         }
     },
     "description": "YYF 开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构"
