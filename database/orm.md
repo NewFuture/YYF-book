@@ -39,9 +39,10 @@ $orm=new Db::table('user');//创建参数和Orm构造函数的一致
 读取数据提供`select`，`find`,`get` 三种方法
 ####  `select()`方法: 批量获取数据 {#select}
 
-```php
-array select([string $fields=''])
-``` 
+>```php
+>array select([string $fields=''])
+>```
+
 * 参数 `$fields`[可选] : 指定查询的字段 逗号`,`分隔符，别名用` AS `链接
 * 返回 `array`多维数组
 * 示例代码
@@ -52,9 +53,10 @@ $list=$orm->select('id AS uid,time');//查询id和time，在返回的数据中id
 ```
 
 #### `find()` 方法: 单条数据读取 {#find}
-```php
-object find([string $id=null])
-```
+>```php
+>object find([string $id=null])
+>```
+
 * 参数 `$id`[可选,`int`|`string` ] :  数据的主键值
 * 返回 `Orm` Object 指向调用的`Orm`对象自身(查询成功)或`null`(查询失败) 
 * 示例代码
@@ -64,9 +66,10 @@ $user=$orm->find(2);//查询id为2的数据
 ```
 
 #### `get()`方法：获取单条或者单个数据 {#get}
-```php
-mixed get([string $key = '', boolean $auto_query = true])
-```
+>```php
+>mixed get([string $key = '', boolean $auto_query = true])
+>```
+
 * 参数 `$key`[可选] : 要查询的数据键值,默认获取全部数据
 * 参数 `$auto_query`[可选] : 数据不存在时是否自动查询数据库，默认自动查询
 * 返回 `mixed` (`array`|基本类型)：查询的数据
@@ -83,9 +86,10 @@ $username=$orm->get('name');//查询用户的姓名，自动同步数据库
 添加数据提供 `add`,`insert`,`insertAll` 三种方法。
 
 #### `insert()`方法： 插入单条数据 {#insert}
-```php
-int|string insert(array $data)
-```
+>```php
+>int insert(array $data)
+>```
+
 * 参数 `$data`[必须] : 要插入的数据(键值对)
 * 返回 `int` ： 插入成功的id(主键值)，适用于自增主键的数据表，操作失败返回`false`
 * tips: 数据可以使用过滤`field()`对数据字段进行过滤
@@ -103,9 +107,10 @@ if($orm->insert(['uid'=>1,'pid'=>2])===false){
 ```
 
 #### `insertAll()`方法: 批量插入数据 {#insertAll}
-```php
-int insertAll(array $data)
-```
+>```php
+>int insertAll(array $data)
+>```
+
 * 参数 `$data`[必须] : 要插入的数据二维数组
 * 返回 `int` ： 插入成功的条数
 * 数据可以使用过滤`field()`对数据字段进行过滤
@@ -116,11 +121,12 @@ $uid=$orm->insert(['name'=>'future','org'=>'nku']);//插入一条数据
 ```
 
 #### `add()`方法: 插入已经设置的数据 {#add}
-```php
-object add()
-```
+>```php
+>object add()
+>```
+
 * 无参数
-* 返回 `Orm`对象或者NULL： 操作成功返回自身，可以继续其他操作 
+* 返回 `Orm`对象或NULL： 操作成功返回自身，可以继续其他操作 
 * 数据可以使用过滤`field()`对数据字段进行过滤
 * tips： 与 insert的区别是会使用之前set的数据
 * 示例代码
@@ -136,14 +142,16 @@ $uid=$orm
 更新数据提供 `update`，`save`两种方法
 
 #### `update()`方法： 更新数据 {#update}
-```php
-int update(array $data)
-```
+>```php
+>int update(array $data)
+>```
+
 * 参数 `$data`[必须] : 要跟新的数据二维数组
 * 返回 `int` ： 跟新成功的条数
 * 数据可以使用过滤`field()`对数据字段进行过滤
-* tips: 之前set的数据对update无影响
-* tips: 可以跟新多条 `limit`进行限制
+* tips:
+  - 之前set的数据对update**无影响**,如果要保留使用 (save)[#save]
+  - 可以跟新多条 `limit`限制最大条数
 * 示例代码
 
 ```php
@@ -158,12 +166,13 @@ $orm->where('id',1)
 
 
 #### `save()`方法： 保存数据 {#save}
-```php
-object save([string $id])
-```
+>```php
+>object save([string $id])
+>```
+
 * 参数 $id (可选): 保存的主键值
-* 返回 `Orm`对象或者NULL： 操作成功返回自身，可以继续其他操作
-* 数据可以使用过滤`field()`对数据字段进行过滤
+* 返回 `Orm`对象或者`NULL`： 操作成功返回自身，可以继续其他操作
+* 数据可以使用`field()`对数据字段进行过滤
 * tips： 与 insert的区别是会使用之前set的数据
 * 示例代码
 
@@ -174,13 +183,34 @@ $orm->field('name')//只有name字段被更新,其他被过滤
     ->set($data)
     ->save(1);//跟新主键为1的name
 ```
-### 删除数据 \(delete\) {#data-delete}
+
+
+#### `put()`方法: 快速写入 {#put}
+
+PUT 快速修改单个字段,会立即写入数据库
+
+>```php
+>  int put(string $key,mixed $value)
+>```
+
+* 参数 string `$key`: 字段名称
+* 参数 mixed `$value`: 对应的值
+* 返回 `int`：影响的条数
+* 数据可以使用`field()`对数据字段进行过滤和设置别名
+* tips： 
+* 示例代码
+
+```php
+/*把id为1的状态修改为1*/
+$orm->where('id',1)->put('status',1);
+```
 
 #### `delete()`方法： 删除数据 {#delete}
 
-```php
-int delete([string $id])
-```
+>```php
+>int delete([string $id])
+>```
+
 * 参数 $id (可选): 删除的主键值
 * 返回 `int` ： 删除成功的条数
 * tips: 可以跟新多条 `limit`进行限制
@@ -198,47 +228,45 @@ $orm->where('id',1)->delete();
 支持where操作如下表
 
 | 类型 | 表达式操作($op) | 值 |例子|
-|-----|------|-----|--|
-|值比较|=,<>,!=,>,>=,<,<=|基本类型| `where($key,>,10)`|
-|空值比较| `=`,`<>`,`IS`|`null`|`where($key,'<>',null)`|
-|字符串相似|`[NOT ]LIKE`, `[NOT ]LIKE BINARY`|string|`where($key,'LIKE','head%')`|
-|in|`IN`，`NOT IN`|`array`|`where($key,'in',[1,3,5])`|
-|between|`BETWEEN`, `NOT BETWEEN`|`array`或连续两个参数|`where($key,'BETWEEN',1,10)` , `where($key,'BETWEEN',[1,10])` |
-
+|:----:|-----|:----:|------|
+| 值比较 |`=`,`<>`,`!=`,`>`,`>=`,`<`,`<=`| 基本类型 | `where($key,>,10)`|
+| 空值比较 | `=`,`<>`,`IS`| `NULL` |`where($key,'<>',null)`|
+| LIKE比较 |`[NOT ]LIKE`, `[NOT ]LIKE BINARY`| `string`|`where($key,'LIKE','head%')`|
+| IN 比较 |`IN`，`NOT IN`|`array`|`where($key,'in',[1,3,5])`|
+| BETWEEN |`BETWEEN`, `NOT BETWEEN`|`array`或跟两参数|`where($key,'BETWEEN',1,10)` , `where($key,'BETWEEN',[1,10])` |
 
 #### `where()`方法： 添加选择条件 {#where-method}
 
-```php
-object where(mixed $condition [...])
-```
+>```php
+>object where(mixed $condition [...])
+>```
 * 参数支持多种方式: 
+  - 三元比较: (参见wehre表) 
+    >`where($field,$operator,$value)`
+    >
+      1. `string` 字段名(`$field`): 字段名如`name`,`user.id`(多表查询存在同名字段时，需要加上表名)
+      2. `string` 比较符(`$oprater`): 支持 `=`,`<>`,`!=`,`>`,`>=`,`<`,`<=`,'LIKE`,`NOT LIKE`,等表中所有操作
+      3. `mixed` 比较的值(`$value`) : 数值或者字符串或者NULL等,`in`和`between`操作可以是数组
 
-    - 三元比较: (参见wehre表) 
-     >`where($field,$operator,$value)`
-
-        1. `string` 字段名(`$field`): 字段名如`name`,`user.id`(多表查询存在同名字段时，需要加上表名)
-        2. `string` 比较符(`$oprater`): 支持 `=`,`<>`,`!=`,`>`,`>=`,`<`,`<=`,'LIKE`,`NOT LIKE`,等表中所有操作
-        3. `mixed` 比较的值(`$value`) : 数值或者字符串或者NULL等,`in`和`between`操作可以是数组
-
-    - 二元相当关系：(三元操作省略`"="`)
+  - 二元相当关系：(三元操作省略`"="`)
     >`where($field,$value)`
+    >
+      1. `string` 字段名(`$field`): 字段名，多表查询存在同名字段时，需要加上表名
+      2. `scalar`(基本类型) 比较的值(`$value`) : 字段的值,`NULL`会被特殊处理变成IS NULL语句
 
-        1. `string` 字段名(`$field`): 字段名，多表查询存在同名字段时，需要加上表名
-        2. `scalar`(基本类型) 比较的值(`$value`) : 字段的值,`NULL`会被特殊处理变成IS NULL语句
-
-    - 一元数组：(数组批量条件)
+  - 一元数组：(数组批量条件)
     >`where($array)`
-
-        1. 关联数组`array`(` $field=>$value`): 每一组键值对相当于二元相等条件
-        2. 二维索引数组`array`(`[$condition1,$condition2,...]`):每组条件相当于一组where条件(不递归)
+    >
+      1. 关联数组`array`(` $field=>$value`): 每一组键值对相当于二元相等条件
+      2. 二维索引数组`array`(`[$condition1,$condition2,...]`):每组条件相当于一组where条件(不递归)
    
-    - 四元区间比较：(BETWEEN条件)
+  - 四元区间比较：(BETWEEN条件)
     >`where($field,$BETWEEN,$min,$max)`
-
-        1. `string` 字段名(`$field`): 字段名，多表查询存在同名字段时，需要加上表名
-        2. `string`(基本类型) 条件 : `BETWEEN`或者`NOT BETWEEN`
-        3. `scalar`(基本类型) 最小值(`$min`) : 下界(或者上界)
-        4. `scalar`(基本类型) 最大值(`$max`) : 上界(或者下界)
+    >
+      1. `string` 字段名(`$field`): 字段名，多表查询存在同名字段时，需要加上表名
+      2. `string`(基本类型) 条件 : `BETWEEN`或者`NOT BETWEEN`
+      3. `scalar`(基本类型) 最小值(`$min`) : 下界(或者上界)
+      4. `scalar`(基本类型) 最大值(`$max`) : 上界(或者下界)
 
 * 返回 `Object`(`Orm`对象) ： 返回$this继续操作 
 * tips: 
@@ -264,7 +292,7 @@ $orm->where('id',1)->where('status',1);//并列： WHERE `id`=1 AND `status`=1
 //in array
 $orm->where('type','IN',[1,3,7]);// 为1，3或者7 : WHERE `type` IN (1,3,7);
 // between
-//在不范围之内<1或者>3: WHERE `status` NOT BETWEEN 1 AND 3
+//在不范围之内,status< 1或者status>3: WHERE `status` NOT BETWEEN 1 AND 3
 $orm->where('status','NOT BETWEEN',[1,3]);
 
 /*四元between*/
@@ -284,9 +312,9 @@ $orm->where($condition);//WHERE `status`>0 AND `name` LIKE "%future%"
 #### `orWhere()`方法： OR条件  {#orwhere-method}
 同where 连接条件变成OR
 
-```php
-object orWhere(mixed $condition [...])
-```
+>```php
+>object orWhere(mixed $condition [...])
+>```
 
 示例代码
 
@@ -294,13 +322,44 @@ object orWhere(mixed $condition [...])
 /*where和orwhere限制*/
 $orm->where('id','<',10)
     ->orWhere('id','>',1000)
-    ->select('name');//查询id<10或者id>1000的用户名
+    ->select('name');//查询id< 10或者id>1000的用户名
 ```
 
 #### `exists()`方法  {#exists-method}
 
-#### `orExists()`方法  {#orexists-method}
+判断子查询是否存在需要使用exist
 
+>```php
+>object exists(Orm $query[, boolean $not=false,[ string $type='AND']])
+>```
+
+* 参数 (`Orm`)`$query`: 包含查询条件的`Orm`对象
+* 参数 (`boolean`) `$not`: 为`ture`时 查询 not exists,默认是 false
+* 参数 (`string`) `$type`: 连接条件 `AND`或者`OR`
+* 返回 `Orm Object` ： 返回$this
+* 示例代码
+
+```php
+/*子查询*/
+$subQuery=new $orm('user');
+$subQuery->where('id',$id);
+$orm->exists($subQuery)
+    ->where('id',$id)
+    ->select('id,content');
+/*另一种方式*/
+InfoModel::exists(
+        Db::table('user')->where('id',$id)
+    )->where('id',$id)
+    ->select('id,content');
+```
+
+#### `orExists()`方法  {#orexists-method}
+判断子查询是否存在需要使用exist，OR条件链接
+
+>```php
+>object orExists(Orm $query[, boolean $not=false])
+>```
+用法同exists
 
 ### 结果分组（group by）
 
