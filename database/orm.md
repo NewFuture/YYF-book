@@ -240,10 +240,12 @@ $orm->where('id',1)->delete();
 >```php
 >object where(mixed $condition [...])
 >```
+
 * 参数支持多种方式: 
   - 三元比较: (参见wehre表) 
     >`where($field,$operator,$value)`
     >
+
       1. `string` 字段名(`$field`): 字段名如`name`,`user.id`(多表查询存在同名字段时，需要加上表名)
       2. `string` 比较符(`$oprater`): 支持 `=`,`<>`,`!=`,`>`,`>=`,`<`,`<=`,'LIKE`,`NOT LIKE`,等表中所有操作
       3. `mixed` 比较的值(`$value`) : 数值或者字符串或者NULL等,`in`和`between`操作可以是数组
@@ -251,18 +253,21 @@ $orm->where('id',1)->delete();
   - 二元相当关系：(三元操作省略`"="`)
     >`where($field,$value)`
     >
+
       1. `string` 字段名(`$field`): 字段名，多表查询存在同名字段时，需要加上表名
       2. `scalar`(基本类型) 比较的值(`$value`) : 字段的值,`NULL`会被特殊处理变成IS NULL语句
 
   - 一元数组：(数组批量条件)
     >`where($array)`
     >
+
       1. 关联数组`array`(` $field=>$value`): 每一组键值对相当于二元相等条件
       2. 二维索引数组`array`(`[$condition1,$condition2,...]`):每组条件相当于一组where条件(不递归)
    
   - 四元区间比较：(BETWEEN条件)
     >`where($field,$BETWEEN,$min,$max)`
     >
+
       1. `string` 字段名(`$field`): 字段名，多表查询存在同名字段时，需要加上表名
       2. `string`(基本类型) 条件 : `BETWEEN`或者`NOT BETWEEN`
       3. `scalar`(基本类型) 最小值(`$min`) : 下界(或者上界)
