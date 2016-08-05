@@ -5,8 +5,7 @@
         "search-jieba",
         "edit-link",
         "github",
-        "splitter",
-        "toggle-chapters",
+        "anchors",
         "tbfed-pagefooter"
     ],
     "pluginsConfig": {
