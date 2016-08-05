@@ -624,16 +624,42 @@ $orm->count('type',true);
 
 #### `sum()`方法： 求和 {#sum}
 >```php
->int sum( string $column_name)
+>int sum(string $column_name)
 >```
 
+* 参数: `string`(`$column_name`)要计算的字段
+* 返回 `int` ： 求和结果
+* 示例代码
 
-#### `avg()`方法： 设置字段
-#### `max()`方法： 设置字段
-#### `min()`方法： 设置字段
+```php
+/*统计总数*/
+$orm->sum('score');
+
+```
+
+#### `avg()`方法： 求均值 {#avg}
+>```php
+>int avg(string $column_name)
+>```
+
+用法同sum
+
+#### `max()`方法： 求最大值 {#max}
+>```php
+>int max(string $column_name)
+>```
+
+用法同sum
+
+#### `min()`方法： 求最小值 {#min}
+>```php
+>int min(string $column_name)
+>```
+
+用法同sum
 
 
-### 自增自减(写)
+### 自增自减(写操作)
 #### `increment()`方法
 #### `decrement()`方法
 
