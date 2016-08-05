@@ -523,28 +523,117 @@ $orm->select('user_id AS uid,name AS user');
 $orm->field('name,info')->update($data);
 ```
 
-### 排序
+### 排序 {#order}
 
 #### `order()`方法： 设置位置和偏移
+添加字段
+
+>```php
+>object order(string $fields [, boolean $desc = false])
+>```
+
+* 最多两个参数: 
+    1. `string`(`$field`) [必须] : 要排序的字段
+    2. `bool`(`$desc`) [默认false]: 是否按照降序排列(默认升序排列)
+* 返回 `Object`(`Orm`对象) ： 返回$this继续操作 
+* tips: 排序通常和[limit](#limit)结合使用
+* 示例代码
+
+```php
+/*order排序*/
+$orm->order('name',ture) // 按照name降序
+    ->ordee('id') //再安装id升序(从小到大)
+    ->select('name,id');
+
+```
 
 ### 分页
 
-#### `limit()`方法： 设置位置和偏移
-#### `page()`方法： 翻页
+#### `limit()`方法：限制读取条数和偏移 {#limit}
 
+>```php
+>object limit( int $maxsize [, int $offset = 0])
+>```
 
+* 最多两个参数: 
+    1. `int`(`$maxsize`) [必须] : 最大条数
+    2. `int`(`$offset`) [默认0]: 偏移量(起始位置)
+* 返回 `Object`(`Orm`对象) ： 返回$this继续操作 
+* 示例代码
 
-## 函数
+```php
+/*limit 限制读取条数*/
+$orm->limit(10) //读取10条数据
+    ->select('name,id');
+
+/*limit 设置偏移量*/
+$orm->limit(10,12) //从12条开始读取10条(到22)
+    ->select('name,id');
+
+```
+
+#### `page()`方法： 翻页 {#page}
+实际应用中limit 操作通常用来快速翻页,page方法是用来翻页的快速操作
+
+>```php
+>object  page( int $number [, int $size = 10])
+>```
+
+* 最多两个参数: 
+    1. `int`(`$number`) [必须] : 页码
+    2. `int`(`$size`) [默认10]: 每页条数
+* 返回 `Object`(`Orm`对象) ： 返回$this继续操作 
+* 示例代码
+
+```php
+/*page 限制读取条数*/
+$orm->page(1) //读取第一页(前10条数据)
+    ->select('name,id');
+
+/*page 设置偏移量*/
+$orm->page(2,15) //每页15条，读取第二页
+    ->select('name,id');
+
+```
+
+## 函数 {function}
+
+Orm 中内置一些常用sql函数和操作
 
 ### 聚合函数
-#### `count()`方法： 设置字段
-#### `sum()`方法： 设置字段
+
+#### `count()`方法： 统计字段 {#count}
+>```php
+>int count( [string $column_name='*', [, boolean $is_distinct = false]])
+>```
+
+* 最多两个参数: 
+    1. `string`(`$column_name`) [默认*] : 要统计字段默认全部条数
+    2. `bool`(`$is_distinct`) [默认false]: 是否去重
+* 返回 `int` ： 统计的数目
+* 示例代码
+
+```php
+/*统计总数*/
+$orm->count();
+
+/*统计不重复的字段*/
+$orm->count('type',true);
+
+```
+
+#### `sum()`方法： 求和 {#sum}
+>```php
+>int sum( string $column_name)
+>```
+
+
 #### `avg()`方法： 设置字段
 #### `max()`方法： 设置字段
 #### `min()`方法： 设置字段
 
 
-### 自增自减
+### 自增自减(写)
 #### `increment()`方法
 #### `decrement()`方法
 
@@ -578,7 +667,7 @@ $feed=Db::table('user')
 ### 切换数据库
 #### `setDb()`方法
 
-## 安全和调试
+## 其他
 
 ### 安全模式
 #### `safe()`方法
@@ -586,6 +675,8 @@ $feed=Db::table('user')
 ### 调试输出
 #### `debug()`方法
 
+### 设置别名
+#### `alias()` 方法
 
 ## 数据操作
 ### 存取方法
