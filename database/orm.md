@@ -35,7 +35,7 @@ $orm=new Db::table('user');//创建参数和Orm构造函数的一致
 
 ## 基本操作 {#basic}
 
-### 读取数据 \(query\) {#data-select}
+### 读取数据 \(query\) {#query}
 读取数据提供`select`，`find`,`get` 三种方法
 ####  `select()`方法: 批量获取数据 {#select}
 
@@ -330,6 +330,8 @@ $orm->where('id','<',10)
     ->select('name');//查询id< 10或者id>1000的用户名
 ```
 
+### 子查询是否存在exists  {#exists}
+
 #### `exists()`方法  {#exists-method}
 
 判断子查询是否存在需要使用exist
@@ -364,29 +366,169 @@ InfoModel::exists(
 >```php
 >object orExists(Orm $query[, boolean $not=false])
 >```
-用法同exists
 
-### 结果分组（group by）
+用法同 [exists](#exists-method)
 
-#### `group()`方法 
 
+### 分组和去重 {#group}
+
+#### `distinct()`方法: 去除相同的结果
+
+数据库在查询的时候返回所有数据库,distinct 可以去除查询结果中重复的结果(同样的查询记录)
+
+>```php
+> object distinct([boolean $is_distinct = true])
+>```
+
+* 参数 (`boolean`) `$is_distinct` : 设置是否去重,默认参数是`ture`
+* 返回 `Orm` 对象: 可以继续其他操作
+* 示例代码
 
 ```php
-$orm->group('name')
-    ->select('name,count(*) as count');
+/*查询所有的状态,每种状态显示一个*/
+$orm->distinct()->select('status');
 ```
-#### 计算条件（having） {#having}
+
+#### `group()`方法 : 查询结果分组{#group}
+
+GROUP 可以按条件或者字段进行分组， 可以连续使用多个GROUP条件
+
+>```php
+> object group(string $field [, string $operator, mixed $value])
+>```
+
+* 参数: 与[where](#where-method)相似但是不接收数组参数.
+    - 一个参数：
+        1. `string`(`$field`)[必须]: 分组的字段
+
+    - 两个参数：
+        1. `string`(`$field`)[必须]: 字段
+        2. `string`(`$value`):  相等条件
+
+    - 三个参数：
+        1. `string`(`$field`)[必须]: 分组的字段
+        2. `string`(`$operator`): 比较符 参照where
+        3. `mixed`(`$value`): 比较值
+
+* 返回 `orm`： 可以继续后续操作
+* 示例代码：
+
+```php
+/*统计每种状态有多少*/
+$orm->group('status')
+    ->select('status,count(*) as count');
+```
+
+
+### 计算条件（having） {#having}
+
+当查询条件需要使用聚合函数时,需要having函数。WHERE 关键字无法与聚和函数一起使用(sql 中where 先执行)。
+
+
 #### `having()`方法： 添加选择条件
+
+HAVING AND链接的条件
+
+>```php
+>object having(string $field,string $operator,string $value)
+>```
+
+* 参数: 与[where](#where-method)相似但是不接收数组参数.
+
+    - 两个参数：
+        1. `string`(`$field`)[必须]: 字段
+        2. `string`(`$value`):  相等条件
+
+    - 三个参数：
+        1. `string`(`$field`)[必须]: 分组的字段
+        2. `string`(`$operator`): 比较符 参照where
+        3. `mixed`(`$value`): 比较值
+        
+* 返回 `orm`： 可以继续后续操作
+* 示例代码：
+
+```php
+/*统计每种状态出现次数大于100的*/
+$orm->group('status')
+    ->having('count','>',100)//where 会报错
+    ->select('status,count(*) as count');
+```
+
 #### `orHaving()`方法： having条件 or 
+HAVING 条件 OR 关系，类似于 orWhere
 
-### 字段
-#### `field()`方法： 设置字段
+>```php
+>object orHaving(string $field,string $operator,string $value)
+>```
 
+用法同 [having](#having)。 
+
+### 字段 {#field}
+
+修改数据或者读取数据时需要进行数据过滤,或者对字段名进行映射时，可以使用`field`方法
+
+#### `field()`方法： 字段过滤和别名设置
+
+>```php
+>object field(mixed $field [, string $alias])
+>```
+
+* 参数支持多种方式: 
+  - 两个参数: (字段别名设置) 
+    >`field($field,$alias)`
+    >
+
+      1. `string` 字段(`$field`): 字段名如`name`,`user.id`(多表查询存在同名字段时，需要加上表名)
+      2. `string` 别名(`$alias`): 别名如`uid`
+
+  - 数组参数:
+    >`field($array)` [$field=>$alias]
+    >
+
+     关联数组`array`(` $field=>$value`): 每一组键值对是一组字段别名隐身
+
+  - 字符串参数：(数组批量条件)
+    >`field($string)`
+    >
+
+     * 多个字段用`,`隔开
+     * 别名用`AS`链接 如 `'user.id AS id'`
+   
+
+* 返回 `Object`(`Orm`对象) ： 返回$this继续操作 
+* tips: 
+    - 字段值是聚合表达式时时 必须指定别名
+    - 如果设置了field,[修改](#update),[插入](#insert)和[查询](#query)操作会对其过滤
+* 示例代码
+
+```php
+/*field 二元参数设置别名*/
+$orm->field('user_id','uid')
+    ->field('name','user')
+    ->select();
+
+/*array*/
+$orm->field([
+        'user_id'=>'uid',
+        'name'=>'user',
+    ])->select();
+
+/*字符串*/
+$orm->field('user_id AS uid,name AS user')
+    ->select();
+//select 快捷方法
+$orm->select('user_id AS uid,name AS user');
+
+/*update过滤,只有name和info会被更新*/
+$orm->field('name,info')->update($data);
+```
 
 ### 排序
+
 #### `order()`方法： 设置位置和偏移
 
 ### 分页
+
 #### `limit()`方法： 设置位置和偏移
 #### `page()`方法： 翻页
 
