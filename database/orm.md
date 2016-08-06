@@ -40,7 +40,7 @@ $orm=new Db::table('user');//创建参数和Orm构造函数的一致
 ####  `select()`方法: 批量获取数据 {#select}
 
 >```php
->array select([string $fields=''])
+>array function select([string $fields=''])
 >```
 
 * 参数 `$fields`[可选] : 指定查询的字段 逗号`,`分隔符，别名用` AS `链接
@@ -54,7 +54,7 @@ $list=$orm->select('id AS uid,time');//查询id和time，在返回的数据中id
 
 #### `find()` 方法: 单条数据读取 {#find}
 >```php
->object find([string $id=null])
+>object function find([string $id=null])
 >```
 
 * 参数 `$id`[可选,`int`|`string` ] :  数据的主键值
@@ -67,7 +67,7 @@ $user=$orm->find(2);//查询id为2的数据
 
 #### `get()`方法：获取单条或者单个数据 {#get}
 >```php
->mixed get([string $key = '', boolean $auto_query = true])
+>mixed function get([string $key = '', boolean $auto_query = true])
 >```
 
 * 参数 `$key`[可选] : 要查询的数据键值,默认获取全部数据
@@ -87,7 +87,7 @@ $username=$orm->get('name');//查询用户的姓名，自动同步数据库
 
 #### `insert()`方法： 插入单条数据 {#insert}
 >```php
->int insert(array $data)
+>int function insert(array $data)
 >```
 
 * 参数 `$data`[必须] : 要插入的数据(键值对)
@@ -108,7 +108,7 @@ if($orm->insert(['uid'=>1,'pid'=>2])===false){
 
 #### `insertAll()`方法: 批量插入数据 {#insertAll}
 >```php
->int insertAll(array $data)
+>int function insertAll(array $data)
 >```
 
 * 参数 `$data`[必须] : 要插入的数据二维数组
@@ -122,7 +122,7 @@ $uid=$orm->insert(['name'=>'future','org'=>'nku']);//插入一条数据
 
 #### `add()`方法: 插入已经设置的数据 {#add}
 >```php
->object add()
+>object function add()
 >```
 
 * 无参数
@@ -143,7 +143,7 @@ $uid=$orm
 
 #### `update()`方法： 更新数据 {#update}
 >```php
->int update(array $data)
+>int function update(array $data)
 >```
 
 * 参数 `$data`[必须] : 要跟新的数据二维数组
@@ -167,7 +167,7 @@ $orm->where('id',1)
 
 #### `save()`方法： 保存数据 {#save}
 >```php
->object save([string $id])
+>object function save([string $id])
 >```
 
 * 参数 $id (可选): 保存的主键值
@@ -190,7 +190,7 @@ $orm->field('name')//只有name字段被更新,其他被过滤
 PUT 快速修改单个字段,会立即写入数据库
 
 >```php
->  int put(string $key,mixed $value)
+>  int function put(string $key,mixed $value)
 >```
 
 * 参数 string `$key`: 字段名称
@@ -208,7 +208,7 @@ $orm->where('id',1)->put('status',1);
 #### `delete()`方法： 删除数据 {#delete}
 
 >```php
->int delete([string $id])
+>int function delete([string $id])
 >```
 
 * 参数 $id (可选): 删除的主键值
@@ -238,7 +238,7 @@ $orm->where('id',1)->delete();
 #### `where()`方法： 添加选择条件 {#where-method}
 
 >```php
->object where(mixed $condition [...])
+>object function where(mixed $condition [...])
 >```
 
 * 参数支持多种方式: 
@@ -318,7 +318,7 @@ $orm->where($condition);//WHERE `status`>0 AND `name` LIKE "%future%"
 同where 连接条件变成OR
 
 >```php
->object orWhere(mixed $condition [...])
+>object function orWhere(mixed $condition [...])
 >```
 
 示例代码
@@ -337,7 +337,7 @@ $orm->where('id','<',10)
 判断子查询是否存在需要使用exist
 
 >```php
->object exists(Orm $query[, boolean $not=false,[ string $type='AND']])
+>object function exists(Orm $query[, boolean $not=false,[ string $type='AND']])
 >```
 
 * 参数 (`Orm`)`$query`: 包含查询条件的`Orm`对象
@@ -364,7 +364,7 @@ InfoModel::exists(
 判断子查询是否存在需要使用exist，OR条件链接
 
 >```php
->object orExists(Orm $query[, boolean $not=false])
+>object function orExists(Orm $query[, boolean $not=false])
 >```
 
 用法同 [exists](#exists-method)
@@ -377,7 +377,7 @@ InfoModel::exists(
 数据库在查询的时候返回所有数据库,distinct 可以去除查询结果中重复的结果(同样的查询记录)
 
 >```php
-> object distinct([boolean $is_distinct = true])
+> object function distinct([boolean $is_distinct = true])
 >```
 
 * 参数 (`boolean`) `$is_distinct` : 设置是否去重,默认参数是`ture`
@@ -394,7 +394,7 @@ $orm->distinct()->select('status');
 GROUP 可以按条件或者字段进行分组， 可以连续使用多个GROUP条件
 
 >```php
-> object group(string $field [, string $operator, mixed $value])
+> object function group(string $field [, string $operator, mixed $value])
 >```
 
 * 参数: 与[where](#where-method)相似但是不接收数组参数.
@@ -430,7 +430,7 @@ $orm->group('status')
 HAVING AND链接的条件
 
 >```php
->object having(string $field,string $operator,string $value)
+>object function having(string $field,string $operator,string $value)
 >```
 
 * 参数: 与[where](#where-method)相似但是不接收数组参数.
@@ -458,7 +458,7 @@ $orm->group('status')
 HAVING 条件 OR 关系，类似于 orWhere
 
 >```php
->object orHaving(string $field,string $operator,string $value)
+>object function orHaving(string $field,string $operator,string $value)
 >```
 
 用法同 [having](#having)。 
@@ -470,7 +470,7 @@ HAVING 条件 OR 关系，类似于 orWhere
 #### `field()`方法： 字段过滤和别名设置
 
 >```php
->object field(mixed $field [, string $alias])
+>object function field(mixed $field [, string $alias])
 >```
 
 * 参数支持多种方式: 
@@ -529,7 +529,7 @@ $orm->field('name,info')->update($data);
 添加字段
 
 >```php
->object order(string $fields [, boolean $desc = false])
+>object function order(string $fields [, boolean $desc = false])
 >```
 
 * 最多两个参数: 
@@ -552,7 +552,7 @@ $orm->order('name',ture) // 按照name降序
 #### `limit()`方法：限制读取条数和偏移 {#limit}
 
 >```php
->object limit( int $maxsize [, int $offset = 0])
+>object function limit( int $maxsize [, int $offset = 0])
 >```
 
 * 最多两个参数: 
@@ -576,7 +576,7 @@ $orm->limit(10,12) //从12条开始读取10条(到22)
 实际应用中limit 操作通常用来快速翻页,page方法是用来翻页的快速操作
 
 >```php
->object  page( int $number [, int $size = 10])
+>object function page( int $number [, int $size = 10])
 >```
 
 * 最多两个参数: 
@@ -604,7 +604,7 @@ Orm 中内置一些常用sql函数和操作
 
 #### `count()`方法： 统计字段 {#count}
 >```php
->int count( [string $column_name='*', [, boolean $is_distinct = false]])
+>int function count( [string $column_name='*', [, boolean $is_distinct = false]])
 >```
 
 * 最多两个参数: 
@@ -624,7 +624,7 @@ $orm->count('type',true);
 
 #### `sum()`方法： 求和 {#sum}
 >```php
->int sum(string $column_name)
+>int function sum(string $column_name)
 >```
 
 * 参数: `string`(`$column_name`)要计算的字段
@@ -639,51 +639,190 @@ $orm->sum('score');
 
 #### `avg()`方法： 求均值 {#avg}
 >```php
->int avg(string $column_name)
+>int function avg(string $column_name)
 >```
 
 用法同sum
 
 #### `max()`方法： 求最大值 {#max}
 >```php
->int max(string $column_name)
+>int function max(string $column_name)
 >```
 
 用法同sum
 
 #### `min()`方法： 求最小值 {#min}
 >```php
->int min(string $column_name)
+>int function min(string $column_name)
 >```
 
 用法同sum
 
 
 ### 自增自减(写操作)
-#### `increment()`方法
-#### `decrement()`方法
+
+#### `increment()`方法：字段值自增 {#increment}
+
+>```php
+>int function increment(string $column_name [,int $step=1])
+>```
+
+* 参数：
+    1. `string`($column_name): 自增的字段
+    2. `int`($step) [可选] : 增加步长默认为1
+* 返回： `int` 操作成功的条数
+* 示例代码
+
+```php
+/*socre值+1*/
+$orm->where('id',1)->increment('score');
+
+/*socre值+5*/
+$orm->where('id',1)->increment('score',5);
+```
+
+#### `decrement()`方法：字段值自减 {#decrement}
+>```php
+>int function decrement(string $column_name [,int $step=1])
+>```
+
+* 参数：
+    1. `string`($column_name): 自减少的字段
+    2. `int`($step) [可选] : 减少步长默认为1
+* 返回： `int` 操作成功的条数
+* 示例代码
+
+```php
+/*socre值-1 相当于 increment('score',-1)*/
+$orm->where('id',1)->decrement('score');
+
+/*socre值-5*/
+$orm->where('id',1)->decrement('score',5);
+```
 
 ## 多表操作
 
 ### 多表查询
-#### `join()`方法
-#### `has()`方法
+join 可以链接多个数据库表
+
+#### `join()`方法 {#join}
+>```php
+>Object function join(string $table, array $condition [, string $type = 'INNER'])
+>```
+
+* 参数：
+    1. `string`($table): 自减少的字段
+    2. `array`($condition) [可选] : 减少步长默认为1
+    3. `string`($condition)
+* 返回`Orm`对象：可以继续后续操作
+* 示例代码
 
 ```php
 $feed=Db::table('user')
-    ->has('feedback AS fb')
+    ->has('feedback AS fb')//用户有feedback
     ->where('user.id',1)
     ->select('user.id,user.name,fb.title,fb.content as feedback');
 ```
 
-#### `belongs()`方法
+#### `has()`方法 {#has}
 
-### 子查询
+has 是对`LEFT JOIN`方法的快捷封装，表示 一个表在逻辑上“拥有”另一个表,比如 用户(user表) 拥有 文章(article表).
+可以表示 $user->has('article'). 此时会使用article的外键关联user主键。
+
+>```php
+>Object function has(string $table [, string $table_fk = null [, string $related_key = null]])
+>```
+
+* 参数：
+    1. `string`($table): 关联的表名，可以使用 AS 设置别名
+    2. `string`($table_fk) [可选]: has 的 表中对应的外键，默认采用当前Orm对应的表名+'_id'
+    3. `string`($related_key) [可选]: 默认是此表的主键，如果多表连接，不是当前表可以加上表名如'table.id'
+* 返回`Orm`对象：可以继续后续操作
+* 示例代码
+
+```php
+/*简单用法*/
+$orm->has('article');
+
+/*多级关联，用户有文章，文章有评论*/
+$user->has('article')
+     ->has('comment','article_id','article.id');
+
+/*完整查询实例*/
+$feed=Db::table('user')
+    ->has('feedback AS fb')//用户有feedback 设置别名
+    ->where('user.id',1)
+    ->select('user.id,user.name,fb.title,fb.content as feedback');
+```
+
+#### `belongs()`方法 {#belongs}
+
+belongs 是对 `INNER JOIN`方法的快捷封装，表示 一个表在逻辑上“从属”另一个表,于has相反。
+比如 文章属于用户 (article 表的外键如 user_id 关联 user表的主键如id)。
+
+>```php
+>Object  belongs(string $table [, string $related_key = null [, string $primary_key = 'id']])
+>```
+
+* 参数：
+    1. `string`($table): 关联的表名，可以使用 AS 设置别名
+    2. `string`($related_key) [可选]: 与之关联的外键默认`$table_id`,如果是其他表可以加上表名 `table.fk_id`
+    3. `string`($primary_key) [可选]: $table表的主键，默认是`id`
+
+* 返回`Orm`对象：可以继续后续操作
+* 示例代码
+
+```php
+/*简单用法*/
+$article->belongs('user');
+
+/*多级关联，文章属于用户，文章有评论*/
+//与has的例子逻辑关系一样，但是查询的主表由user表变成article表
+$article->belongs('user')
+     ->has('comment');
+
+/*多级关联，实例*/
+Db::table('comment')
+     ->belongs('user')//评论属于用户
+     ->field('user.name','user')//用户名
+     ->belongs('article')//评论属于文章
+     ->field(['article.title'=>'article'])//选取article 标题
+     ->belongs('user AS reply','article.user_id')//文章属于另一个用户
+     ->field('reply.id AS rid,reply.name as reciever')//另一个用户的id和姓名
+     ->select('comment.*');//comment的所有内容
+```
 
 ### 合并查询
-#### `union()`方法
-#### `unionAll()`方法
 
+#### `union()`方法: 合并 {#union}
+UNION 将结果合并在一起
+>```php
+>object function union(Orm $query [, boolean $is_all = false])
+>```
+
+* 参数 (`Orm`)`$query`: 包含查询条件的`Orm`对象，相当于执行`select`的结果
+* 参数 (`boolean`) `$is_all` 默认false: 为`ture`时 UNION ALL 
+* 返回 `Orm Object` ： 返回$this
+* 示例代码
+
+```php
+Db::table('student)
+    ->field('id,name,number')
+    ->union(
+        Db::table('teacher')
+            ->field('id,name,number')
+    )->select();
+```
+
+#### `unionAll()`方法:全部合并 {#unionAll}
+UNION 默认会去除相同的结果，UNION ALL 不去重
+>```php
+>object function union(Orm $query)
+>```
+
+* 参数 (`Orm`)`$query`: 包含查询条件的`Orm`对象，相当于执行`select`的结果
+* 返回 `Orm Object` ： 返回$this
+* 用法与[union](#union)同
 
 
 ## 多数据库
@@ -701,6 +840,7 @@ $feed=Db::table('user')
 ### 调试输出
 #### `debug()`方法
 
+### `clear()`方法
 ### 设置别名
 #### `alias()` 方法
 
