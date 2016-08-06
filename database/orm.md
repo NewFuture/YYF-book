@@ -887,7 +887,6 @@ Db::table('user')->safe(false)//关闭安全模式
     ])->select();//默认情况会报错
 ```
 
-
 ### `clear()`方法: 清空设置和查询 {#clear}
 清空之前此ORM所有的查询设置和数据。
 但是 **别名`alias`** 和 **数据库设置** 不会清除。
@@ -956,8 +955,76 @@ $orm->alias('a')//数据库表别名设为a
 ```
 
 ## 数据操作
+
 ### 存取方法
-#### `set()`方法
+
+#### `set()`方法：设置数据 {#set}
+>```php
+>object function set(mixed $key,mixed $value)
+>```
+
+* 参数可以是键值对或者数组: 
+  - 两个参数 键值：
+    1. `string` (`key`)键: 设置的字段
+    2. `mixed` (`$value`): 设置值
+  
+  -  数组：
+     - 一个参数 `array`: 批量设置键值对 
+
+* 返回 `Orm Object` ： 返回$this，可以进行后续操作
+* tips:
+    - 后设置的值会覆盖之前的值
+    - 只有进行写入操作(`add`,`save`)之后数据才会保存到数据库
+* 示例代码
+
+```php
+/*设置参数*/
+$orm->set('name','future')
+    ->set('status',1)
+    ->add();//添加数据
+```
+
+#### `get()`方法：获取数据 
+ 
+ 快速获取数据 [get](#get)
+
+#### `put()`方法：快速修改 
+ 
+ 快速修改数据参看 [put](#put)
+
 ### Object操作
-### JSON序列化
+
+`Orm`实现了类的`__set()`和`__get()`方法，可以直接使用对象成员`->`操作符读取和设置数据
+但是这种方式读取数据**不会读取或写入数据库**。
+
+```php
+/*修改数据*/
+$orm->status=1;//与下面操作等效
+$orm->set('status',1);
+
+/*读取数据*/
+$status=$orm->status;//与下面操作等效果
+$status=$orm->get('status',false);
+```
+
 ### Array接口
+`Orm`也实现了数组接口可以直接使用 `[]`操作符读取和修改数据
+
+```php
+/*修改数据*/
+$orm['status']=1;//与下面操作等效
+$orm->set('status',1);
+
+/*读取数据*/
+$status=$orm['status'];//与下面操作等效果
+$status=$orm->get('status',false);
+
+```
+
+### JSON序列化
+可以对`Orm`对象直接进行`json_encode()`对其中的数据进行虚拟化。
+因此可以**在YYF的REST控制器中可以**赋值给`response`,会直接虚拟化其中的数据。
+```php
+$orm->find(1);
+echo json_encode($orm);
+```
