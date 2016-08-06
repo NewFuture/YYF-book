@@ -341,7 +341,7 @@ $orm->where('id','<',10)
 >```
 
 * 参数 (`Orm`)`$query`: 包含查询条件的`Orm`对象
-* 参数 (`boolean`) `$not`: 为`ture`时 查询 not exists,默认是 false
+* 参数 (`boolean`) `$not`: 为`true`时 查询 not exists,默认是 false
 * 参数 (`string`) `$type`: 连接条件 `AND`或者`OR`
 * 返回 `Orm Object` ： 返回$this
 * 示例代码
@@ -380,7 +380,7 @@ InfoModel::exists(
 > object function distinct([boolean $is_distinct = true])
 >```
 
-* 参数 (`boolean`) `$is_distinct` : 设置是否去重,默认参数是`ture`
+* 参数 (`boolean`) `$is_distinct` : 设置是否去重,默认参数是`true`
 * 返回 `Orm` 对象: 可以继续其他操作
 * 示例代码
 
@@ -541,7 +541,7 @@ $orm->field('name,info')->update($data);
 
 ```php
 /*order排序*/
-$orm->order('name',ture) // 按照name降序
+$orm->order('name',true) // 按照name降序
     ->ordee('id') //再安装id升序(从小到大)
     ->select('name,id');
 
@@ -801,7 +801,7 @@ UNION 将结果合并在一起
 >```
 
 * 参数 (`Orm`)`$query`: 包含查询条件的`Orm`对象，相当于执行`select`的结果
-* 参数 (`boolean`) `$is_all` 默认false: 为`ture`时 UNION ALL 
+* 参数 (`boolean`) `$is_all` 默认false: 为`true`时 UNION ALL 
 * 返回 `Orm Object` ： 返回$this
 * 示例代码
 
@@ -821,28 +821,139 @@ UNION 默认会去除相同的结果，UNION ALL 不去重
 >```
 
 * 参数 (`Orm`)`$query`: 包含查询条件的`Orm`对象，相当于执行`select`的结果
-* 返回 `Orm Object` ： 返回$this
+* 返回 `Orm Object`: 返回$this
 * 用法与[union](#union)同
+* 示例代码
 
-
-## 多数据库
-
-### 默认数据库
-
-### 切换数据库
-#### `setDb()`方法
+```
+$orm1->where('...')
+    //更多设置
+    ->field('...');
+$orm->unionAll($orm1)
+    ->select();
+```
 
 ## 其他
 
-### 安全模式
-#### `safe()`方法
+### `debug()`方法: 开启调试输出 {#debug}
+程序调试过程中，可能需要输出sql语句，debug开启之后。 对数据库的操作不会执行，而是直接返回sql语句和参数。
+影响的操作包括一下操作(返回数组包含 `sql` 和 `param` )
+* 查询: `select`,`find`,`get`,`count`,`min`,`max`,`avg`,`sum`
+* 添加: `insert`,`add`,
+* 修改：`update`,`save`,`put`,`increment`,`decrement`
+* 删除：`delete`,
 
-### 调试输出
-#### `debug()`方法
+>```php
+> object function debug([boolean $enable=true])
+>```
 
-### `clear()`方法
-### 设置别名
-#### `alias()` 方法
+* 参数 (`boolean`) `$enable` : 是否开启,默认参数是`true`，设为false时关闭调试
+* 返回 `Orm Object` ： 返回$this，可以进行后续操作 
+* 示例代码
+
+```php
+$query=Db::table('user')
+        ->debug()
+        ->count();
+/*$query 结果如下
+Array ( 
+    [sql] => 'SELECT COUNT(*)FROM`user`',
+    [param] => Array ( ) 
+    ); 
+*/
+```
+
+
+### `safe()`方法:安全模式 {#safe}
+`Orm`在生成sql语句时，会对所有操作进行严格的格式检查，where和field等操作不能使用原生的sql语句或者复杂的查询条件。
+必要时可以把safe模式关闭，从而关闭字段格式检查和包装。
+
+警告：尽量**不要使用**此功能，它会降低安全性同时带来不确定因素！
+
+>```php
+> object function safe([boolean $enable=true])
+>```
+
+* 参数 (`boolean`) `$enable` : 是否开启,默认参数是`true`，设为false时关闭安全模式
+* 返回 `Orm Object` ： 返回$this，可以进行后续操作 
+* 示例代码
+
+```php
+/*各种统计性别人数*/
+Db::table('user')->safe(false)//关闭安全模式
+    ->field([
+       'SUM(CASE WHEN sex = "m" THEN 1 ELSE 0 END)'=>'male', 
+       'SUM(CASE WHEN sex = "f" THEN 1 ELSE 0 END)'=>'female' 
+    ])->select();//默认情况会报错
+```
+
+
+### `clear()`方法: 清空设置和查询 {#clear}
+清空之前此ORM所有的查询设置和数据。
+但是 **别名`alias`** 和 **数据库设置** 不会清除。
+通常用来放弃之前的操作或者重用对象。
+>```php
+>object function clear()
+>```
+
+* 返回 `Orm Object` ： 返回$this，可以进行后续操作
+* 示例代码
+
+```php
+$orm->clear()->select();
+```
+
+### 设定数据库
+
+ORM 会根据配置自动链接数据库
+* `_`(必须设置): 主数据库(没有额外设置会使用此数据库) 
+* `_read`(可选): 从数据库(读操作数据库),设置此数据库后读操作默认使用此数据库  
+* `_write`(可选): 写数据库,设置此数据库写操作优先使用此数据库  
+
+#### `setDb()`方法:设定数据库 {#setDb}
+设置数据之后,此ORM,读写操作都会直接使用设定的数据库，覆盖默认行为i。
+
+>```php
+>object function setDb(mixed $db)
+>```
+
+* 参数 `mixed` `$db`: 
+  - `string` :  配置名称,后会自动使用此配置链接
+  - `array` 键值对数组：数据库连接包含
+    1. `$db['dsn']`必须: 数据库的DSN
+    2. `$db['username']`可选: 数据库账号
+    3. `$db['password']`可选： 数据库密码
+  - `Database`对象： 直接使用已经建立连接的数据库对象
+* 返回 `Orm Object` ： 返回$this，可以进行后续操作
+* 示例代码
+
+```php
+/*配置名称*/
+$orm->setDb('_');//强制使用默认数据库
+
+/*数组配置*/
+$orm->setDb([
+    'dsn'=>'sqlite:/temp/databases/test.db'
+]);//切换到此sqlite数据库
+
+/*数据库对象*/
+$db=Db::current();//获取默认数据库
+$orm->setDb($db);
+```
+
+### `alias()` 方法：设置别名 {#alias}
+多表操作有时为了方便需要使用别名设置。Alias 可以设置当前主表的别名。
+>```php
+>object function alias(string $alias)
+>```
+* 参数 `string` $alias: 数据表的别名
+* 返回 `Orm Object` ： 返回$this，可以进行后续操作
+* 示例代码
+
+```php
+$orm->alias('a')//数据库表别名设为a
+    ->select('a.id');
+```
 
 ## 数据操作
 ### 存取方法
