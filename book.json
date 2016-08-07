@@ -9,6 +9,9 @@
         "tbfed-pagefooter"
     ],
     "pluginsConfig": {
+        "theme-default": {
+             "showLevel": true
+        },
         "edit-link": {
             "base": "https://github.com/NewFuture/yyf-book/blob/master/",
             "label": "在GITHUB上修改此页"
