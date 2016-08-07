@@ -53,16 +53,29 @@ $list=$orm->select('id AS uid,time');//查询id和time，在返回的数据中id
 ```
 
 #### `find()` 方法: 单条数据读取 {#find}
+find 方法会自动限制数据的条数
+
 >```php
->object function find([string $id=null])
+>object function find([mixed $id=null])
 >```
 
-* 参数 `$id`[可选,`int`|`string` ] :  数据的主键值
+* 参数 :
+    - `int`|`string` :  数据的主键值
+    - `array`: 查找的条件参看[where](#where)数组参数
+    - `NULL`: 无参数使用where等设置查找
+
 * 返回 `Orm` Object 指向调用的`Orm`对象自身(查询成功)或`null`(查询失败) 
 * 示例代码
 
 ```php
+/*主键find*/
 $user=$orm->find(2);//查询id为2的数据
+
+/*数组条件*/
+$orm->find([
+    'id'=>2,
+    'status'=>1
+]);//查询id为2，status为1的数据
 ```
 
 #### `get()`方法：获取单条或者单个数据 {#get}
@@ -703,25 +716,62 @@ $orm->where('id',1)->decrement('score',5);
 ## 多表操作
 
 ### 多表查询
-join 可以链接多个数据库表
+join 可以链接多个数据库表 ，通常 [`has`方法](#has) 和 [`belongs`方法](#belongs)的封装可以满足绝大多数应用场景，推使用这两个方法。
 
 #### `join()`方法 {#join}
 >```php
->Object function join(string $table, array $condition [, string $type = 'INNER'])
+>Object function join( string $type, string $table, mixed $on [, string  related_key= null])
 >```
 
 * 参数：
-    1. `string`($table): 自减少的字段
-    2. `array`($condition) [可选] : 减少步长默认为1
-    3. `string`($condition)
-* 返回`Orm`对象：可以继续后续操作
-* 示例代码
+    - 四个参数简单join： `join($type,$table,string $table_key, string $related_key)`
+        1. `string`($type): JOIN 类型 `INNER,LEFT,RIGHT,OUTER,FULL OUTER`等 
+        2. `string`($table)： JOIN的表名，支持`AS` 别名
+        3. `string`($on)： JOIN 表中的关联字段,不用加上表名或别名
+        4. `string`($related_key)：主表获其他表与之相等的关联字段，通常要加上表名
+   - 三个参数复杂逻辑(数组条件): `join($type,$table,array $on)`
+        1. `string`($type): JOIN 类型
+        2. `string`($table): JOIN的表名，支持`AS` 别名
+        3. `array`($on) 三维数组: 对于多个条件或者复杂逻辑可以使用这种方式，每个数组包含一下内容
+            * [必须]`on`=>array($field,$op,$value),参考[where](#where)表达式参数
+            * [可选]`logic`=> 条件关系'AND'或者'OR'， 默认采用AND连接
+            * [可选]`value`=>`NULL`或者`'VALUE'`,如果不设置或者为NULL，`on`条件中的值会按字段处理，否则按照值进行绑定
 
+* 返回`Orm`对象：可以继续后续操作
+* tips:
+    - has或者belongs等操作比复杂条件效率更高也更容易理解
+    - 复杂join的 on 条件可以考虑放到where条件
+* 示例代码
+    
 ```php
-$feed=Db::table('user')
-    ->has('feedback AS fb')//用户有feedback
-    ->where('user.id',1)
-    ->select('user.id,user.name,fb.title,fb.content as feedback');
+/*简单join关联user表的user.id和article表的user_id*/
+$orm->join('INNER','article','user_id','user.id');
+
+/*复杂关联*/
+$response= Db::table('comment')
+     ->field('from.id as from_id,from.name as from')
+     ->field('to.id AS to_id,to.name as to')
+     ->join('LEFT','article','id','comment.article_id')
+     ->join('INNER','user as from',[// 评论发出的用户
+         [
+             'on'=>['from.id','=','comment.user_id'],
+             'logic'=>'AND',//默认是AND可以省略
+             'value'=>NULL,//value为NULL安装字段处理，可以省略
+         ],
+         [
+             'on'=>['from.status','>',0],
+             'logic'=>'AND',
+             'value'=>'value',//值绑定,on的第三个参数“0” 会按照值处理，而不是字段
+         ],
+     ])->join('LEFT','user AS to',[//评论文章的作者
+         [
+             'on'=>['article.user_id','=','to.id'],
+         ],
+         [
+             'on'=>['to.status','>',0],
+             'value'=>'value',
+         ]
+     ])->select();
 ```
 
 #### `has()`方法 {#has}
