@@ -10,51 +10,42 @@ Object-Relational Mapping（对象关系映射）
 * [**select**](#select)
 * [**find**](#find)
 * [**get**](#get)
-
 * [**insert**](#insert)
 * [insertAll](#insertAll)
 * [**add**](#add)
-
 * [**update**](#update)
 * [**save**](#save)
 * [**put**](#put)
 * [**increment**](#increment)
 * [**decrement**](#decrement)
 * [**delete**](#delete)
-
 * [**where**](#where)
 * [**orwhere**](#orwhere)
 * [whereField](#whereField)
 * [orWhereField](#orWhereField)
 * [exists](#exists)
 * [orExists](#orExists)
-
 * [distinct](#distinct)
 * [group](#group)
 * [having](#having)
 * [orhaving](#orHaving)
 * [field](#field)
-
 * [**order**](#order)
 * [limit](#limit)
 * [**page**](#page)
-
 * [**count**](#count)
 * [**sum**](#sum)
 * [avg](#avg)
 * [max](#max)
 * [min](#min)
-
 * [join](#join)
 * [**has**](#has)
 * [**belongs**](#belongs)
 * [union](#union)
 * [unionAll](#unionAll)
-
 * [alias](#alias)
 * [**set**](#set)
 * [**clear**](#clear)
-
 * [**transact**](#transact)
 * [debug](#debug)
 * [safe](#safe)
