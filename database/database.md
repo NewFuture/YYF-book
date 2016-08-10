@@ -1,17 +1,17 @@
 Database 底层数据库连接
 ===========
 
-`Service/Database` 
-* 实现对底层[PDO](http://php.net/manual/zh/book.pdo.php)的继承和封装，提供数据库访问接口,采用完全PDO封装防止SQL注入.
+`Service/Database` 类:
+* 实现对底层[PDO](http://php.net/manual/zh/book.pdo.php)的继承和轻量封装，提供数据库访问接口.
 * 执行出错会Log记录ERROR信息
 * 开发环境默认会记录所有的SQL查询请求和结果以及耗时统计
 
 通常你并不需要直接使用此类, [Orm](orm.md)和[Model](model.md)在数据连接时会自动的处理此类。
 
 **不建议使用原生SQL语句除非有200%的把握**(对自己100%和对其他修改代码的人100%把握). 
-此框架中的`Orm`对sql语句的生成非常安全高效，建议使用对象函数时的方式来查询.
+此框架中的`Orm`对sql语句的生成非常安全高效，建议使用对象函数时的方式来查询，采用完全参数化封装防止SQL注入.
 
-接口和方法
+接口和方法列表
 -------------
 - 方法接口
     * [Database::exec($sql,$params)](#exec) 执行一条SQL(写),并返回受影响的行数
@@ -62,7 +62,7 @@ $db=Db::connect();
 
 #### Database::exec() 方法:执行sql命令，返回修改结果 {#exec}
 >```php
->int function exec(string $sql [, array $params = null])
+>function exec(string $sql [, array $params = null]): int
 >```
 
 * 参数：
@@ -84,7 +84,7 @@ $db->query('DELETE FROM user WHERE id =:id',['id'=>1]);
 
 #### Database::query() 方法 查询一条SQL(读),并返回执行结果 {#query}
 >```php
->array function query(string $sql [, array $params = null [, $fetchmode = \PDO::FETCH_ASSOC]])
+>function query(string $sql [, array $params = null [, $fetchmode = \PDO::FETCH_ASSOC]])：array
 >```
 
 * 参数：
@@ -114,7 +114,7 @@ $db->query('SELECT * FROM user WHERE id=:id AND status>:status',['id'=>1,'status
 
 #### Database::column() 方法 查询一条SQL(读),并返回一个值 {#column}
 >```php
->array function column(string $sql [, array $params = null])
+>function column(string $sql [, array $params = null]): scalar
 >```
 
 * 参数：
@@ -143,7 +143,7 @@ $name=$db->column('SELECT name FROM user WHERE id=?',[1]);//返回的是字符�
     - 第二个错误的代码
     - 第三个错误原因
 
-#### 事务
+### 事务 {#tansaction}
 
 几个操作必须都成功执行的时候，需要使用事务
 
@@ -153,16 +153,16 @@ $name=$db->column('SELECT name FROM user WHERE id=?',[1]);//返回的是字符�
 * [PDO::rollBack()](http://php.net/manual/zh/pdo.rollback.php) — 回滚一个事务
 * Database::transact($func) 快捷事务
 
-#### `transact()`方法：处理事务
+#### `transact()`方法：处理事务 {#transact}
 >```php
 >function transact(callable $func)
 >```
 
 * 参数callable $func: 调用函数过程(可以是匿名函数)
     - $func 参数是当前对象(`$this`)
-    - 返回值，如果是`false`(严格的false,null,0等控**不是false**),同样执行回滚
+    - 返回值，如果是`false`(严格的false,null,0等**不是false**),同样执行回滚
 * 返回：`false`(执行失败)或者$func的返回值(执行成功)
-* tips： 如果$func 无返回值，执行出差同样回滚
+* tips： 如果$func 无返回值，执行出错同样回滚
 * 代码
 
 ```php
@@ -209,7 +209,7 @@ before(string &$sql, array &$params, string name);
 before 包含三个参数执行的：
 * `$sql`: sql语句,在注册的函数中可以对其修改
 * `$params`： 执行参数，支持引用传参可以被修改
-* string: 当前调用的入口名称(`query`,`exec`,`column`)
+* `string`: 当前调用的入口名称(`query`,`exec`,`column`)
 
 调试的SQL记录日志采用此接口实现.
 
@@ -220,7 +220,7 @@ after(Database &$this, mixed &$result, string name);
 after 回调包含三个参数执行的：
 * `$this`: 当前查询对象,在注册的函数中可以对其修改和获取其状态码
 * `$result`： 返回的结果，支持引用传参可以被修改
-* string: 当前调用的入口名称(`query`,`exec`,`column`)
+* `string`: 当前调用的入口名称(`query`,`exec`,`column`)
 
 
 ### `$debug` 调试输出 {#debug}

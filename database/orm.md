@@ -3,9 +3,66 @@ ORM 数据库操作对象
 
 Object-Relational Mapping（对象关系映射）
 
-数据库操作的核心封装
+数据库操作的对象核心封装
 
-## 创建 {#create}
+全部接口列表
+---------
+* [**select**](#select)
+* [**find**](#find)
+* [**get**](#get)
+
+* [**insert**](#insert)
+* [insertAll](#insertAll)
+* [**add**](#add)
+
+* [**update**](#update)
+* [**save**](#save)
+* [**put**](#put)
+* [**increment**](#increment)
+* [**decrement**](#decrement)
+* [**delete**](#delete)
+
+* [**where**](#where)
+* [**orwhere**](#orwhere)
+* [whereField](#whereField)
+* [orWhereField](#orWhereField)
+* [exists](#exists)
+* [orExists](#orExists)
+
+* [distinct](#distinct)
+* [group](#group)
+* [having](#having)
+* [orhaving](#orHaving)
+* [field](#field)
+
+* [**order**](#order)
+* [limit](#limit)
+* [**page**](#page)
+
+* [**count**](#count)
+* [**sum**](#sum)
+* [avg](#avg)
+* [max](#max)
+* [min](#min)
+
+* [join](#join)
+* [**has**](#has)
+* [**belongs**](#belongs)
+* [union](#union)
+* [unionAll](#unionAll)
+
+* [alias](#alias)
+* [**set**](#set)
+* [**clear**](#clear)
+
+* [**transact**](#transact)
+* [debug](#debug)
+* [safe](#safe)
+* [setDb](#setDb)
+
+
+
+## 创建Orm {#create}
 
 有三种方式创建一个ORM对象，所有说明都是基于此对象说明
 
@@ -237,7 +294,7 @@ $orm->where('id',1)->delete();
 
 ## 条件限制 (condition) {#condition}
 
-### 条件查询（where）{#where}
+### 条件查询（where）{#where-method}
 支持where操作如下表
 
 | 类型 | 表达式操作($op) | 值 |例子|
@@ -248,7 +305,7 @@ $orm->where('id',1)->delete();
 | IN 比较 |`IN`，`NOT IN`|`array`|`where($key,'in',[1,3,5])`|
 | BETWEEN |`BETWEEN`, `NOT BETWEEN`|`array`或跟两参数|`where($key,'BETWEEN',1,10)` , `where($key,'BETWEEN',[1,10])` |
 
-#### `where()`方法： 添加选择条件 {#where-method}
+#### `where()`方法： 添加选择条件 {#where}
 
 >```php
 >object function where(mixed $condition [...])
@@ -327,7 +384,23 @@ $orm->where($condition);//WHERE `status`>0 AND `name` LIKE "%future%"
 
 ```
 
-#### `orWhere()`方法： OR条件  {#orwhere-method}
+#### `whereField()`方法： 字段比较条件 {#whereField}
+
+由于`where`默认会将比较的值进行参数绑定，所以如果是字段会按照字符处理，`whereField`就是用来比较字段之间的关系，值会按照字段处理。
+
+>```php
+>object function whereField(mixed $condition [...])
+>```
+
+* 与[where](#where)用法一致
+* 示例代码
+
+```php
+/*whereField 比较*/
+$orm->whereField('up','>','dwon');//up字段值>down的值
+```
+
+#### `orWhere()`方法： OR条件  {#orWhere}
 同where 连接条件变成OR
 
 >```php
@@ -343,9 +416,25 @@ $orm->where('id','<',10)
     ->select('name');//查询id< 10或者id>1000的用户名
 ```
 
-### 子查询是否存在exists  {#exists}
+#### `orWhereField()`方法： 字段比较条件OR  {#orWhereField}
+同where 连接条件一样
 
-#### `exists()`方法  {#exists-method}
+>```php
+>object function orWhereField(mixed $condition [...])
+>```
+
+示例代码
+
+```php
+/*where和orwhere限制*/
+$orm->where('id','<',100)
+    ->orWhereField('regtime','logtime')
+    ->select('idname');
+```
+
+### 子查询是否存在exists  {#exists-method}
+
+#### `exists()`方法  {#exists}
 
 判断子查询是否存在需要使用exist
 
@@ -373,14 +462,14 @@ InfoModel::exists(
     ->select('id,content');
 ```
 
-#### `orExists()`方法  {#orexists-method}
+#### `orExists()`方法  {#orExists}
 判断子查询是否存在需要使用exist，OR条件链接
 
 >```php
 >object function orExists(Orm $query[, boolean $not=false])
 >```
 
-用法同 [exists](#exists-method)
+用法同 [exists](#exists)
 
 
 ### 分组和去重 {#group}
@@ -410,7 +499,7 @@ GROUP 可以按条件或者字段进行分组， 可以连续使用多个GROUP�
 > object function group(string $field [, string $operator, mixed $value])
 >```
 
-* 参数: 与[where](#where-method)相似但是不接收数组参数.
+* 参数: 与[where](#where)相似但是不接收数组参数.
     - 一个参数：
         1. `string`(`$field`)[必须]: 分组的字段
 
@@ -433,12 +522,12 @@ $orm->group('status')
 ```
 
 
-### 计算条件（having） {#having}
+### 计算条件（having） {#having-method}
 
 当查询条件需要使用聚合函数时,需要having函数。WHERE 关键字无法与聚和函数一起使用(sql 中where 先执行)。
 
 
-#### `having()`方法： 添加选择条件
+#### `having()`方法： 添加选择条件 {#having}
 
 HAVING AND链接的条件
 
@@ -446,7 +535,7 @@ HAVING AND链接的条件
 >object function having(string $field,string $operator,string $value)
 >```
 
-* 参数: 与[where](#where-method)相似但是不接收数组参数.
+* 参数: 与[where](#where)相似但是不接收数组参数.
 
     - 两个参数：
         1. `string`(`$field`)[必须]: 字段
@@ -467,7 +556,7 @@ $orm->group('status')
     ->select('status,count(*) as count');
 ```
 
-#### `orHaving()`方法： having条件 or 
+#### `orHaving()`方法： having条件 or {#orHaving}
 HAVING 条件 OR 关系，类似于 orWhere
 
 >```php
@@ -884,6 +973,39 @@ $orm->unionAll($orm1)
 ```
 
 ## 其他
+
+#### `transact()`方法：处理事务
+几个操作必须都成功执行的时候，需要使用事务.
+
+更底层的事务参见[Database::tansaction](database.md#tansaction)
+
+>```php
+>function transact(callable $func) : mixed
+>```
+
+* 参数callable $func: 调用函数过程(可以是匿名函数)
+   - $func 参数是当前对象(`$this`)
+   - 返回值，如果是`false`(严格的false,null,0等控**不是false**),同样执行回滚
+* 返回：
+    - `false`(执行失败)
+    - `$func`的回调值(执行成功)
+* tips：
+    - 执行过程中出错同样回滚
+    - `$func`返回`false`会强制回滚
+* 代码
+
+```php
+/*事务操作转积分*/
+$Orm->transact(function ($user) {
+ $user->where('id',1)
+      ->increment('score',5);//id为1的用户积分+5
+ $user->clear() //清空查询重用
+      ->where('id',2)
+      ->decrement('score',5);//id为2的积分-5
+ return $user->get('score')>0;//判断加分是否为正,如果此时积分小于0依然回滚
+});
+```
+
 
 ### `debug()`方法: 开启调试输出 {#debug}
 程序调试过程中，可能需要输出sql语句，debug开启之后。 对数据库的操作不会执行，而是直接返回sql语句和参数。
