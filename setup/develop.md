@@ -14,9 +14,14 @@ YYF定制了一个集成了YYF所需环境的虚拟机镜像(大约350M),并提�
 
 ( 注：虚拟理解只提供服务器运行环境，**代码存和修改仍然在本机**，会自动映射到虚拟机中。)
 
-使用YYF虚拟机镜像你可能需要已经安装 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) 和 [vagrant](https://www.vagrantup.com/downloads.html) 。双击或者运行(`init.cmd`)即可自动安装和部署 
+使用YYF虚拟机镜像你可能需要:
 
-不同系统请参考
+1. 安装 [VirtualBox](https://www.virtualbox.org/wiki/Downloads)(安装即可，不需额外操作); 
+2. 下载安装[vagrant](https://www.vagrantup.com/downloads.html);
+3. 双击或者运行(`init.cmd`)自动配置
+
+
+不同系统请参考：
 * [Windows下虚拟机环境安装](vm-in-windows.md)
 * [Linux下虚拟机环境安装]
 * [Mac下虚拟机环境安装]
@@ -26,9 +31,13 @@ YYF定制了一个集成了YYF所需环境的虚拟机镜像(大约350M),并提�
 ============
 如果你希望在本机上进行开发,你需要安装PHP并配置好必要的扩展即可。(不同人配置相同的环境总能有意想不到的问题)
 
+1. 下载或者编译PHP
+2. 下载或者编译YAF扩展
+3. 双击或者运行(`init.cmd`)配置
+
 具体可以参考一下内容
-* [Windows下配置YYF环境](yyf-in-windows.md)
-* [Linux下配置YYF环境]
+* [Windows下配置YYF开发环境](yyf-in-windows.md)
+* [Linux下配置YYF开发环境](yyf-in-linux.md)
 * [Mac下配置YYF环境]
 
 
