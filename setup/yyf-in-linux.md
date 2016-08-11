@@ -51,12 +51,17 @@ git clone https://github.com/YunYinORG/YYF.git
 ./init.cmd
 ```
 
-正常情况,配置和清理完成后会出现如下选项
+正常情况,配置和清理完成后会出现如下选项：
+
 >
 >select which development environment you want to use?
+>
 >  1) Use virtual Machine with vagrant;
+>
 >  2) Use local development (with PHP);
+>
 >  0) Exit;
+>
 >
 >Input your choice (default[ENTER] is 1):
 >
