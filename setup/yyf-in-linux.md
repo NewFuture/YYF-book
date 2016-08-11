@@ -38,13 +38,13 @@ sudo sh -c "echo 'extension=yaf.so\n[yaf]\nyaf.environ=dev'>/etc/php/7.0/cli/con
 
 ## clone YYF源码和运行 {#yyf}
 
-1. clone最新代码到工作目录,当然也可以直接下载zip解压
+1.clone最新代码到工作目录,当然也可以直接下载zip解压
 
 ```bash
 git clone https://github.com/YunYinORG/YYF.git
 ```
 
-2.  执行`init.cmd`,配置环境
+2.执行`init.cmd`,配置环境
 
 切换到项目目录执行
 ```bash
@@ -64,12 +64,12 @@ git clone https://github.com/YunYinORG/YYF.git
 输入`2`回车(选择本地开发环境)即可配置和启动PHP测试服务器。
 
 
-3. 快速启动脚本
+3.快速启动脚本
 
 初始化完成后会自动生成 `server.cmd`, 以后只需运行此脚本即可快速启用php测试服务器。
 
 当然如果使用`apache`或者`nginx`作为服务器可以将web根目录设置为 `项目目录/public/` 即可
 
-4. 测试服务
+4.测试服务
 
 完成后浏览器打开 [127.0.0.1:1122](http://127.0.0.1:1122) 如果显示类似与[https://yyf.yunyin.org/](https://yyf.yunyin.org/)就配置OK了！
