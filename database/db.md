@@ -237,4 +237,4 @@ try{
 
 对ORM或者model的操作，建议使用`orm`封装的事务操作[`transact()`](orm.md#transact);
 
-或者使用[`transact`]方法(database.md#transact)。
+或者使用[数据库`transact`方法](database.md#transact)。

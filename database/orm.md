@@ -965,7 +965,7 @@ $orm->unionAll($orm1)
 
 ## 其他
 
-#### `transact()`方法：处理事务
+#### `transact()`方法：处理事务 {#transact}
 几个操作必须都成功执行的时候，需要使用事务.
 
 更底层的事务参见[Database::tansaction](database.md#tansaction)

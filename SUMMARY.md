@@ -9,11 +9,11 @@
 ## 环境和安装
 * [基本环境](setup/README.md)
 * [开发环境配置](setup/develop.md)
-    * 虚拟机环境
+    * [虚拟机环境](setup/develop.md#vm)
         * [Windows下虚拟机安装](setup/vm-in-windows.md)
         * [Linux\(更新中\)](#)
         * [mac\(更新中\)](#)
-    * 本机开发
+    * [本机开发](setup/develop.md#local)
         * [Windows下配置](setup/yyf-in-windows.md)
         * [Linux下安装配置](setup/yyf-in-linux.md)
         * [mac\(更新中\)](#)
