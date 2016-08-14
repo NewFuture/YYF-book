@@ -3,12 +3,12 @@ Db 数据库辅助类
 
 `Db`类提供封装和简化了数据库相关操作的调用，提高简单的静态调用接口。
 
-接口和方法列表
+接口和方法列表 {#interface}
 -------------
 - 常用方法接口
     * [current()](#current) 获取当前数据库连接
     * [connect()](#connect) 连接数据库
-    * [use()](#use) 切换数据库
+    * [set()](#set) 设定数据库
     * [table()](#table) 快速创建数据库表
     * [query()](#query) 查询sql语句
     * [exec()](#exec) 执行sql命令
@@ -89,39 +89,47 @@ $db=Db::current();
 $db->query('some thing');
 ```
 
-### `use()`方法：设定并切换数据库 {#use}
+### `set()`方法：设定并切换数据库 {#set}
 
-`use`方法手动切换Db方式调用的默认数据库，调用之后默认数据会采用此数据库
+`set`方法手动切换设置数据库。
 
-注意： 此方法**不会影响** model和orm中数据的调用
+此方法不会影响直接查询对数据库的选择，但是会影响
+
+注意：如果修改保留名称，此方法会**影响** [Model](model.md)和[Orm](orm.md)中默认读写数据库的调用.
 
 >```php
->function use(mixed $config,[string $username,[string $password]]) :Database
+>function $name(string $name,mixed $config,[string $username,[string $password]]) :Database
 >```
 
+* 参数 `$name`(string): 数据库配置名称如果无则创建，有则覆盖 
 * 参数 `$config` (必填)： 可以是下列三项之一
   - string 数据库`配置名称`如 "_read","mydb",只要在[database] 下配置了即可; 
   - string dsn设置 如： "sqlite:/tmp/sql.db";
   - array  数据库链接配置，包括dsn，username，password;
 * 参数 `$username` string: 数据库账号 (当$cofnig为dsn时选填）
 * 参数 `$password` string: 数据库密码 (当$cofnig为dsn时选填）
-* tips : 此方法会影响`Db`使用的默认数据库
+* tips :
+    -  当 `$name`为 `_` 会修改 `Db`,[Model](model.md)和[Orm](orm.md) 等数据库操作使用的默认数据库
+    -  当 `$name`为 `_read`会修改 `Db`, [Model](model.md)和[Orm](orm.md) 等数据库**读取操作**的数据库
+    -  当 `$name`为 `_write`会修改 `Db`, [Model](model.md)和[Orm](orm.md) 等数据库**写入操作**的数据库
+
 * 返回 ： 数据库对象
 * 示例代码
 
 ```php
 
 /*配置名称切换数据库,'_','_read','_write'三个是保留数据库名*/
-Db::use('_read')->query('query something');//切换到读数据库
-Db::use('mydb')->exec($sql);//执行
+Db::set('_','_read')->query('query something');//切换到读数据库
+Db::set('_write','mydb')->exec($sql);//执行
 
-Db::exec($sql2);//此时仍然使用mydb
+Db::exec($sql2);//此时仍然使用mydb写
 
 /*dsn*/
-Db::use('sqlite:/tmp/sql.db')->query($sql);
-Db::use('mysql:host=localhost;port=3306;dbname=yyf;charset=utf8','root','root');
+Db::set('temp','sqlite:/tmp/sql.db')->query($sql);
+/*多参数设置*/
+Db::set('_write','mysql:host=localhost;port=3306;dbname=yyf;charset=utf8','root','root');
 /*array*/
-Db::use([
+Db::set('test',[
    'dsn'=>'mysql:host=localhost;port=3306;dbname=yyf;charset=utf8',
    'username'=>'root'
  ]);
@@ -167,7 +175,7 @@ Db::query($sql);//此时任然是_read数据库
 
 可以直接执行或者调用sql语句.但是对于新手或者对安全不太了解的，**不推荐**这么使用,因为这样容易造成潜在的SQL注入风险,如果确实要这么做,**务必使用参数分离**的方式进行查询。
 
-同时，常用的数据方法使用静态方式加速.
+同时，常用的数据方法使用静态方式加速,并自动读写分离.
 
 ### `query()`查询sql语句(读)：{#query}
 
@@ -180,6 +188,17 @@ Db::query($sql);//此时任然是_read数据库
 $list=Db::query('select id,name from user');
 //键值对参数分离
 $data=Db::query('select * from user where id=:id',['id'=>2]);
+```
+
+### `column()`查询sql语句(读)：{#column}
+
+数据库单条读取(select)查询，是对 [Database::column()](database.md#column)的快速调用。
+
+示例代码
+
+```php
+//键值对参数分离
+$name=Db::column('select name from user where id=?',[123]);
 ```
 
 ### `execute()`执行sql语句: {#execute}
@@ -221,13 +240,13 @@ Db::prepare('UPDATE`user`SET(`time`=?)WHERE(`id`=?)')
 如原生事务：
 
 ```php
-Db::beginTransaction();//开始事物
+Db::beginTransaction();//开始事务
 try{
     Db::exec('do something ...');
     Db::query('do something ...');
     Db::exec('do something ...');
     /*更多查询...*/
-    Db::commit();//事物完成提交
+    Db::commit();//事务成提交
 } catch (Exception $e) {
     Db::rollBack();//出错回滚
 }

@@ -5,7 +5,7 @@ Object-Relational Mapping（对象关系映射）
 
 数据库操作的对象核心封装
 
-全部接口列表
+全部接口列表 {#interface}
 ---------
 * [**select**](#select)
 * [**find**](#find)
