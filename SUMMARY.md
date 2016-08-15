@@ -50,8 +50,8 @@
 * [Db 辅助类](database/db.md)
 * [Model 数据模型](database/model.md)
 * [Orm 对象映射](database/orm.md)
-* [Database 数据库连接](database/database.md)
-* [使用\(更新中\)](#)
+* [Database 数据库连接]
+* [使用](database/example.md)
 
 ## \[视图与输出\]
 * [yaf view\(更新中\)](#)

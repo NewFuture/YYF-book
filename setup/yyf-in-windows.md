@@ -20,8 +20,10 @@ YAF下载地址：[https://pecl.php.net/package/yaf](https://pecl.php.net/packag
 
 并在`php.ini`文件(位于PHP目录,如果没有将`php.ini-development`改成`php.ini`)中加入
 
-```
-extension=php_yaf.dll
+```ini
+extension = php_yaf.dll
+
+yaf.environ = dev;开发环境是dev,服务器生产环境使用production
 ```
 
 ## 下载YYF {#yyf}
