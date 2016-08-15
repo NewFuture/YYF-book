@@ -24,6 +24,12 @@ YAF下载地址：[https://pecl.php.net/package/yaf](https://pecl.php.net/packag
 extension=php_yaf.dll
 ```
 
+最后加入
+```
+yaf.environ=dev
+```
+使用开发者模式
+
 ## 下载YYF {#yyf}
 
 1.clone [https://github.com/YunYinORG/YYF.git](https://github.com/YunYinORG/YYF.git) 或者下载zip解压
