@@ -11,8 +11,7 @@
 * [开发环境配置](setup/develop.md)
     * [虚拟机环境](setup/develop.md#vm)
         * [Windows下虚拟机安装](setup/vm-in-windows.md)
-        * [Linux\(更新中\)](#)
-        * [mac\(更新中\)](#)
+        * [Linux 和 mac ](setup/vm-in-linuxx.md)
     * [本机开发](setup/develop.md#local)
         * [Windows下配置](setup/yyf-in-windows.md)
         * [Linux下安装配置](setup/yyf-in-linux.md)
@@ -50,7 +49,7 @@
 * [Db 辅助类](database/db.md)
 * [Model 数据模型](database/model.md)
 * [Orm 对象映射](database/orm.md)
-* [Database 数据库连接]
+* [Database 数据库连接](database/database.md)
 * [使用](database/example.md)
 
 ## \[视图与输出\]

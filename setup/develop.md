@@ -22,8 +22,8 @@ YYF定制了一个集成了YYF所需环境的虚拟机镜像(大约350M),并提�
 
 不同系统请参考：
 * [Windows下虚拟机环境安装](vm-in-windows.md)
-* [Linux下虚拟机环境安装]
-* [Mac下虚拟机环境安装]
+* [Linux 和 Mac下虚拟机环境安装](vm-in-linux.md)
+
 
 
 本机开发环境 {#local}
