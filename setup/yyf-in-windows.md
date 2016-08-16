@@ -26,6 +26,12 @@ extension = php_yaf.dll
 yaf.environ = dev;开发环境是dev,服务器生产环境使用production
 ```
 
+最后加入
+```
+yaf.environ=dev
+```
+使用开发者模式
+
 ## 下载YYF {#yyf}
 
 1.clone [https://github.com/YunYinORG/YYF.git](https://github.com/YunYinORG/YYF.git) 或者下载zip解压
