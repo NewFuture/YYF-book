@@ -1,7 +1,7 @@
 # Summary
 
-## 快速开始
-* [YYF是什么](README.md)
+## 简介
+* [YYF简介](README.md)
 * [快速上手](about\README.md)
 * [对比\(更新中\)](#)
 * [支持\(更新中\)](#)
