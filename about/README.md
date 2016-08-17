@@ -115,7 +115,7 @@ curl -X POST -d "msg=这是一条POST请求!" 192.168.23.33/Test/demo
 ------------
 在`RESTful`的API设计中，URL 通常是这样的例如
 
-1. `https://yyf.yunyin.org/products/1234` 获取id为1234的产品信息(非restful设计可能是这样的`https://yyf.yunyin.org/products/?id=1234`)
+1. `https://yyf.yunyin.org/products/1234` 获取id为1234的产品信息(非restful设计可能是这样的`https://yyf.yunyin.org/products/info?id=1234`)
 2. `https://yyf.yunyin.org/products/1234/comments` 获取id为1234的产品评论(非restful设计可能是这样的`https://yyf.yunyin.org/comments/list?products_id=1234`)
 
 建一个ProductsController `app/controllers/Products.php`
