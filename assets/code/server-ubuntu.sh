@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 sudo apt install -y apache2 libapache2-mod-php php
 
 sudo tee /etc/apache2/sites-available/yyf.conf> /dev/null <<EOF
