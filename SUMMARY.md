@@ -15,10 +15,9 @@
         * [Windows下配置](setup/yyf-in-windows.md)
         * [Linux下安装配置](setup/yyf-in-linux.md)
         * [mac\(更新中\)](#)
-* [生产环境\(更新中\)](#)
-    * [centos 6\(更新中\)](#)
-    * [centos 7\(更新中\)](#)
-    * [ubuntu 16.04\(更新中\)](#)
+* [生产环境](#)
+    * [centos 服务器](setup/yyfserver-in-cetnos.md)
+    * [ubuntu 服务器](setup/yyfserver-in-ubuntu.md)
 
 ## \[架构\]
 * [目录结构](architecture/folder-structure.md)

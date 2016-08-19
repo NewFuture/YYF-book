@@ -46,7 +46,8 @@ AllowOverride all
 </Directory>
 EOF
 
-# clone YYF
+# clone YYF and initialize
+# clone 代码  初始化
 sudo chmod 755 /var/www
 git clone https://github.com/YunYinORG/YYF.git clone /var/www/YYF
 echo 0 | /var/www/YYF/init.cmd 
