@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
+
+PROJECT_PATH="/var/www/YYF"
+TEMP_PATH=$HOME
+
 #################################
-### [LAMP]
+###[LAMP]
 ### 安装 apache php mysql
 ################################
+
+
 sudo apt install -y apache2 libapache2-mod-php \ #apache
 php php-mcrypt php-curl  \ #php
 mysql-server php-pdo-sqlite php-pdo-mysql \ # mysql
@@ -11,8 +17,8 @@ php-dev gcc git # php扩展
 # httpd webroot
 # 配置 apache 根目录
 sudo tee /etc/apache2/sites-available/yyf.conf> /dev/null <<EOF
-DocumentRoot /var/www/YYF/public
-<Directory "/var/www/YYF/public"> 
+DocumentRoot "${PROJECT_PATH}/public"
+<Directory "${PROJECT_PATH}/public"> 
 Options FollowSymLinks 
 AllowOverride all 
 Require all granted  
@@ -26,9 +32,10 @@ sudo a2enmod php*
 sudo a2enmod rewrite
 
 #################################
-### [YAF_EXTENTSION]
+###[YAF_EXTENTSION]
 ### 安装 yaf
 ################################
+PHP_PATH=php;
 # 获取PHP版本
 # GET PHP version
 PHP_VERSION=$($PHP_PATH -v|grep --only-matching --perl-regexp "\W\d\.\d+\.\d+");
@@ -78,8 +85,8 @@ rm $TEMP_PATH/yaf.ini
 # clone YYF and initialize
 # clone 代码  初始化
 sudo chmod 755 /var/www
-git clone https://github.com/YunYinORG/YYF.git clone /var/www/YYF
-echo 0 | /var/www/YYF/init.cmd 
+git clone https://github.com/YunYinORG/YYF.git clone ${PROJECT_PATH}
+echo 0 | {$PROJECT_PATH}/init.cmd 
 #重启apache服务器
 #restart apache
 sudo service apache2 restart
