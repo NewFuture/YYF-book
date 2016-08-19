@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
-sudo apt install -y apache2 libapache2-mod-php mysql-server \
-php php-mcrypt php-curl php-pdo-sqlite php-pdo-mysql \
-php-dev gcc git
+#################################
+### [LAMP]
+### 安装 apache php mysql
+################################
+sudo apt install -y apache2 libapache2-mod-php \ #apache
+php php-mcrypt php-curl  \ #php
+mysql-server php-pdo-sqlite php-pdo-mysql \ # mysql
+php-dev gcc git # php扩展
 
 # httpd webroot
 # 配置 apache 根目录
@@ -21,16 +26,19 @@ sudo a2enmod php*
 sudo a2enmod rewrite
 
 #################################
-### YAF EXTENTSION
+### [YAF_EXTENTSION]
+### 安装 yaf
 ################################
-
-# 检查PHP版本
-PHP_VERSION=$(php -v|grep --only-matching --perl-regexp "\W\d\.\d+\.\d+");
-if [[ ${PHP_VERSION} == "5."* ]]; then 
-    YAF_VERSION=yaf-2.3.5
-else 
+# 获取PHP版本
+# GET PHP version
+PHP_VERSION=$($PHP_PATH -v|grep --only-matching --perl-regexp "\W\d\.\d+\.\d+");
+if [[ ${PHP_VERSION} == "7."* ]]; then
+    #php 7
     YAF_VERSION=yaf-3.0.3
-fi
+else
+    #php 5 
+    YAF_VERSION=yaf-2.3.5
+fi;
 
 # download yaf
 # 下载解压yaf
@@ -41,9 +49,10 @@ cd ~/${YAF_VERSION}; phpize;
 # compile and install YAF
 ./configure && make && sudo make install
 
-# 配置yaf
-# configure yaf
-sudo tee /etc/php.d/yaf.ini> /dev/null <<EOF
+
+## 创建yaf配置文件
+## create temp yaf file
+cat <<EOF>$TEMP_PATH/yaf.ini
 extension=yaf.so
 [yaf]
 # product environ in server
@@ -51,11 +60,26 @@ yaf.environ=product
 # cache the config file
 yaf.cache_config = 1
 EOF
+# 获取 PHP ini 配置目录
+# Scan for additional .ini path
+PHP_INI_PATH=$($PHP_PATH --ini|grep --only-matching --perl-regexp  "/.*\.d$")
+PHP_INI_PATH=$(echo $PHP_INI_PATH | sed -r -e 's/cli/*/')
+# 复制配置文件到各个目录
+# cp the yaf configure to each file 
+echo $PHP_INI_PATH | xargs -n 1 sudo cp $TEMP_PATH/yaf.ini 
+# 删除临时文件
+# remove temp ini
+rm $TEMP_PATH/yaf.ini
 
+#################################
+### [YYF]
+### 下载YYF
+################################
 # clone YYF and initialize
 # clone 代码  初始化
 sudo chmod 755 /var/www
 git clone https://github.com/YunYinORG/YYF.git clone /var/www/YYF
 echo 0 | /var/www/YYF/init.cmd 
-
+#重启apache服务器
+#restart apache
 sudo service apache2 restart
