@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 PROJECT_PATH="/var/www/YYF"
-TEMP_PATH=$HOME
+TEMP_PATH="/tmp/"
 
 #################################
 ###[LAMP]
@@ -35,10 +35,9 @@ sudo a2enmod rewrite
 ###[YAF_EXTENTSION]
 ### 安装 yaf
 ################################
-PHP_PATH=php;
 # 获取PHP版本
 # GET PHP version
-PHP_VERSION=$($PHP_PATH -v|grep --only-matching --perl-regexp "\W\d\.\d+\.\d+");
+PHP_VERSION=$(php -v|grep --only-matching --perl-regexp "\W\d\.\d+\.\d+");
 if [[ ${PHP_VERSION} == "7."* ]]; then
     #php 7
     YAF_VERSION=yaf-3.0.3
@@ -49,8 +48,8 @@ fi;
 
 # download yaf
 # 下载解压yaf
-curl https://pecl.php.net/get/${YAF_VERSION}.tgz | tar zx -C ~/
-cd ~/${YAF_VERSION}; phpize;
+curl https://pecl.php.net/get/${YAF_VERSION}.tgz | tar zx -C $TEMP_PATH
+cd $TEMP_PATH${YAF_VERSION}; phpize;
 
 # 编译安装 YAF
 # compile and install YAF
@@ -59,7 +58,7 @@ cd ~/${YAF_VERSION}; phpize;
 
 ## 创建yaf配置文件
 ## create temp yaf file
-cat <<EOF>$TEMP_PATH/yaf.ini
+cat <<EOF>${TEMP_PATH}yaf.ini
 extension=yaf.so
 [yaf]
 # product environ in server
@@ -76,16 +75,16 @@ PHP_INI_PATH=$(echo $PHP_INI_PATH | sed -r -e 's/cli/*/')
 echo $PHP_INI_PATH | xargs -n 1 sudo cp $TEMP_PATH/yaf.ini 
 # 删除临时文件
 # remove temp ini
-rm $TEMP_PATH/yaf.ini
+rm ${TEMP_PATH}yaf.ini
 
 #################################
-### [YYF]
+###[YYF]
 ### 下载YYF
 ################################
 # clone YYF and initialize
 # clone 代码  初始化
 sudo chmod 755 /var/www
-git clone https://github.com/YunYinORG/YYF.git clone ${PROJECT_PATH}
+git clone https://github.com/YunYinORG/YYF.git ${PROJECT_PATH}
 echo 0 | {$PROJECT_PATH}/init.cmd 
 #重启apache服务器
 #restart apache
