@@ -1,16 +1,23 @@
 YYF 文件目录结构
 ==========
+主要内容
+--------
 
-整体目录文件结构
+1. [整体目录文件结构](#folder)
+2. [public(网站根目录)](#public)
+3. [运行时目录(数据存储位置)](#runtime)
+4. [app应用目录](#app)
+
+
+整体目录文件结构 {#folder}
 ----------
->
+
 ```
 │  .htaccess    Apache开发环境重新url
 │  config.yaml  SAE配置和URL重定向
-|  init.cmd     开发环境初始化脚本 
+|  init.cmd     统一初始化脚本 
 │  LICENSE
 │  README.MD
-|  server.cmd   启动php server 调试 
 │  
 ├─app  
 │  │  Bootstrap.php     生产环境入口 
@@ -48,7 +55,7 @@ YYF 文件目录结构
 │  │  Head.php     调试header输出库
 │  │  Input.php    输入过滤接口
 │  │  Kv.php       key-value存取类
-│  │  Log.php      日志管理类
+│  │  Logger.php      日志管理类
 │  │  Mail.php     邮件发送
 │  │  Model.php    基础model
 |  |  Orm.php      ORM数据库对象映射
@@ -84,17 +91,31 @@ YYF 文件目录结构
 │      index.php    入口文件
 │      robots.txt
 │      
-└─temp 缓存日志临时文件夹【可写权限】
+└─runtime 运行时数据存储文件夹【可以放在其他位置读写权限】
 ```
->
 
-网站根目录
+
+网站根目录 {#public}
 -----------
-`public` 
+`public` 前端目录(用户唯一可以访问的目录)
+
+* 前端资源目录：静态资源css,js等放置于此目录
+* web根目录：生产环境时作为网站的根目录
 
 
-应用目录
+运行时目录
+-----------
+`runtime` 文件缓存等数据会存于此目录，保证程序对目录可读写权限；
+
+可以配置`conf/app.ini`中`runtime`指向系统的其他位置。
+
+注意生产环生成的存储文件会设置为**700权限**，保证安全性。
+
+
+应用目录 {#app}
 ----------
-`app`
+`app` 应用
 
- 
+ 多模块是添加到 `app/modules/`目录下
+
+ 如添加一个admin目录`app/modules/admin/controllers/Index.php`
