@@ -13,11 +13,9 @@
         * [Linux 和 mac ](setup/vm-in-linux.md)
     * [本机开发](setup/develop.md#local)
         * [Windows下配置](setup/yyf-in-windows.md)
-        * [Linux下安装配置](setup/yyf-in-linux.md)
-        * [mac\(更新中\)](#)
-* [生产环境](#)
-    * [centos 服务器](setup/yyfserver-in-cetnos.md)
-    * [ubuntu 服务器](setup/yyfserver-in-ubuntu.md)
+        * [Linux 和 mac 下配置](setup/yyf-in-linux.md)
+* [服务器(生产环境)](setup/yyf-in-server.md)
+
 
 ## \[架构\]
 * [目录结构](architecture/folder-structure.md)
