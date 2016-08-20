@@ -13,9 +13,10 @@ CONF_PATH="/etc/httpd/conf/httpd.conf"
 
 # install httpd
 # 安装 apache php gcc和git
-sudo yum install -y httpd \
-php php-opcache php-pdo_mysql php-mcrypt php-mbstring php-curl \
-php-devel gcc git
+sudo yum install -y httpd git \
+    php php-opcache php-pdo_mysql php-mcrypt php-mbstring php-curl \
+    php-devel gcc
+    
 
 # 安装mysql或者mariadb 会二者选一
 sudo yum install -y mysql-server mariadb-server
@@ -39,17 +40,15 @@ fi;
 curl https://pecl.php.net/get/${YAF_VERSION}.tgz | tar zx -C $TEMP_PATH
 # 编译安装 YAF
 # compile and install YAF
-cd ${TEMP_PATH}${YAF_VERSION}/; phpize;
+cd ${TEMP_PATH}${YAF_VERSION} && phpize;
 ./configure && make && sudo make install
 
-# 配置yaf
-# configure yaf
+# 配置yaf(product 环境)
+# configure yaf with product environment
 sudo tee /etc/php.d/yaf.ini> /dev/null <<EOF
 extension=yaf.so
 [yaf]
-# product environ in server
 yaf.environ=product
-# cache the config file
 yaf.cache_config = 1
 EOF
 
@@ -70,9 +69,12 @@ sudo sed -i.back -e "s|\"/var/www/html\"|\"${PROJECT_PATH}/public\"|g" $CONF_PAT
 if [ ! -f $PROJECT_PATH ]; then
     sudo mkdir -p ${PROJECT_PATH}
 fi;
-sudo chmod 755 ${PROJECT_PATH}
+
+sudo chown $UID ${PROJECT_PATH}
 
 git clone https://github.com/YunYinORG/YYF.git ${PROJECT_PATH}
 echo 0 | ${PROJECT_PATH}/init.cmd 
 
+#重启apache服务器
+#restart apache
 sudo service httpd restart
