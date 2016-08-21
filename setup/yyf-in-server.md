@@ -11,7 +11,7 @@
 
 注意: 服务器上使用生产环境(product)配置,同时配置文件会一直缓存在内存中(更新配置需重启PHP进程)。
 
-Centos 上默认配置 {#centos}
+1. Centos 上默认配置 {#centos}
 ------------------------
 
 ```bash
@@ -32,7 +32,7 @@ PHP 版本 | <=5.4   | 5.5 或5.6 |
 [import,server-centos.sh,lang-bash](../assets/code/server-centos.sh)
 
 
-Ubuntu 上默认配置 {#ubuntu}
+2. Ubuntu 上默认配置 {#ubuntu}
 ------------------------
 
 ```bash

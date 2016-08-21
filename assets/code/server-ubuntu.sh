@@ -42,7 +42,7 @@ sudo a2enmod rewrite
 ###[YAF_EXTENTSION]
 ################################
 # check PHP version
-PHP_VERSION=$(php -v|grep --only-matching --perl-regexp "\W\d\.\d+\.\d+");
+PHP_VERSION=$(php -v|grep --only-matching --perl-regexp "\d\.\d+\.\d+"|head -1);
 if [[ ${PHP_VERSION} == "7."* ]]; then
     #php 7
     YAF_VERSION=yaf-3.0.3

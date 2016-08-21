@@ -7,7 +7,7 @@ TEMP_PATH=${TEMP_PATH:="/tmp/"}
 
 # 获取PHP版本
 # GET PHP version
-PHP_VERSION=$("$PHP_PATH" -v|grep --only-matching --perl-regexp "\W\d\.\d+\.\d+");
+PHP_VERSION=$("$PHP_PATH" -v|grep --only-matching --perl-regexp "\d\.\d+\.\d+"|head -1);
 if [[ ${PHP_VERSION} == "7."* ]]; then
     YAF_VERSION=yaf-3.0.3 #php 7
 else

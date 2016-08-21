@@ -1,19 +1,20 @@
 Linux 安装 YYF 虚拟机
 =========================
 
-1. 安装virtualbox 和 vagrant
-3. 下载源码 init
+1. [安装virtualbox 和 vagrant](virtualbox-vagrant)
+2. [clone YYF源码 init](#yyf)
 
 
 
-## 1. 安装virtualbox和vagrant
+## 1. 安装virtualbox和vagrant {#virtualbox-vagrant}
 
-### Ubuntu
+### Ubuntu 上安装
+一行命令即可
 ```bash
 sudo apt install -y virtualbox vagrant git
 ```
 
-### Centos
+### Centos 上安装
 ``` bash
 # virtualbox
 sudo curl http://download.virtualbox.org/virtualbox/rpm/rhel/virtualbox.repo -o /etc/yum.repos.d/virtualbox.repo
@@ -25,7 +26,7 @@ sudo yum -y localinstall vagrant.rpm
 
 ```
 
-##  2. clone 初始化yyf
+##  2. clone 初始化yyf {#yyf}
 clone源码
 
 ```bash
