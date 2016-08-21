@@ -8,7 +8,7 @@ Linux 上配置YYF环境
 2. [编译配置YAF](#yaf)
 3. [clone YYF源码运行](#yyf)
 
-## 安装PHP {#php}
+## 1. 安装PHP {#php}
 
 安装PHP和必要扩展(其中php-dev和gcc是编译yaf所需).扩展名称在不同系统名称可能有所不同
 
@@ -16,12 +16,14 @@ Linux 上配置YYF环境
 sudo apt install -y php php-mcrypt php-curl php-pdo-sqlite php-pdo-mysql php-dev gcc
 ```
 
-## 编译和配置yaf {#yaf}
+## 2. 编译和配置yaf {#yaf}
 
 可以在[https://pecl.php.net/package/yaf](https://pecl.php.net/package/yaf)选择最新稳定版yaf编译(php7使用yaf 3.x版本,**php5使用 2.x版本**)
 
 ### 自动编译(支持不同系统和PHP版本,自动切换)
-会自动配置yaf的开发环境[dev]
+
+自动安装脚本yaf的开发环境[dev]
+
 ```bash
 curl http://yyf.newfuture.cc/assets/code/yaf.dev.sh | bash
 ```
@@ -43,7 +45,7 @@ sudo make install
 sudo sh -c "echo 'extension=yaf.so\n[yaf]\nyaf.environ=dev'>/etc/php/7.0/cli/conf.d/yaf.ini"
 ```
 
-## clone YYF源码和运行 {#yyf}
+## 3. clone YYF源码和运行 {#yyf}
 
 1.clone最新代码到工作目录,当然也可以直接下载zip解压
 

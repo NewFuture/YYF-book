@@ -5,14 +5,14 @@ Windows 上配置YYF环境
 2. [配置YAF](#yaf)
 3. [下载配置YYF](#yyf)
 
-## 下载PHP {#php}
+## 1. 下载PHP {#php}
 
 如果已有PHP或者安装了`WAMP`,可以跳过此步骤。
 
 Windows版PHP下载地址：[http://windows.php.net/download](http://windows.php.net/download). 选择对应版本下载解压即可。
 
 
-## 配置YAF {#yaf}
+## 2. 配置YAF {#yaf}
 
 YAF下载地址：[https://pecl.php.net/package/yaf](https://pecl.php.net/package/yaf)
 
@@ -26,7 +26,7 @@ extension = php_yaf.dll
 yaf.environ = dev;开发环境是dev,服务器生产环境使用production
 ```
 
-## 下载YYF {#yyf}
+## 3. 下载YYF {#yyf}
 
 1.clone [https://github.com/YunYinORG/YYF.git](https://github.com/YunYinORG/YYF.git) 或者下载zip解压
 

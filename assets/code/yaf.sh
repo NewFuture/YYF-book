@@ -31,7 +31,7 @@ yaf.cache_config=1
 EOF
 # 获取 PHP ini 配置目录
 # Scan for additional .ini path
-PHP_INI_PATH$("$PHP_PATH" --ini|grep --only-matching --perl-regexp  "/.*\.d$"|sed -r -e 's/cli/*/')
+PHP_INI_PATH=$("$PHP_PATH" --ini|grep --only-matching --perl-regexp  "/.*\.d$"|sed -r -e 's/cli/*/')
 # 复制配置文件到各个目录
 # cp the yaf configure to each file 
 echo $PHP_INI_PATH | xargs -n 1 sudo cp "$TEMP_PATH/yaf.ini" 
