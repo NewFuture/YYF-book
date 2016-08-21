@@ -15,7 +15,7 @@ YYF 文件目录结构
 ```
 │  .htaccess    Apache开发环境重新url
 │  config.yaml  SAE配置和URL重定向
-|  init.cmd     统一初始化脚本 
+│  init.cmd     统一初始化脚本 
 │  LICENSE
 │  README.MD
 │  
@@ -50,7 +50,7 @@ YYF 文件目录结构
 │  │  Cache.php    缓存管理类
 │  │  Config.php   配置读取类
 │  │  Cookie.php   安全Cookie接口
-|  |  Db.php       数据库操作封装
+│  │  Db.php       数据库操作封装
 │  │  Encrypt.php  加密库
 │  │  Head.php     调试header输出库
 │  │  Input.php    输入过滤接口
@@ -58,7 +58,7 @@ YYF 文件目录结构
 │  │  Logger.php      日志管理类
 │  │  Mail.php     邮件发送
 │  │  Model.php    基础model
-|  |  Orm.php      ORM数据库对象映射
+│  │  Orm.php      ORM数据库对象映射
 │  │  Random.php   随机字符生成类
 │  │  README.md
 │  │  Rest.php     基础REST类
@@ -103,7 +103,7 @@ YYF 文件目录结构
 * web根目录：生产环境时作为网站的根目录
 
 
-运行时目录
+运行时目录 {#runtime}
 -----------
 `runtime` 文件缓存等数据会存于此目录，保证程序对目录可读写权限；
 

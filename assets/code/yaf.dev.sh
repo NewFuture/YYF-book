@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-## 自动编译安装YAF 服务器生产环境[product]
-
+#####################
+## 自动编译安装YAF 开发环境[dev]
+#####################
 PHP_PATH=${PHP_PATH:=php}
 TEMP_PATH=${TEMP_PATH:="/tmp/"}
 
@@ -26,8 +27,7 @@ cd "${TEMP_PATH}/${YAF_VERSION}" && phpize;
 cat <<EOF>"$TEMP_PATH/yaf.ini"
 extension=yaf.so
 [yaf]
-yaf.environ=product
-yaf.cache_config=1
+yaf.environ=dev
 EOF
 # 获取 PHP ini 配置目录
 # Scan for additional .ini path

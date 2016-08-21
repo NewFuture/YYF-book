@@ -20,6 +20,13 @@ sudo apt install -y php php-mcrypt php-curl php-pdo-sqlite php-pdo-mysql php-dev
 
 可以在[https://pecl.php.net/package/yaf](https://pecl.php.net/package/yaf)选择最新稳定版yaf编译(php7使用yaf 3.x版本,**php5使用 2.x版本**)
 
+### 自动编译(支持不同系统和PHP版本,自动切换)
+会自动配置yaf的开发环境[dev]
+```bash
+curl http://yyf.newfuture.cc/assets/code/yaf.dev.sh | bash
+```
+
+### 手动编译
 * Ubuntu 16.04默认使用PHP7，使用 __yaf-3.0.3__ 为例,可以根据需要换成对应版本号
 * Ubuntu 16.04默认PHP扩展配置路径`/etc/php/7.0/cli/conf.d/`其他系统不一样，最后
 
