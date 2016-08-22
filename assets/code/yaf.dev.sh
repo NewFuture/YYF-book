@@ -7,7 +7,7 @@ TEMP_PATH=${TEMP_PATH:="/tmp/"}
 
 # 获取PHP版本
 # GET PHP version
-PHP_VERSION=$("$PHP_PATH" -v|grep --only-matching --perl-regexp "\d\.\d+\.\d+"|head -1);
+PHP_VERSION=$("$PHP_PATH" -v|grep -m1 --only-matching --perl-regexp "\d\.\d\.\d+"|head -1);
 if [[ ${PHP_VERSION} == "7."* ]]; then
     YAF_VERSION=yaf-3.0.3 #php 7
 else
@@ -30,11 +30,29 @@ extension=yaf.so
 yaf.environ=dev
 EOF
 # 获取 PHP ini 配置目录
-# Scan for additional .ini path
-PHP_INI_PATH=$("$PHP_PATH" --ini|grep --only-matching --perl-regexp  "/.*\.d$"|sed -r -e 's/cli/*/')
+# Scan for additional .ini path folder
+PHP_INI_PATH=$("$PHP_PATH" --ini|grep -o -m1 -P "additional.*\s(/.*$)"|grep -o "/.*$"|sed -r -e 's/cli/*/')
 # 复制配置文件到各个目录
 # cp the yaf configure to each file 
 echo $PHP_INI_PATH | xargs -n 1 sudo cp "$TEMP_PATH/yaf.ini" 
 # 删除临时文件
 # remove temp ini
 rm "$TEMP_PATH/yaf.ini"
+
+
+# 修改配置文件： 文件  键   值
+# CHANGE_INI   $file $key $value
+CHANGE_INI(){
+if [ $(cat "$1" | grep -c "^\s*$2") -eq 0 ] ; then
+   sudo bash -c "echo '$2=$3' >> '$1'"
+else
+   sudo sed -i.bak -e "s/^\s*$2.*$/$2=$3/" "$1"
+fi;
+}
+
+# 修改开发环境断言配置
+PHP_INI=$("$PHP_PATH" --ini|grep -m1 --only-matching --perl-regexp  "/.*php\.ini$"|sed -r -e 's/cli/*/')
+PHP_INI=($PHP_INI) 
+for ini in ${PHP_INI[@]};do 
+    CHANGE_INI $ini zend.assertions 1
+done

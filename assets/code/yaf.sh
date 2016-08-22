@@ -38,3 +38,27 @@ echo $PHP_INI_PATH | xargs -n 1 sudo cp "$TEMP_PATH/yaf.ini"
 # 删除临时文件
 # remove temp ini
 rm "$TEMP_PATH/yaf.ini"
+
+
+# 修改配置文件： 文件  键   值
+# CHANGE_INI   $file $key $value
+CHANGE_INI(){
+if [ $(cat "$1" | grep -c "^\s*$2") -eq 0 ] ; then
+   sudo bash -c "echo '$2=$3' >> '$1'"
+else
+   sudo sed -i.bak -e "s/^\s*$2.*$/$2=$3/" "$1"
+fi;
+}
+
+# 修改断PHP配置
+# 生产环境PHP配置
+PHP_INI=$("$PHP_PATH" --ini|grep -m1 --only-matching --perl-regexp  "/.*php\.ini$"|sed -r -e 's/cli/*/')
+PHP_INI=($PHP_INI) 
+for ini in ${PHP_INI[@]};do 
+    CHANGE_INI $ini assert.active 0	 
+    CHANGE_INI $ini assert.bail 0	 
+    CHANGE_INI $ini assert.warning 0	 
+    CHANGE_INI $ini assert.quiet_eval 1	 
+    CHANGE_INI $ini assert.exception 0
+    CHANGE_INI $ini zend.assertions -1
+done
