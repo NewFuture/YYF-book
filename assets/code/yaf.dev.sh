@@ -58,7 +58,13 @@ curl https://pecl.php.net/get/${YAF_VERSION}.tgz | tar zx -C "$TEMP_PATH"
 # 编译YAF 
 echo "compile YAF [编译 YAF] ..."
 cd "${TEMP_PATH}/${YAF_VERSION}" && phpize;
-./configure >"$TEMP_PATH/yaf.configure.log" && make >>"$TEMP_PATH/yaf.configure.log"
+PHP_CONFIG_PATH=$(command -v "${PHP_PATH}-config" 2>/dev/null)
+if [ -z "$PHP_CONFIG_PATH" ]; then
+    ./configure >"$TEMP_PATH/yaf.configure.log"
+else
+    ./configure --with-php-config="$PHP_CONFIG_PATH" >"$TEMP_PATH/yaf.configure.log"
+fi;
+make >>"$TEMP_PATH/yaf.configure.log"
 
 # 复制到PHP扩展目录
 PHP_LIB_PATH=$("$PHP_PATH" -i | grep -o -m1 "^extension_dir.*=>.*=>" | grep -m1 -o -P "(['\"](/+[^/\\\\:*?'\"<>=|\^]*)+/?['\"])|((/+[^/\\\\:*?'\"<>=|\s\^]*)+/?)" | tail -1)
