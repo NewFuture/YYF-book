@@ -4,6 +4,7 @@ Linux 安装 YYF 虚拟机
 1. [安装virtualbox 和 vagrant](virtualbox-vagrant)
 2. [clone YYF源码 init](#yyf)
 
+Ubuntu 一键配置脚本 `curl http://yyf.newfuture.cc/assets/code/vm-ubuntu.sh |bash`
 
 
 ## 1. 安装virtualbox和vagrant {#virtualbox-vagrant}

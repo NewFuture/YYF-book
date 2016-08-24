@@ -18,27 +18,26 @@ sudo apt install -y php php-mcrypt php-curl php-pdo-sqlite php-pdo-mysql php-dev
 
 ## 2. 编译和配置yaf {#yaf}
 
-可以在[https://pecl.php.net/package/yaf](https://pecl.php.net/package/yaf)选择最新稳定版yaf编译(php7使用yaf 3.x版本,**php5使用 2.x版本**)
-
 ### 自动编译(支持不同系统和PHP版本,自动切换)
 
-自动安装脚本yaf的开发环境[dev]
+复制运行下面命令,自动安装脚本YAF的并配置PHP开发环境(dev).(需要已安装gcc和php-dev,否则会报错)。如果权限不够会自动切换到`sudo`
 
 ```bash
-curl http://yyf.newfuture.cc/assets/code/yaf.dev.sh | bash
+curl http://yyf.newfuture.cc/assets/code/yaf.dev.sh |bash
 ```
 
 ### 手动编译
+可以在[https://pecl.php.net/package/yaf](https://pecl.php.net/package/yaf)选择最新稳定版yaf编译.
+(php7使用yaf 3.x版本,**php5使用 2.x版本**)
+
 * Ubuntu 16.04默认使用PHP7，使用 __yaf-3.0.3__ 为例,可以根据需要换成对应版本号
 * Ubuntu 16.04默认PHP扩展配置路径`/etc/php/7.0/cli/conf.d/`其他系统不一样，最后
 
 ```bash
 #下载YAF,不同版本
-curl https://pecl.php.net/get/yaf-3.0.3.tgz | tar zx -C ~/
+curl https://pecl.php.net/get/yaf-3.0.3.tgz |tar zx -C ~/
 #编译yaf
-cd ~/yaf-3.0.3/; phpize;
-./configure
-make
+cd ~/yaf-3.0.3/; phpize;./configure && make
 # 安装yaf
 sudo make install
 #添加yaf.ini到PHP配置中，不同系统路径不同
@@ -62,18 +61,21 @@ git clone https://github.com/YunYinORG/YYF.git
 
 正常情况,配置和清理完成后会出现如下选项：
 
->
+> 
 >select which development environment you want to use?
 >
->  1) Use virtual Machine with vagrant;
+>  1) Use virtual Machine with vagrant; [*自动配置虚拟机环境*]
 >
->  2) Use local development (with PHP);
+>  2) Use php server (local development); [*安装配置本机PHP开发环境*]
+> 
+>  3) install yaf with DEV environ (local); [*只安装YAF并设置为开发环境*]
 >
->  0) Exit;
+>  4) install yaf with PRODUCT environ (server); [*安装YAF设置生产环境*]
 >
+>  0) Exit (Manual); [*退出(手动配置)*]
 >
 >Input your choice (default[ENTER] is 1):
->
+> 
 
 输入`2`回车(选择本地开发环境)即可配置和启动PHP测试服务器。
 

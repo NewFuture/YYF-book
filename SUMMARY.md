@@ -9,11 +9,11 @@
 * [基本环境](setup/README.md)
 * [开发环境配置](setup/develop.md)
     * [虚拟机环境](setup/develop.md#vm)
-        * [Windows下虚拟机安装](setup/vm-in-windows.md)
-        * [Linux 和 mac ](setup/vm-in-linux.md)
+        * [Windows 下虚拟机](setup/vm-in-windows.md)
+        * [Linux和Mac虚拟机](setup/vm-in-linux.md)
     * [本机开发](setup/develop.md#local)
-        * [Windows下配置](setup/yyf-in-windows.md)
-        * [Linux 和 mac 下配置](setup/yyf-in-linux.md)
+        * [Windows 下配置](setup/yyf-in-windows.md)
+        * [Linux和Mac配置](setup/yyf-in-linux.md)
 * [服务器(生产环境)](setup/yyf-in-server.md)
 
 
@@ -41,11 +41,11 @@
 
 ## 数据库与Model
 * [数据库](database/README.md)
+* [使用示例](database/example.md)
 * [Db 辅助类](database/db.md)
 * [Model 数据模型](database/model.md)
-* [Orm 对象映射](database/orm.md)
-* [Database 数据库连接](database/database.md)
-* [使用](database/example.md)
+* [Orm 数据对象映射](database/orm.md)
+* [Database底层数据库连接](database/database.md)
 
 ## \[视图与输出\]
 * [yaf view\(更新中\)](#)
