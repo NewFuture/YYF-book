@@ -84,13 +84,14 @@ $db->query('DELETE FROM user WHERE id =:id',['id'=>1]);
 
 #### Database::query() 方法 查询一条SQL(读),并返回执行结果 {#query}
 >```php
->function query(string $sql [, array $params = null [, $fetchmode = \PDO::FETCH_ASSOC]])：array
+>function query(string $sql [, array $params = null [, boolean $fetchAll= true [, $fetchmode = \PDO::FETCH_ASSOC]]])：array
 >```
 
 * 参数：
     1. string $sql: SQL 写操作处理语句(`UPDATE`,`INSERT`,`DELETE`),(select 语句使用[query](#query)或者[column](#column)查询)
     2. array $params: 查询参数数组，索引数组(对应`?`参数)或者键值对数组(对应`:xx`型参数，如果参数无`:`会自动补全)
-    3. $fetchmode: 结果返回方式
+    3. boolean $fetchAll: 结果读取方式 默认 fetchAll 全部二维数组， `false`时 使用fetch 一维数组
+    4. $fetchmode: 结果返回方式
 * 返回：$fetchmode 确定，默认二维数组
 * 代码
 

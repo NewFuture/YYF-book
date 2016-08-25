@@ -39,4 +39,4 @@ YYF对系统日志进行轻量封装.完全兼容[PSR-3日子接口](https://git
 
 >```php
 >function write(string $message [,string $level="NOTICE"]):boolean
->`
+>```
