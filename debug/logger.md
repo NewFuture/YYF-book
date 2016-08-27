@@ -36,7 +36,104 @@ YYF对系统日志进行轻量封装.完全兼容[PSR-3日子接口](https://git
 -------------
 
 ### `write()`快速写入 {#write}
+快速写入会根据日志级别设置自动过滤日志level
 
 >```php
 >function write(string $message [,string $level="NOTICE"]):boolean
 >```
+
+* 参数：
+    1. `string $message`[必填] :记录消息
+    2. `string $level`[选填]: 日志级别 默认是 NOTICE(自动转成大写)
+* 返回：`boolean` 日志是否写入成功
+* 示例代码
+
+```php
+//快速查询
+Logger::write('somae message');
+Logger::write('error message','ERROR');
+```
+
+
+
+### `log()`写入日志 {#log}
+对write的扩展,可以写入数组对象或者模板消息
+
+>```php
+>function log(string $level, mixed $message, [array context]):boolean
+>```
+* 参数：
+    1. `string $level`[必填] :日志级别
+    2. `string|mixed $message`[必须]: 日志内容，如果能转换字符串会进行json格式化
+    3. `array $context` [可选]：模板消息替换,三个参数是第二个参数必须是字符串。模板用`{}`标记
+* 返回：`boolean` 日志是否写入成功
+* 注意：消息如果是`object`且实现了`__toString()`方法，可直接转字符串
+* 示例代码
+
+```php
+//字符串写入
+Logger::log('ERROR','error message');
+
+//模板消息
+Logger::log('WARN','login from {ip}',['ip'=>'12.34.56.78']);//实际消息"login from 12.34.56.78"
+//数组对象
+Logger::log('DEBUG',['name'=>'tester','info'=>'test']);//实际消息{"name":"tester","info":"test"}
+
+//模板数组
+Logger::log('INFO','post message {msg} at {time}',[
+    'msg'=$_POST;
+    'time'=time();
+]);//其中{msg}会被 json_encode($_POST)替换;
+
+````
+
+
+### `clear()`清空日志 {#clear}
+
+>```php
+>function clear()
+>```
+
+清空所有日志文件.仅对文件模式`file`有效,(如果系统日志配置了日志文件也可清除).
+
+其他 PSR-3日志接口 {#psr3}
+-----
+实现8中日志接口类型,对[`log`](#log)进行封装,方便快速高效写入日志
+```php
+function emergency($message [,$context]):boolean;
+
+function alert($message [,$context]):boolean;
+
+function critical($message [,$context]):boolean;
+
+function error($message [,$context]):boolean;
+
+function warning($message [,$context]):boolean;
+function warn($message [,$context]):boolean;
+
+function notice($message [,$context]):boolean;
+
+function info($message [,$context]):boolean;
+
+function debug($message [,$context]):boolean;
+```
+
+示例代码
+
+```php
+//字符串写入
+Logger::error('error message');
+
+//模板消息
+Logger::warn('login from {ip}',['ip'=>'12.34.56.78']);
+Logger::warning('login from {ip}',['ip'=>'12.34.56.78']);
+//数组对象
+Logger::debug(['name'=>'tester','info'=>'test']);//实际消息{"name":"tester","info":"test"}
+
+//模板数组
+Logger::info('post message {msg} at {time}',[
+    'msg'=$_POST;
+    'time'=time();
+]);
+
+````
