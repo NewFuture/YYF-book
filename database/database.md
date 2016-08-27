@@ -152,16 +152,17 @@ $name=$db->column('SELECT name FROM user WHERE id=?',[1]);//返回的是字符�
 * [PDO::beginTransaction()](http://php.net/manual/zh/pdo.begintransaction.php)— 启动一个事务
 * [PDO::commit()](http://php.net/manual/zh/pdo.commit.php) — 提交一个事务
 * [PDO::rollBack()](http://php.net/manual/zh/pdo.rollback.php) — 回滚一个事务
-* Database::transact($func) 快捷事务
+* [Database::transact($func)](#transact) 快捷事务
 
 #### `transact()`方法：处理事务 {#transact}
 >```php
->function transact(callable $func)
+>function transact(callable $func [, boolean $err_exception=true]):boolean
 >```
 
 * 参数callable $func: 调用函数过程(可以是匿名函数)
     - $func 参数是当前对象(`$this`)
     - 返回值，如果是`false`(严格的false,null,0等**不是false**),同样执行回滚
+* boolean $err_exception: 将错误作为异常处理，这样可以坚持代码内部错误
 * 返回：`false`(执行失败)或者$func的返回值(执行成功)
 * tips： 如果$func 无返回值，执行出错同样回滚
 * 代码
@@ -177,10 +178,14 @@ $db->transact(function ($DB) {
 /*等效实务操作*/
 try{
     $db->beginTransaction();
-    $db->exec('DELETE FROM article WHERE user_id =?',[1]);
-    //更多操作...
-    $db->exec('DELETE FROM user WHERE id =?',[1]);
-    $db->commit();
+    if($db->exec('DELETE FROM article WHERE user_id =?',[1]))
+    {
+        //更多操作...
+        $db->exec('DELETE FROM user WHERE id =?',[1]);
+        $db->commit();
+    }else{
+        $db->rollBack();
+    }
 }catch(Exception $e){
     $db->rollBack();
 }
