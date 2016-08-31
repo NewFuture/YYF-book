@@ -4,8 +4,8 @@
 "一键部署"
 ----------------------
 
-* [Centos (rpm系列)](#centos): `curl http://yyf.newfuture.cc/assets/code/server-centos.sh | bash`
-* [Ubuntu (deb系列)](#ubuntu): `curl http://yyf.newfuture.cc/assets/code/server-ubuntu.sh | bash`
+* [Centos (rpm系列)](#centos): `curl -#L http://yyf.newfuture.cc/assets/code/server-centos.sh |bash`
+* [Ubuntu (deb系列)](#ubuntu): `curl -#L http://yyf.newfuture.cc/assets/code/server-ubuntu.sh |bash`
 
 对于“裸机”可以直接选择对应的系统运行后面的命令自动安装和配置(包括 apache,php,mysql或mariadb,和yaf扩展)。
 
