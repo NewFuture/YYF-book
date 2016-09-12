@@ -15,7 +15,7 @@
 ------------------------
 
 ```bash
-curl http://yyf.newfuture.cc/assets/code/server-centos.sh | bash
+curl -#L http://yyf.newfuture.cc/assets/code/server-centos.sh |bash
 ```
 使用系统默源进行安装httpd和php和数据库,不同版本系统安装的结果会不一样。
 
@@ -36,7 +36,7 @@ PHP 版本 | <=5.4   | 5.5 或5.6 |
 ------------------------
 
 ```bash
-curl http://yyf.newfuture.cc/assets/code/server-ubuntu.sh | bash
+curl -#L http://yyf.newfuture.cc/assets/code/server-ubuntu.sh |bash
 ```
 
 使用系统默源进行安装apache,msyql和PHP (ubuntu 16.04及以上会自动安装php7)
