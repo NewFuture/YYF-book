@@ -1,19 +1,18 @@
-键值对存储(Kv)
+缓存(Cache)
 ================
 
-键值对存储提供快速一致的永久存储服务接口。支持存储类型:(配置中指明类型即可)
-* redis 高性能键值对存储服务
+缓存存储提供快速一致的缓存服务接口。支持存储类型:(配置中指明类型即可)
+* memcached 内存缓存
 * file  文件存储磁盘存储
-* sae   sae KVDB键值对存储
+* memcache memcache内存缓存(包括sae)
 
 存储接口
 ----------------
-* [Kv::set()存储值](#set)
-* [Kv::get()读取](#get)
-* [kv::del()删除](#del)
-* [Kv::flush()清空](#flush)
-* [Kv::handler()获取当前Kv底层存储对象](#handler)
-
+* [Cache::set()存储值](#set)
+* [Cache::get()读取](#get)
+* [Cache::del()删除](#del)
+* [Cache::flush()清空](#flush)
+* [Cache::handler()获取当前Kv底层存储对象](#handler)
 
 
 `set`保存 {#set}
@@ -21,8 +20,8 @@
 set快速存储键值
 
 >```php
->function set(string $key, string $value):boolean;
->function set(array $data):boolean
+>function set(string $key, string $value, int $expire=0):boolean;
+>function set(array $data, int $expire=0):boolean
 >```
 
 * 双参数：
@@ -35,12 +34,12 @@ set快速存储键值
 *  tips: 使用redis会调用`mset`相当于数据库中的事务，只有都写入成功才继续。
 
 ```php
-Kv::set('test_key','some value');
+Cache::set('test_key','some value',60);
 
-Kv::set([
+Cache::set([
     'key1'=>'value1',
     'key2'=>'value2'
-]);
+],60);
 ```
 
 `get`获取 {#get}
@@ -49,7 +48,7 @@ get快速获取存储
 
 >```php
 >function get(string $key, string $defualt=false):boolean|string;
->function get(string $data):array;
+>function get(string $array):array;
 >```
 
 * 双参数：
@@ -58,12 +57,12 @@ get快速获取存储
 * 数组参数： 返回array
     
 ```php
-Kv::get('test_key');
-Kv::get('no_key');//false
-Kv::get('no_key','default');//返回'default'
+Cache::get('test_key');
+Cache::get('no_key');//false
+Cache::get('no_key','default');//返回'default'
 
-Kv::get(['key1','key2']);//返回数组['key1'=>'value1','key2'=>'value2']
-Kv::get(['key1','key2','no_key']);//返回数组['key1'=>'value1','key2'=>'value2','no_key'=>false]
+Cache::get(['key1','key2']);//返回数组['key1'=>'value1','key2'=>'value2']
+Cache::get(['key1','key2','no_key']);//返回数组['key1'=>'value1','key2'=>'value2','no_key'=>false]
 ```
 
 `del`删除 {#del}
@@ -79,7 +78,7 @@ del快速删除
     2. `int` $time=0:延迟时间，仅对redis有效
 
 ```php
-Kv::del('test_key');
+Cache::del('test_key');
 ```
 
 
@@ -91,7 +90,7 @@ Kv::del('test_key');
 >```
 
 ```php
-Kv::flush();
+Cache::flush();
 ```
 
 
@@ -103,5 +102,5 @@ Kv::flush();
 >```
 
 ```php
-$handler=Kv::handler();
+$handler=Cache::handler();
 ```

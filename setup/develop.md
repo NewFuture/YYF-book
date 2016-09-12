@@ -50,7 +50,7 @@ YYF定制了一个集成了YYF所需环境的虚拟机镜像(大约350M),并提�
 
 1. 如果打开网站出现下面错误，说明没有安装yaf扩展
 
->PHP Fatal error:  Class 'Yaf_Application' not found in XXX/public/index.php on line 3
+>PHP Fatal error:  Class 'Yaf_Application' not found in XXX/public/index.php
 
 可以安装如下方法配置，或者搜索引擎搜索 如何配置yaf扩展
 * [windows 配置yaf方法](yyf-in-windows.md#yaf)
