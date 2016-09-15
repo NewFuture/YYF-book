@@ -61,17 +61,28 @@ cd "${TEMP_PATH}${YAF_VERSION}" && phpize;
 PHP_CONFIG_PATH=$(command -v "${PHP_PATH}-config" 2>/dev/null)
 if [ -z "$PHP_CONFIG_PATH" ]; then
     ./configure >"${TEMP_PATH}yaf.configure.log"
+    make >>"${TEMP_PATH}yaf.configure.log"
+    # 复制到PHP扩展目录
+    PHP_LIB_PATH=$("$PHP_PATH" -i|grep -oPm1 "(?<=^extension_dir\W=>\W)(['\"]?(/+[^/\\\\:*?'\"<>=|\^]*)+/?['\"]?)(?=\W=>)")
+    echo "copye yaf.so to php extension dir ${PHP_LIB_PATH} [安装 YAF 到 ${PHP_LIB_PATH}] ..."
+    CHECK_SUDO $PHP_LIB_PATH
+    $SUDO cp "${TEMP_PATH}${YAF_VERSION}/modules/yaf.so" "$PHP_LIB_PATH"
 else
     ./configure --with-php-config="$PHP_CONFIG_PATH" >"${TEMP_PATH}yaf.configure.log"
+    make >>"${TEMP_PATH}yaf.configure.log"
+    echo "install yaf"
+    CHECK_SUDO $("$PHP_CONFIG_PATH" --extension-dir)
+    $SUDO make install
 fi;
-make >>"${TEMP_PATH}yaf.configure.log"
 
-# 复制到PHP扩展目录
-PHP_LIB_PATH=$("$PHP_PATH" -i|grep -oPm1 "(?<=^extension_dir\W=>\W)(['\"]?(/+[^/\\\\:*?'\"<>=|\^]*)+/?['\"]?)(?=\W=>)")
-echo "copye yaf.so to php extension dir ${PHP_LIB_PATH} [安装 YAF 到 ${PHP_LIB_PATH}] ..."
-CHECK_SUDO $PHP_LIB_PATH
-$SUDO mv "${TEMP_PATH}${YAF_VERSION}/modules/yaf.so" "$PHP_LIB_PATH"
 
+#配置YAF
+# 获取 PHP ini 配置目录
+# Scan for additional .ini path
+PHP_ADD_INI=$("$PHP_PATH" --ini|grep -oPm1 "(?<=Scan for additional \.ini files in:).*"|sed -r -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+
+if [ -d "$PHP_ADD_INI" ]; then
+# use additional ini path
 
 ## 创建yaf配置文件
 ## create temp yaf file
@@ -81,14 +92,23 @@ extension=yaf.so
 yaf.environ=$ENVIRON
 yaf.cache_config=$CACHE_CONIFG
 EOF
-# 获取 PHP ini 配置目录
-# Scan for additional .ini path
-PHP_INI_PATH=$("$PHP_PATH" --ini|grep -oPm1  "(?<=:\W)/.*\.d$"|sed -r -e 's/cli/*/')
-# 复制配置文件到各个目录
-echo "copy the configure to each file to $PHP_INI_PATH [复制yaf.ini到扩展配置目录]" 
-CHECK_SUDO $PHP_INI_PATH
-echo $PHP_INI_PATH | xargs -n 1 $SUDO cp "${TEMP_PATH}yaf.ini" 
 
-# 删除临时文件
-# remove temp ini
-rm "${TEMP_PATH}yaf.ini"
+    CHECK_SUDO $PHP_ADD_INI
+    PHP_ADD_INI="$(sed -e 's/\/cli\//\/*\//' <<< ${PHP_ADD_INI})"
+    # 复制配置文件到各个目录
+    echo "copy the configure to each file to $PHP_ADD_INI [复制yaf.ini到扩展配置目录]" 
+    echo $PHP_ADD_INI | xargs -n 1 $SUDO cp "${TEMP_PATH}yaf.ini" 
+    # 删除临时文件
+    # remove temp ini
+    rm "${TEMP_PATH}yaf.ini"
+else
+# use single php.ini
+    PHP_INI_PATH=$("$PHP_PATH" --ini|grep -oPm1 "(?<=Loaded Configuration File:).*"|sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
+    echo "configure yaf in $PHP_INI_PATH"
+    CHECK_SUDO $PHP_INI_PATH
+    if [ $(cat "$PHP_INI_PATH" | grep -c "^\s*extension\s*=\s*yaf.so") -eq 0 ] ; then 
+       $SUDO bash -c "echo 'extension=yaf.so' >> '$PHP_INI_PATH'"
+    fi;
+    CHANGE_INI $PHP_INI_PATH yaf.environ $ENVIRON
+    CHANGE_INI $PHP_INI_PATH yaf.cache_config $CACHE_CONIFG
+fi;
