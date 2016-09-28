@@ -23,7 +23,7 @@ sudo apt install -y php php-mcrypt php-curl php-pdo-sqlite php-pdo-mysql php-dev
 复制运行下面命令,自动安装脚本YAF的并配置PHP开发环境(dev).(需要已安装gcc和php-dev,否则会报错)。如果权限不够会自动切换到`sudo`
 
 ```bash
-curl -#L http://yyf.newfuture.cc/assets/code/yaf.dev.sh |bash
+curl -#L https://yyf.newfuture.cc/assets/code/yaf.dev.sh |bash
 ```
 
 ### 手动编译
