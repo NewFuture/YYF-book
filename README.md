@@ -18,7 +18,7 @@ YYF最初是从第二版云印系统后端核心框架萃取和完善发展而�
 鉴于流行Laravel框架和使用较多的ThinkPHP框架的使用习惯, 以 yaf扩展作为底层框架提高整体性能，开发的RESTful后端PHP框架。
 
 
-如果使用过Larval或者Thinkphp等任何PHP框架,或者熟悉Rails等类似的web框架,可轻松上手YYF。
+如果使用过Laraval或者Thinkphp等任何PHP框架,或者熟悉Rails等类似的web框架,可轻松上手YYF。
 
 主要特点：
 ---------

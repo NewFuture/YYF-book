@@ -23,7 +23,7 @@
         },
         "tbfed-pagefooter": {
             "copyright": "Copyright &copy NewFuture 2016",
-            "modify_label": "此页修订时间：",
+            "modify_label": "文档编译时间：",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         }
     },
