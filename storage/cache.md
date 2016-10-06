@@ -1,8 +1,9 @@
 缓存(Cache)
 ================
 
-缓存存储提供快速一致的缓存服务接口。支持存储类型:(配置中指明类型即可)
+缓存存储提供快速一致的缓存服务接口(缓存可能会被清理)。支持存储类型:(配置中指明类型即可)
 * memcached 内存缓存
+* redis 能键值对缓存服务
 * file  文件存储磁盘存储
 * memcache memcache内存缓存(包括sae)
 
@@ -70,12 +71,11 @@ Cache::get(['key1','key2','no_key']);//返回数组['key1'=>'value1','key2'=>'va
 del快速删除
 
 >```php
->function del(string $key, int $time=0):boolean;
+>function del(string $key):boolean;
 >```
 
-* 参数：
-    1. `string` $key：键值
-    2. `int` $time=0:延迟时间，仅对redis有效
+* 参数 `string` $key：键值
+
 
 ```php
 Cache::del('test_key');
