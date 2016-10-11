@@ -2,10 +2,11 @@
 ===============
 
 YYF提供多种工具在开发和测试的过程中尽快定位问题。开发环境下自动注入的方式方便查看和调试。
+同时提供chrome 扩展 YYF-Debugger
 
 * [assert断言错误](assert.md)
 * [logger日志记录](logger.md)
-* [header调试]
+* [header调试](header.md)
 * [资源消耗统计]
 * [SQL记录和统计]
 * [Debug调试工具]

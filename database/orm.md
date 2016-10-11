@@ -48,6 +48,7 @@ Object-Relational Mapping（对象关系映射）
 * [**clear**](#clear)
 * [**transact**](#transact)
 * [debug](#debug)
+* [autoClear](#autoClear)
 * [safe](#safe)
 * [setDb](#setDb)
 
@@ -995,6 +996,20 @@ $Orm->transact(function ($user) {
       ->decrement('score',5);//id为2的积分-5
  return $user->get('score')>0;//判断加分是否为正,如果此时积分小于0依然回滚
 });
+```
+
+### `autoClear()`方法: 开启调试输出 {#autoClear}
+查询结束后自动清理掉查询条件和查询参数，可直接再次使用
+>```php
+> object function autoClear(boolean $clear])
+>```
+
+* 参数 (`boolean`) `$clear` : 是否开启,设为false时关闭自动清除
+* 返回 `Orm Object` ： 返回$this，可以进行后续操作 
+* 示例代码
+
+```php
+$query=Db::table('user')->autoClear();
 ```
 
 
