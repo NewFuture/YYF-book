@@ -55,12 +55,12 @@
 
 ## 调试
 * [调试方法](debug/README.md)
-* [header\(更新中\)]
+* [header](debug/header.md)
 * [dump\(更新中\)]
-* [Logger 日志管理](debug/logger.md)
-* [查看数据库\(更新中\)]
 * [assert 断言](debug/assert.md)
+* [Logger 日志管理](debug/logger.md)
 * [异常\(更新中\)]
+* [查看数据库\(更新中\)]
 
 ## \[路由\]
 * [默认路由\(更新中\)]
