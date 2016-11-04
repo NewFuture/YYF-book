@@ -17,8 +17,8 @@ Database 底层数据库连接
     * [Database::exec($sql,$params)](#exec) 执行一条SQL(写),并返回受影响的行数
     * [Database::query($sql,$params)](#query) 查询一条SQL(读),并返回执行结果
     * [Database::column($sql,$params)](#column)(查询一条SQL(读),并返回一个值
+    * [Database::isok()](#isOk) 是否出错
     * [Database::errorInfo()](#errorInfo) 获取出错信息
-    * [Database::errorCode()](#errorCode) 获取错误码
     * [Database::transact($func)](#transact) 执行事务
 - 全局接口
     * [Database::$before](#before) 数据库请求处理之前调用
@@ -129,21 +129,27 @@ $db->query('SELECT * FROM user WHERE id=:id AND status>:status',['id'=>1,'status
 $name=$db->column('SELECT name FROM user WHERE id=?',[1]);//返回的是字符串
 ```
 
-#### 获取错误信息
+#### 获取错误信息  {#isOk}
+查询是否出错,返回bool
+```
+$db->isOk();
+```
+
+#### 获取错误信息  {#errorInfo}
 
 可以在[database]的配置中配置`exception=1`来开启异常，(执行出错抛出,异常，可以使用`try`,`catch`处理)
 
 获取错误或者执行是否出错或者粗出结果可以使用
 
-* Database::errorCode() 获取错误码 {#errorCode}
-    - 返回字符串，
-    - 无错误时返回"000"或者"00000"与驱动有关，可以使用 `$db->errorCode()==0`判断
 * Database::errorInfo() 获取出错信息
     - 返回数组，一般三个值
     - 第一个值错误码
     - 第二个错误的代码
     - 第三个错误原因
 
+```
+$db->errorInfo();
+```
 ### 事务 {#tansaction}
 
 几个操作必须都成功执行的时候，需要使用事务

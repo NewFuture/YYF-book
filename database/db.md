@@ -19,7 +19,7 @@ Db 数据库辅助类
     * [Database::query($sql,$params)](database.md#query) 查询一条SQL(读),并返回执行结果
     * [Database::column($sql,$params)](database.md#column)(查询一条SQL(读),并返回一个值
     * [Database::errorInfo()](database.md#errorInfo) 获取出错信息
-    * [Database::errorCode()](database.md#errorCode) 获取错误码
+    * [Database::isOk()](database.md#isOk) 上次查询是否出错
     * [Database::transact($func)](database.md#transact) 执行事务
 - 继承自[PDO](http://php.net/manual/zh/book.pdo.php)(下面链接均为PHP文档)
     * [PDO::beginTransaction()](http://php.net/manual/zh/pdo.begintransaction.php)— 启动一个事务
