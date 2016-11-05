@@ -56,7 +56,6 @@
 ## 调试
 * [调试方法](debug/README.md)
 * [header](debug/header.md)
-* [dump\(更新中\)]
 * [assert 断言](debug/assert.md)
 * [Logger 日志管理](debug/logger.md)
 * [异常\(更新中\)]
@@ -99,8 +98,8 @@
 * [Wechat微信](library/wechat.md)
 
 ## \[前端插件\]
-* [调试工具\(更新中\)]
-* [api js 操作库\(更新中\)]
+* [YYF-Debugger调试插件](http://debugger.newfuture.cc/)
+* [YYFJS API接口库\(更新中\)]
 
 ## \[优化\]
 * [php优化\(更新中\)]
