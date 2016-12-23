@@ -7,51 +7,59 @@ Object-Relational Mapping（对象关系映射）
 
 全部接口列表 {#interface}
 ---------
-* [**select**](#select)
-* [**find**](#find)
-* [**get**](#get)
-* [**insert**](#insert)
-* [insertAll](#insertAll)
-* [**add**](#add)
-* [**update**](#update)
-* [**save**](#save)
-* [**put**](#put)
-* [**increment**](#increment)
-* [**decrement**](#decrement)
-* [**delete**](#delete)
-* [**where**](#where)
-* [**orwhere**](#orwhere)
-* [whereField](#whereField)
-* [orWhereField](#orWhereField)
-* [exists](#exists)
-* [orExists](#orExists)
-* [distinct](#distinct)
-* [group](#group)
-* [having](#having)
-* [orhaving](#orHaving)
-* [field](#field)
-* [**order**](#order)
-* [limit](#limit)
-* [**page**](#page)
-* [**count**](#count)
-* [**sum**](#sum)
-* [avg](#avg)
-* [max](#max)
-* [min](#min)
-* [join](#join)
-* [**has**](#has)
-* [**belongs**](#belongs)
-* [union](#union)
-* [unionAll](#unionAll)
-* [alias](#alias)
-* [**set**](#set)
-* [**clear**](#clear)
-* [**transact**](#transact)
-* [debug](#debug)
-* [autoClear](#autoClear)
-* [safe](#safe)
-* [setDb](#setDb)
-
+- [查询操作](#query)
+    * [**select** 批量查询](#select)
+    * [**find** 单条查询](#find)
+    * [**get** 获取单条或单个属性](#get)
+- [插入操作](#insert-method)
+    * [**insert** 插入](#insert)
+    * [insertAll 批量插入](#insertAll)
+    * [**add** 添加](#add)
+- [更新操作](#update-method)
+    * [**update** 更新数据](#update)
+    * [**save** 保持数据](#save)
+    * [**set** 修改属性](#set)
+    * [**put** 快速修改字段](#put)
+    * [**increment** 字段自增](#increment)
+    * [**decrement** 字段自减](#decrement)
+- [**delete** 删除操作](#delete)
+- [条件限制](#condition)
+    * [**where** 设置条件](#where)
+    * [**orwhere** 设置`或条件`](#orwhere)
+    * [whereField 字段关系](#whereField)
+    * [orWhereField 字段`或关系`](#orWhereField)
+    * [having 计算条件](#having)
+    * [orhaving 计算OR条件](#orHaving)
+- [子查询是否存在](#exists-method)
+    * [exists 子查询存在](#exists)
+    * [orExists 不存在](#orExists)
+- [结果筛选](#group-method)
+    * [distinct 去重](#distinct)
+    * [group 分组](#group)
+    * [field 字段过滤](#field)
+    * [**order** 排序](#order)
+    * [limit 限制数量](#limit)
+    * [**page** 翻页](#page)
+-  [函数](#function)
+    * [**count** 统计](#count)
+    * [**sum** 求和](#sum)
+    * [avg 均值](#avg)
+    * [max 最大值](#max)
+    * [min 最小值](#min)
+- [多表操作](#multi-table)
+    * [join 接表](#join)
+    * [**has** 包含外键关联](#has)
+    * [**belongs** 从属外键关联](#belongs)
+    * [union 合并查询](#union)
+    * [unionAll 合并查询不去重](#unionAll)
+- [其他方法](#others)
+    * [alias 别名](#alias)
+    * [**clear** 清空](#clear)
+    * [**transact** 事务](#transact)
+    * [debug 调试sql](#debug)
+    * [autoClear 自动清空](#autoClear)
+    * [safe 安全模式](#safe)
+    * [setDb 切换数据库](#setDb)
 
 
 ## 创建Orm {#create}
@@ -84,7 +92,7 @@ $orm=new Db::table('user');//创建参数和Orm构造函数的一致
 
 ## 基本操作 {#basic}
 
-### 读取数据 \(query\) {#query}
+### 查询数据 \(query\) {#query}
 读取数据提供`select`，`find`,`get` 三种方法
 ####  `select()`方法: 批量获取数据 {#select}
 
@@ -144,7 +152,7 @@ $user=$orm->where('id',2)->get();//查询id为2的全部数据数据
 $username=$orm->get('name');//查询用户的姓名，自动同步数据库
 ```
 
-### 添加数据 \(insert\) {#data-insert}
+### 添加数据 \(insert\) {#insert-method}
 添加数据提供 `add`,`insert`,`insertAll` 三种方法。
 
 #### `insert()`方法： 插入单条数据 {#insert}
@@ -200,7 +208,7 @@ $uid=$orm
       ->add();//插入之前set的数据
 ```
 
-### 跟新数据 \(update\) {#data-update}
+### 跟新数据 \(update\) {#update-method}
 更新数据提供 `update`，`save`两种方法
 
 #### `update()`方法： 更新数据 {#update}
@@ -267,7 +275,7 @@ PUT 快速修改单个字段,会立即写入数据库
 $orm->where('id',1)->put('status',1);
 ```
 
-#### `delete()`方法： 删除数据 {#delete}
+### `delete()`方法： 删除数据 {#delete}
 
 >```php
 >int function delete([string $id])
@@ -309,7 +317,7 @@ $orm->where('id',1)->delete();
     >
 
       1. `string` 字段名(`$field`): 字段名如`name`,`user.id`(多表查询存在同名字段时，需要加上表名)
-      2. `string` 比较符(`$oprater`): 支持 `=`,`<>`,`!=`,`>`,`>=`,`<`,`<=`,'LIKE`,`NOT LIKE`,等表中所有操作
+      2. `string` 比较符(`$oprater`): 支持 `=`,`<>`,`!=`,`>`,`>=`,`<`,`<=`,`LIKE`,`NOT LIKE`,等表中所有操作
       3. `mixed` 比较的值(`$value`) : 数值或者字符串或者NULL等,`in`和`between`操作可以是数组
 
   - 二元相当关系：(三元操作省略`"="`)
@@ -464,7 +472,7 @@ InfoModel::exists(
 用法同 [exists](#exists)
 
 
-### 分组和去重 {#group}
+### 分组和去重 {#group-method}
 
 #### `distinct()`方法: 去除相同的结果
 
@@ -794,7 +802,7 @@ $orm->where('id',1)->decrement('score');
 $orm->where('id',1)->decrement('score',5);
 ```
 
-## 多表操作
+## 多表操作 {#multi-table}
 
 ### 多表查询
 join 可以链接多个数据库表 ，通常 [`has`方法](#has) 和 [`belongs`方法](#belongs)的封装可以满足绝大多数应用场景，推使用这两个方法。
@@ -964,7 +972,7 @@ $orm->unionAll($orm1)
     ->select();
 ```
 
-## 其他
+## 其他 {#others}
 
 #### `transact()`方法：处理事务 {#transact}
 几个操作必须都成功执行的时候，需要使用事务.
