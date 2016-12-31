@@ -14,7 +14,7 @@
     * [本机开发](setup/develop.md#local)
         * [Windows 下配置](setup/yyf-in-windows.md)
         * [Linux和Mac配置](setup/yyf-in-linux.md)
-* [服务器(生产环境)](setup/yyf-in-server.md)
+* [服务器\(生产环境\)](setup/yyf-in-server.md)
 
 
 ## \[架构\]
@@ -23,7 +23,7 @@
 * [REST\(更新中\)]
 * [YAF\(更新中\)]
 * [格式规范\(更新中\)]
-* 运行生命周期\(更新中\)
+* [运行生命周期\(更新中\)]
 
 ## \[配置\]
 * [配置类型和特点\(更新中\)]
@@ -45,7 +45,7 @@
 * [Db 辅助类](database/db.md)
 * [Model 数据模型](database/model.md)
 * [Orm 数据对象映射](database/orm.md)
-* [Database底层数据库连接](database/database.md)
+* [Database 底层数据库连接](database/database.md)
 
 ## \[视图与输出\]
 * [yaf view\(更新中\)]

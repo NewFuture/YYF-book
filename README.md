@@ -7,7 +7,7 @@ Documentation for YUNYIN YAF Framework
 * 文档主站(gitbook服务): [https://yyf.newfuture.cc](https://yyf.newfuture.cc)
 * 文档加速站(CDN 加速): [https://yyf.newfuture.xyz](https://yyf.newfuture.xyz)
 * 文档源码: [https://github.com/NewFuture/yyf-book](https://github.com/NewFuture/yyf-book)
-
+* PDF版下载: [https://yyf.newfuture.xyz/yyf.pdf](https://yyf.newfuture.xyz/yyf.pdf)
 
 YYF( Yunyin Yaf Framework )
 ---------------------------
