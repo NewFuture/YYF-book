@@ -71,10 +71,6 @@ before_install:
   - test -d "$BUILD_PATH" || mkdir -p "$BUILD_PATH" 
 
 
-addons:
-  ssh_known_hosts: github.com
-
-
 git: #clone 目录深度 1 提高速度
   depth: 1
 
