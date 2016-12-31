@@ -3,6 +3,8 @@ sudo: false
 dist: trusty
 language: node_js
 
+node_js: "6"
+
 addons:
   apt:
     packages:
