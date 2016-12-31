@@ -40,6 +40,7 @@ before_script:
 script:
   - gitbook build
   - xvfb-run gitbook pdf ./ _book/yyf.pdf
+  - cp README.md $BUILD_PATH/
 
 
 #### 下面默认根据配置自动处理不用修改 ####
