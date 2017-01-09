@@ -15,9 +15,6 @@ Db 数据库辅助类
     * [execute()](#execute) exec 别名
 
 - [Database接口调用](#database)
-    * [Database::exec($sql,$params)](database.md#exec) 执行一条SQL(写),并返回受影响的行数
-    * [Database::query($sql,$params)](database.md#query) 查询一条SQL(读),并返回执行结果
-    * [Database::column($sql,$params)](database.md#column)(查询一条SQL(读),并返回一个值
     * [Database::errorInfo()](database.md#errorInfo) 获取出错信息
     * [Database::isOk()](database.md#isOk) 上次查询是否出错
     * [Database::transact($func)](database.md#transact) 执行事务

@@ -28,12 +28,12 @@
         }
     },
     "author": "New Future",
-    "title": "YYF Book | YYF文档  ",
+    "title": "YYF Book | YYF文档",
     "language": "zh",
     "links": {
         "sidebar": {
             "YYF": "https://github.com/YunYinORG/YYF"
         }
     },
-    "description": "YYF 开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构"
+    "description": "YYF框架开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构"
 }
