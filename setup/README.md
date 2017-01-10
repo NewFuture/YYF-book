@@ -18,7 +18,7 @@ YYF 会根据不同环境切换运行方式。
 YYF 是基于`YAF`扩展的`PHP`框架，所以这两点是必须的
 * 【必需】PHP (版本>=5.3) 
 * 【必需】[YAF扩展](http://pecl.php.net/package/yaf)
-* 【可选】mcrypt扩展(使用加密相关库需要)
+* 【可选】mcrypt和openssl扩展(使用加密相关库需要)
 * 【可选】PDO(使用数据库连接需要)
 * 【可选】CURL(使用第三方接口需要)
 
@@ -44,6 +44,9 @@ YYF对库进行轻量级的封装，可以在不同平台和服务器之间平�
 - 云服务器(虚拟机) 完全支持
     * Linux 服务器
     * Windows 服务器
+
+- Docker
+    * [YAF-docker](https://hub.docker.com/r/newfuture/yaf/)
 
 - 云引擎(PAAS)支持
     * SAE(新浪云): 完全支持
