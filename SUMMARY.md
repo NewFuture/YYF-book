@@ -19,9 +19,8 @@
 
 ## \[架构\]
 * [目录结构](architecture/folder-structure.md)
-* [MVC\(更新中\)]
+* [MVC](architecture/mvc.md)
 * [REST\(更新中\)]
-* [YAF\(更新中\)]
 * [格式规范\(更新中\)]
 * [运行生命周期\(更新中\)]
 
