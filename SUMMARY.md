@@ -20,7 +20,7 @@
 ## \[架构\]
 * [目录结构](architecture/folder-structure.md)
 * [MVC](architecture/mvc.md)
-* [REST\(更新中\)]
+* [REST](architecture/rest.md)
 * [格式规范\(更新中\)]
 * [运行生命周期\(更新中\)]
 
@@ -45,12 +45,6 @@
 * [Model 数据模型](database/model.md)
 * [Orm 数据对象映射](database/orm.md)
 * [Database 底层数据库连接](database/database.md)
-
-## \[视图与输出\]
-* [yaf view\(更新中\)]
-* [json\(更新中\)]
-* [yaf response\(更新中\)]
-* [模板\(更新中\)]
 
 ## 调试
 * [调试方法](debug/README.md)
