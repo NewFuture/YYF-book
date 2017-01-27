@@ -64,7 +64,7 @@
 * [input\(更新中\)]
     * [请求方式\(更新中\)]
     * [过滤和回调\(更新中\)]
-* [加密 cookie](input/cookie.md)
+* [Cookie加密](input/cookie.md)
 * [参数自动绑定\(更新中\)]
 
 
@@ -72,7 +72,7 @@
 * [快速存储](storage/README.md)
 * [Cache缓存](storage/cache.md)
 * [Kv键值对存储](storage/kv.md)
-* [Session\(更新中\)]
+* [Session存取封装](storage/session.md)
 
 ## \[安全\]
 * [aes\(更新中\)]
@@ -91,9 +91,9 @@
 * [短信\(更新中\)]
 * [Wechat微信](library/wechat.md)
 
-## \[前端插件\]
+## 前端插件
 * [YYF-Debugger调试插件](http://debugger.newfuture.cc/)
-* [YYFJS API接口库\(更新中\)]
+* [YYFJS API请求接口库](https://github.com/YunYinORG/YYFJS/)
 
 ## \[优化\]
 * [php优化\(更新中\)]

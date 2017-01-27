@@ -37,7 +37,7 @@ Cookie::set('test_cookie','something');
 
 ## get设置cookie {#get}
 
-set快速保存cookie
+get快速获取cookie
 
 >```php
 >function get(string $name, mixed $default = null):mixed
