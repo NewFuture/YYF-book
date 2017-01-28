@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>使用示例 · YYF Book | YYF文档</title>
+        <title>RSA非对称加密 · YYF Book | YYF文档</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -69,10 +69,6 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="db.html" />
-    
-    
-    <link rel="prev" href="./" />
     
 
     </head>
@@ -576,9 +572,9 @@
         
         
     
-        <li class="chapter " data-level="6.1" data-path="./">
+        <li class="chapter " data-level="6.1" data-path="../database/">
             
-                <a href="./">
+                <a href="../database/">
             
                     
                         <b>6.1.</b>
@@ -591,9 +587,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="6.2" data-path="example.html">
+        <li class="chapter " data-level="6.2" data-path="../database/example.html">
             
-                <a href="example.html">
+                <a href="../database/example.html">
             
                     
                         <b>6.2.</b>
@@ -606,9 +602,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.3" data-path="db.html">
+        <li class="chapter " data-level="6.3" data-path="../database/db.html">
             
-                <a href="db.html">
+                <a href="../database/db.html">
             
                     
                         <b>6.3.</b>
@@ -621,9 +617,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.4" data-path="model.html">
+        <li class="chapter " data-level="6.4" data-path="../database/model.html">
             
-                <a href="model.html">
+                <a href="../database/model.html">
             
                     
                         <b>6.4.</b>
@@ -636,9 +632,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.5" data-path="orm.html">
+        <li class="chapter " data-level="6.5" data-path="../database/orm.html">
             
-                <a href="orm.html">
+                <a href="../database/orm.html">
             
                     
                         <b>6.5.</b>
@@ -651,9 +647,9 @@
             
         </li>
     
-        <li class="chapter " data-level="6.6" data-path="database.html">
+        <li class="chapter " data-level="6.6" data-path="../database/database.html">
             
-                <a href="database.html">
+                <a href="../database/database.html">
             
                     
                         <b>6.6.</b>
@@ -1028,9 +1024,9 @@
             
         </li>
     
-        <li class="chapter " data-level="11.2" data-path="../safety/rsa.html">
+        <li class="chapter active" data-level="11.2" data-path="rsa.html">
             
-                <a href="../safety/rsa.html">
+                <a href="rsa.html">
             
                     
                         <b>11.2.</b>
@@ -1295,7 +1291,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >使用示例</a>
+        <a href=".." >RSA非对称加密</a>
     </h1>
 </div>
 
@@ -1310,99 +1306,40 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x6570;&#x636E;&#x5E93;&#x4F7F;&#x7528;&#x793A;&#x4F8B;"><a name="&#x6570;&#x636E;&#x5E93;&#x4F7F;&#x7528;&#x793A;&#x4F8B;" class="plugin-anchor" href="#&#x6570;&#x636E;&#x5E93;&#x4F7F;&#x7528;&#x793A;&#x4F8B;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6570;&#x636E;&#x5E93;&#x4F7F;&#x7528;&#x793A;&#x4F8B;</h1>
-<h2 id="sql&#x8BED;&#x53E5;&#x67E5;&#x8BE2;"><a name="sql&#x8BED;&#x53E5;&#x67E5;&#x8BE2;" class="plugin-anchor" href="#sql&#x8BED;&#x53E5;&#x67E5;&#x8BE2;"><i class="fa fa-link" aria-hidden="true"></i></a>SQL&#x8BED;&#x53E5;&#x67E5;&#x8BE2;</h2>
-<pre><code class="lang-php"><span class="hljs-comment">//1</span>
-Db::query(<span class="hljs-string">&apos;SELECT * FROM user WHERE id=?&apos;</span>,[<span class="hljs-number">1</span>]);
-<span class="hljs-comment">//2</span>
-Db::execute(<span class="hljs-string">&apos;INSERT INTO user (name,org) VALUES (?, ?)&apos;</span>,[<span class="hljs-string">&apos;future&apos;</span>,<span class="hljs-string">&apos;NKU&apos;</span>]);
-<span class="hljs-comment">/*&#x7B49;&#x6548;&#x64CD;&#x4F5C;*/</span>
-<span class="hljs-comment">//3</span>
-Db::execute(<span class="hljs-string">&apos;INSERT INTO user (name,org) VALUES (:name, :org)&apos;</span>,[<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;future&apos;</span>,<span class="hljs-string">&apos;org&apos;</span>=&gt;<span class="hljs-string">&apos;NKU&apos;</span>]);
+                                <h1 id="rsa-&#x52A0;&#x5BC6;&#x5B58;&#x53D6;"><a name="rsa-&#x52A0;&#x5BC6;&#x5B58;&#x53D6;" class="plugin-anchor" href="#rsa-&#x52A0;&#x5BC6;&#x5B58;&#x53D6;"><i class="fa fa-link" aria-hidden="true"></i></a>RSA &#x52A0;&#x5BC6;&#x5B58;&#x53D6;</h1>
+<p>RSA&#x662F;&#x975E;&#x5BF9;&#x79F0;&#x52A0;&#x5BC6;&#xFF0C;<code>Rsa</code>&#x5BF9;&#x5176;&#x7B80;&#x5355;&#x5C01;&#x88C5;(&#x9700;&#x8981;rsa&#x6269;&#x5C55;),&#x53EF;&#x4EE5;&#x653E;&#x5230;&#x52A0;&#x5BC6;&#x548C;&#x89E3;&#x5BC6;.</p>
+<h2 id="&#x63A5;&#x53E3;&#x65B9;&#x6CD5;"><a name="&#x63A5;&#x53E3;&#x65B9;&#x6CD5;" class="plugin-anchor" href="#&#x63A5;&#x53E3;&#x65B9;&#x6CD5;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x63A5;&#x53E3;&#x65B9;&#x6CD5;</h2>
+<ul>
+<li><a href="#encode">Rsa::encode($string,$id=null) Rsa&#x52A0;&#x5BC6;</a></li>
+<li><a href="#decode">Rsa::decode($string,$id=null) Rsa&#x89E3;&#x5BC6;</a></li>
+<li><a href="#pubKey">Rsa::pubKey($id=null) &#x83B7;&#x53D6;&#x5BF9;&#x5E94;&#x7684;&#x516C;&#x94A5;</a></li>
+</ul>
+<h2 id="encode"><a name="encode" class="plugin-anchor" href="#encode"><i class="fa fa-link" aria-hidden="true"></i></a><code>encode</code> &#x52A0;&#x5BC6; </h2>
+<p>Rsa&#x52A0;&#x5BC6;</p>
+<blockquote>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">encode</span><span class="hljs-params">( string $id=null)</span></span>;
 </code></pre>
-<h2 id="&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x8C61;&#x6620;&#x5C04;"><a name="&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x8C61;&#x6620;&#x5C04;" class="plugin-anchor" href="#&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x8C61;&#x6620;&#x5C04;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x6570;&#x636E;&#x5E93;&#x5BF9;&#x8C61;&#x6620;&#x5C04;</h2>
-<pre><code class="lang-php"><span class="hljs-comment">/*2&#xFF0C;3&#xFF0C;4&#xFF0C;5&#xFF0C;6&#x64CD;&#x4F5C;&#x7B49;&#x6548;*/</span>
-<span class="hljs-comment">//4</span>
-Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;insert([<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;future&apos;</span>,<span class="hljs-string">&apos;org&apos;</span>=&gt;<span class="hljs-string">&apos;NKU&apos;</span>]);
-<span class="hljs-comment">//5</span>
-Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;set([<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;future&apos;</span>,<span class="hljs-string">&apos;org&apos;</span>=&gt;<span class="hljs-string">&apos;NKU&apos;</span>])-&gt;add();
-
-<span class="hljs-comment">/*&#x63D2;&#x5165;&#x65F6;&#x4F7F;&#x7528;&#x522B;&#x540D;*/</span>
-<span class="hljs-comment">//6</span>
-$data=[<span class="hljs-string">&apos;username&apos;</span>=&gt;<span class="hljs-string">&apos;future&apos;</span>,<span class="hljs-string">&apos;organization&apos;</span>=&gt;<span class="hljs-string">&apos;NKU&apos;</span>];
-$user-&gt;field(<span class="hljs-string">&apos;name&apos;</span>,<span class="hljs-string">&apos;username&apos;</span>)
-        -&gt;field(<span class="hljs-string">&apos;org&apos;</span>,<span class="hljs-string">&apos;organization&apos;</span>)
-        -&gt;insert($data);
-
-<span class="hljs-comment">/*&#x5B57;&#x6BB5;&#x8FC7;&#x6EE4;&#x548C;&#x6279;&#x91CF;&#x63D2;&#x5165;*/</span>
-<span class="hljs-comment">//7</span>
-$data=[
-    [<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;test&apos;</span>],
-    [<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;test2&apos;</span>],
-    [<span class="hljs-string">&apos;id&apos;</span>=&gt;<span class="hljs-number">1000</span>,<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;test3&apos;</span>],
-    [<span class="hljs-string">&apos;password&apos;</span>=&gt;<span class="hljs-string">&apos;xyz&apos;</span>,<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;test4&apos;</span>],
-    [<span class="hljs-string">&apos;id&apos;</span>=&gt;<span class="hljs-number">123</span>]
-];
-$response =  UserModel::field(<span class="hljs-string">&apos;name&apos;</span>)-&gt;insertAll($data);
-
-<span class="hljs-comment">/*&#x67E5;&#x8BE2;*/</span>
-<span class="hljs-comment">//7</span>
-$response =  Db::table(<span class="hljs-string">&apos;user&apos;</span>)
-                -&gt;where(<span class="hljs-string">&apos;id&apos;</span>,<span class="hljs-string">&apos;BETWEEN&apos;</span>,<span class="hljs-number">5</span>,<span class="hljs-number">8</span>)
-                -&gt;select(<span class="hljs-string">&apos;id,name&apos;</span>);
-
-<span class="hljs-comment">//8</span>
-$user = Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;find(<span class="hljs-number">1</span>);
-
-<span class="hljs-comment">//9</span>
-$username = Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;where(<span class="hljs-string">&apos;id&apos;</span>,<span class="hljs-number">1</span>)-&gt;get(<span class="hljs-string">&apos;name&apos;</span>);
-<span class="hljs-comment">//&#x7B49;&#x6548;&#x64CD;&#x4F5C;</span>
-$username = Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;find(<span class="hljs-number">1</span>)-&gt;name;
-
-<span class="hljs-comment">//10</span>
-$response=  Db::table(<span class="hljs-string">&apos;user&apos;</span>)
-            -&gt;where(<span class="hljs-string">&apos;name&apos;</span>,<span class="hljs-string">&apos;NOT LIKE&apos;</span>,<span class="hljs-string">&apos;%future&apos;</span>)
-            -&gt;where(<span class="hljs-string">&apos;id&apos;</span>,<span class="hljs-string">&apos;in&apos;</span>,[<span class="hljs-number">100</span>,<span class="hljs-number">10</span>,<span class="hljs-number">1</span>])
-            -&gt;select();
-
-<span class="hljs-comment">//11</span>
-$response=  Db::table(<span class="hljs-string">&apos;user&apos;</span>)
-            -&gt;where([<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;future&apos;</span>])
-            -&gt;where(<span class="hljs-string">&apos;id&apos;</span>,<span class="hljs-string">&apos;&gt;&apos;</span>,<span class="hljs-number">10</span>)
-            -&gt;limt(<span class="hljs-number">5</span>);
-            -&gt;select();
-<span class="hljs-comment">//12</span>
-Db::table(<span class="hljs-string">&apos;user&apos;</span>)
-            -&gt;where()
-            -&gt;page(<span class="hljs-number">3</span>,<span class="hljs-number">5</span>)
-            -&gt;select();
-
-<span class="hljs-comment">/*&#x4FEE;&#x6539;*/</span>
-<span class="hljs-comment">//13</span>
-Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;where(<span class="hljs-string">&apos;id&apos;</span>,<span class="hljs-number">1</span>)-&gt;update([<span class="hljs-string">&apos;name&apos;</span>=&gt;<span class="hljs-string">&apos;first user&apos;</span>]);
-
-<span class="hljs-comment">//14</span>
-<span class="hljs-keyword">if</span>($user =  Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;find(<span class="hljs-number">2</span>))
-{
-    $user-&gt;field(<span class="hljs-string">&apos;name&apos;</span>)-&gt;set(<span class="hljs-string">&apos;name&apos;</span>,<span class="hljs-string">&apos;second user&apos;</span>)-&gt;save();
-}
-
-
-<span class="hljs-comment">/*&#x5220;&#x9664;*/</span>
-
-Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;delete(<span class="hljs-number">10</span>);
-<span class="hljs-comment">//&#x7B49;&#x6548;</span>
-Db::table(<span class="hljs-string">&apos;user&apos;</span>)-&gt;where(<span class="hljs-string">&apos;id&apos;</span>,<span class="hljs-string">&apos;=&apos;</span>,<span class="hljs-number">10</span>)-&gt;delete();
+</blockquote>
+<pre><code class="lang-php">Rsa::encode(<span class="hljs-string">&apos;someidstring&apos;</span>);
+Rsa::encode(<span class="hljs-string">&apos;someidstring&apos;</span>,<span class="hljs-number">123456</span>);
 </code></pre>
-<h2 id="&#x4F7F;&#x7528;model"><a name="&#x4F7F;&#x7528;model" class="plugin-anchor" href="#&#x4F7F;&#x7528;model"><i class="fa fa-link" aria-hidden="true"></i></a>&#x4F7F;&#x7528;model</h2>
-<p>&#x5B9A;&#x4E49;&#x5982;&#x4E0B;model <code>app/models/User.php</code></p>
-<pre><code class="lang-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserModel</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Model</span></span>{}
+<h2 id="decode"><a name="decode" class="plugin-anchor" href="#decode"><i class="fa fa-link" aria-hidden="true"></i></a><code>decode</code> &#x89E3;&#x5BC6; </h2>
+<p>Rsa&#x89E3;&#x5BC6;</p>
+<blockquote>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decode</span><span class="hljs-params">( string $id=null)</span></span>;
 </code></pre>
-<pre><code class="lang-php">UserModel::set(<span class="hljs-string">&apos;name&apos;</span>,<span class="hljs-string">&apos;yyf&apos;</span>)-&gt;add();
-
-$user=UserModel::find(<span class="hljs-number">1</span>);
-
-UserModel::page(<span class="hljs-number">2</span>,<span class="hljs-number">10</span>)-&gt;select(<span class="hljs-string">&apos;id,name&apos;</span>);
+</blockquote>
+<pre><code class="lang-php">Rsa::decode(<span class="hljs-string">&apos;xxxxx&apos;</span>);
+Rsa::decode(<span class="hljs-string">&apos;xxxx&apos;</span>,<span class="hljs-number">123456</span>);
+</code></pre>
+<h2 id="pubKey"><a name="pubKey" class="plugin-anchor" href="#pubKey"><i class="fa fa-link" aria-hidden="true"></i></a><code>pubKey</code> &#x83B7;&#x53D6;&#x516C;&#x94A5; </h2>
+<p>&#x83B7;&#x53D6;&#x52A0;&#x5BC6;&#x516C;&#x94A5; Rsa &#x516C;&#x94A5;</p>
+<blockquote>
+<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pubKey</span><span class="hljs-params">( string $id=null)</span></span>;
+</code></pre>
+</blockquote>
+<pre><code class="lang-php">Rsa::pubKey();
+Rsa::pubKey(<span class="hljs-number">123456</span>);
 </code></pre>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; NewFuture 2016 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6587;&#x6863;&#x7F16;&#x8BD1;&#x65F6;&#x95F4;&#xFF1A;
 2017-01-28 12:25:46
@@ -1433,14 +1370,6 @@ UserModel::page(<span class="hljs-number">2</span>,<span class="hljs-number">10<
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 数据库">
-                    <i class="fa fa-angle-left"></i>
-                </a>
-                
-                
-                <a href="db.html" class="navigation navigation-next " aria-label="Next page: Db 辅助类">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -1449,7 +1378,7 @@ UserModel::page(<span class="hljs-number">2</span>,<span class="hljs-number">10<
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"使用示例","level":"6.2","depth":1,"next":{"title":"Db 辅助类","level":"6.3","depth":1,"path":"database/db.md","ref":"database/db.md","articles":[]},"previous":{"title":"数据库","level":"6.1","depth":1,"path":"database/README.md","ref":"database/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr","search-jieba","edit-link","github","anchors","tbfed-pagefooter","back-to-top-button","include-codeblock"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search-jieba":{},"tbfed-pagefooter":{"copyright":"Copyright &copy NewFuture 2016","modify_label":"文档编译时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/YunYinORG/YYF"},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"include-codeblock":{},"edit-link":{"label":"在GITHUB上修改此页","base":"https://github.com/NewFuture/yyf-book/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{}},"theme":"default","author":"New Future","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"YYF Book | YYF文档","language":"zh","links":{"sidebar":{"YYF":"https://github.com/YunYinORG/YYF"}},"gitbook":"*","description":"YYF框架开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构"},"file":{"path":"database/example.md","mtime":"2017-01-28T12:25:46.782Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-28T12:29:04.272Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"RSA非对称加密","level":"11.2","depth":1,"next":{"title":"[安全统计(更新中)]","level":"11.3","depth":1,"ref":"","articles":[]},"previous":{"title":"[格式保留加密(更新中)]","level":"11.1.1","depth":2,"ref":"","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr","search-jieba","edit-link","github","anchors","tbfed-pagefooter","back-to-top-button","include-codeblock"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search-jieba":{},"tbfed-pagefooter":{"copyright":"Copyright &copy NewFuture 2016","modify_label":"文档编译时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/YunYinORG/YYF"},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"include-codeblock":{},"edit-link":{"label":"在GITHUB上修改此页","base":"https://github.com/NewFuture/yyf-book/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{}},"theme":"default","author":"New Future","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"YYF Book | YYF文档","language":"zh","links":{"sidebar":{"YYF":"https://github.com/YunYinORG/YYF"}},"gitbook":"*","description":"YYF框架开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构"},"file":{"path":"safety/rsa.md","mtime":"2017-01-28T12:25:46.786Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-28T12:29:04.272Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
