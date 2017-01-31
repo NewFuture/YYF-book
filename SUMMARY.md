@@ -16,7 +16,6 @@
         * [Linux和Mac配置](setup/yyf-in-linux.md)
 * [服务器\(生产环境\)](setup/yyf-in-server.md)
 
-
 ## \[架构\]
 * [目录结构](architecture/folder-structure.md)
 * [MVC](architecture/mvc.md)
@@ -52,7 +51,7 @@
 * [assert 断言](debug/assert.md)
 * [Logger 日志管理](debug/logger.md)
 * [异常\(更新中\)]
-* [查看数据库\(更新中\)]
+* [数据库调试\(更新中\)]
 
 ## \[路由\]
 * [默认路由\(更新中\)]
@@ -79,9 +78,7 @@
     * [格式保留加密\(更新中\)]
 * [RSA非对称加密](safety/rsa.md)
 * [安全统计\(更新中\)]
-* [cors\(更新中\)]
-    * [服务器端配置\(更新中\)]
-    * [跨域cookie\(更新中\)]
+* [CORS 跨站请求](safety/cors.md)
 
 ## \[库\]
 * [文件上传\(更新中\)]
