@@ -40,7 +40,7 @@
 
 ## 数据库与Model
 * [数据库](database/README.md)
-* [使用示例](database/example.md)
+* [示例代码](database/example.md)
 * [Db 辅助类](database/db.md)
 * [Model 数据模型](database/model.md)
 * [Orm 数据对象映射](database/orm.md)
