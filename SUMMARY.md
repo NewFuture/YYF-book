@@ -72,7 +72,7 @@
 * [快速存储](storage/README.md)
 * [Cache 缓存](storage/cache.md)
 * [Kv 键值对存储](storage/kv.md)
-* [Session 存取封装](storage/session.md)
+* [Session 存取库](storage/session.md)
 
 ## \[安全\]
 * [常用加密\(更新中\)]
