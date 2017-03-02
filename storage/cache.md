@@ -94,7 +94,7 @@ Cache::flush();
 ```
 
 
-`handler`清空 {#handler}
+`handler`获取当前Kv底层存储对象 {#handler}
 ----------
 获取处理方式
 >```php

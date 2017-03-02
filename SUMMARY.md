@@ -21,7 +21,7 @@
 * [目录结构](architecture/folder-structure.md)
 * [MVC](architecture/mvc.md)
 * [REST](architecture/rest.md)
-* [格式规范\(更新中\)]
+* [格式规范](architecture/standard.md)
 * [运行生命周期\(更新中\)]
 
 ## \[配置\]
