@@ -17,20 +17,17 @@
 * [Docker运行环境](setup/docker.md)
 * [服务器-生产环境](setup/yyf-in-server.md)
 
-## \[架构\]
+## 架构
 * [目录结构](architecture/folder-structure.md)
 * [MVC](architecture/mvc.md)
 * [REST](architecture/rest.md)
 * [格式规范](architecture/standard.md)
-* [运行生命周期\(更新中\)]
+* [运行生命周期](architecture/lifecircle.md)
 
 ## \[配置\]
 * [配置类型和特点\(更新中\)]
 * [ini基础配置\(更新中\)]
 * [特殊配置\(更新中\)]
-    * [配置内容\(更新中\)]
-    * [开发环境\(更新中\)]
-    * [生产环境\(更新中\)]
 * [Config 配置读取](configure/config.md)
 
 ## \[控制器\]
