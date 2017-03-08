@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Kv 键值对存储 · YYF Book | YYF文档</title>
+        <title>配置类型和特点 · YYF Book | YYF文档</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -69,10 +69,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="session.html" />
     
-    
-    <link rel="prev" href="cache.html" />
+    <link rel="prev" href="../architecture/lifecircle.html" />
     
 
     </head>
@@ -421,9 +419,9 @@
         
         
     
-        <li class="chapter " data-level="4.1" data-path="../configure/">
+        <li class="chapter active" data-level="4.1" data-path="./">
             
-                <a href="../configure/">
+                <a href="./">
             
                     
                         <b>4.1.</b>
@@ -466,9 +464,9 @@
             
         </li>
     
-        <li class="chapter " data-level="4.4" data-path="../configure/config.html">
+        <li class="chapter " data-level="4.4" data-path="config.html">
             
-                <a href="../configure/config.html">
+                <a href="config.html">
             
                     
                         <b>4.4.</b>
@@ -889,9 +887,9 @@
         
         
     
-        <li class="chapter " data-level="10.1" data-path="./">
+        <li class="chapter " data-level="10.1" data-path="../storage/">
             
-                <a href="./">
+                <a href="../storage/">
             
                     
                         <b>10.1.</b>
@@ -904,9 +902,9 @@
             
         </li>
     
-        <li class="chapter " data-level="10.2" data-path="cache.html">
+        <li class="chapter " data-level="10.2" data-path="../storage/cache.html">
             
-                <a href="cache.html">
+                <a href="../storage/cache.html">
             
                     
                         <b>10.2.</b>
@@ -919,9 +917,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="10.3" data-path="kv.html">
+        <li class="chapter " data-level="10.3" data-path="../storage/kv.html">
             
-                <a href="kv.html">
+                <a href="../storage/kv.html">
             
                     
                         <b>10.3.</b>
@@ -934,9 +932,9 @@
             
         </li>
     
-        <li class="chapter " data-level="10.4" data-path="session.html">
+        <li class="chapter " data-level="10.4" data-path="../storage/session.html">
             
-                <a href="session.html">
+                <a href="../storage/session.html">
             
                     
                         <b>10.4.</b>
@@ -1223,7 +1221,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Kv 键值对存储</a>
+        <a href=".." >配置类型和特点</a>
     </h1>
 </div>
 
@@ -1238,97 +1236,38 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x952E;&#x503C;&#x5BF9;&#x5B58;&#x50A8;kv"><a name="&#x952E;&#x503C;&#x5BF9;&#x5B58;&#x50A8;kv" class="plugin-anchor" href="#&#x952E;&#x503C;&#x5BF9;&#x5B58;&#x50A8;kv"><i class="fa fa-link" aria-hidden="true"></i></a>&#x952E;&#x503C;&#x5BF9;&#x5B58;&#x50A8;(Kv)</h1>
-<p>&#x9AD8;&#x6548;&#x5B57;&#x7B26;&#x4E32;&#x952E;&#x503C;&#x5BF9;&#x5B58;&#x50A8;&#x63D0;&#x4F9B;&#x5FEB;&#x901F;&#x4E00;&#x81F4;&#x7684;<code>&#x6C38;&#x4E45;&#x5B58;&#x50A8;&#x670D;&#x52A1;</code>(&#x7406;&#x8BBA;&#x4E0A;&#x662F;&#x53EF;&#x9760;&#x4E0D;&#x4F1A;&#x88AB;&#x6E05;&#x7406;&#x7684;))&#x63A5;&#x53E3;&#x3002;&#x652F;&#x6301;&#x5B58;&#x50A8;&#x7C7B;&#x578B;:(&#x914D;&#x7F6E;&#x4E2D;&#x6307;&#x660E;&#x7C7B;&#x578B;&#x5373;&#x53EF;)</p>
+                                <h1 id="&#x914D;&#x7F6E;&#x8BF4;&#x660E;"><a name="&#x914D;&#x7F6E;&#x8BF4;&#x660E;" class="plugin-anchor" href="#&#x914D;&#x7F6E;&#x8BF4;&#x660E;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x914D;&#x7F6E;&#x8BF4;&#x660E;</h1>
 <ul>
-<li>redis &#x9AD8;&#x6027;&#x80FD;&#x952E;&#x503C;&#x5BF9;&#x5B58;&#x50A8;&#x670D;&#x52A1;</li>
-<li>file  &#x6587;&#x4EF6;&#x5B58;&#x50A8;&#x78C1;&#x76D8;&#x5B58;&#x50A8;</li>
-<li>sae   sae KVDB&#x952E;&#x503C;&#x5BF9;&#x5B58;&#x50A8;</li>
+<li><a href="#style">&#x914D;&#x7F6E;&#x683C;&#x5F0F;</a></li>
+<li><a href="#app.ini">&#x5E94;&#x7528;&#x914D;&#x7F6E;app.ini</a></li>
+<li><a href="#secret.ini">&#x79C1;&#x5BC6;&#x914D;&#x7F6E;secret.*.ini</a></li>
 </ul>
-<h2 id="&#x5B58;&#x50A8;&#x63A5;&#x53E3;"><a name="&#x5B58;&#x50A8;&#x63A5;&#x53E3;" class="plugin-anchor" href="#&#x5B58;&#x50A8;&#x63A5;&#x53E3;"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5B58;&#x50A8;&#x63A5;&#x53E3;</h2>
+<h2 id="style"><a name="style" class="plugin-anchor" href="#style"><i class="fa fa-link" aria-hidden="true"></i></a>&#x914D;&#x7F6E;&#x683C;&#x5F0F; </h2>
+<p>&#x6574;&#x4E2A;&#x6846;&#x67B6;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E3A;<code>ini</code>&#x683C;&#x5F0F;,&#x5728;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7F13;&#x5B58;&#x914D;&#x7F6E;&#x63D0;&#x9AD8;&#x90E8;&#x5206;&#x6027;&#x80FD;&#x3002;</p>
+<pre><code class="lang-ini">;&#x9017;&#x53F7;&#x81F3;&#x884C;&#x672B;&#x4E3A;&#x6CE8;&#x91CA;
+key = &quot;string&quot;
+;&#x6570;&#x7EC4;
+sub.index = 1234
+</code></pre>
+<p>&#x5176;&#x4E2D;&#x652F;&#x6301;PHP&#x5E38;&#x91CF;</p>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x8282;([section])&#x533A;&#x5206;&#x4E0D;&#x540C;&#x73AF;&#x5883;</p>
+<h2 id="app.ini"><a name="app.ini" class="plugin-anchor" href="#app.ini"><i class="fa fa-link" aria-hidden="true"></i></a>&#x5E94;&#x7528;&#x914D;&#x7F6E; app.ini </h2>
+<p>&#x5E94;&#x7528;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E3A; <code>conf/app.ini</code></p>
 <ul>
-<li><a href="#set">Kv::set()&#x5B58;&#x50A8;&#x503C;</a></li>
-<li><a href="#get">Kv::get()&#x8BFB;&#x53D6;</a></li>
-<li><a href="#del">kv::del()&#x5220;&#x9664;</a></li>
-<li><a href="#flush">Kv::flush()&#x6E05;&#x7A7A;</a></li>
-<li><a href="#handler">Kv::handler()&#x83B7;&#x53D6;&#x5F53;&#x524D;Kv&#x5E95;&#x5C42;&#x5B58;&#x50A8;&#x5BF9;&#x8C61;</a></li>
+<li>[common] &#x4E0B;&#x4E3A;&#x516C;&#x7528;&#x7684;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;</li>
+<li>[dev] &#x4E0B;&#x4E3A;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x4E0B;&#x91C7;&#x7528;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x65B9;&#x4FBF;&#x8C03;&#x8BD5;&#x548C;&#x5FEB;&#x901F;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x517C;&#x5BB9;&#x4E3A;&#x4E3B;</li>
+<li>[product] &#x4E3A;&#x751F;&#x4EA7;&#x73AF;&#x5883;&#x91C7;&#x7528;&#x7684;&#x914D;&#x7F6E;&#xFF0C;&#x5B89;&#x5168;&#x9AD8;&#x6027;&#x80FD;&#x4E3A;&#x4E3B;</li>
 </ul>
-<h2 id="set"><a name="set" class="plugin-anchor" href="#set"><i class="fa fa-link" aria-hidden="true"></i></a><code>set</code>&#x4FDD;&#x5B58; </h2>
-<p>set&#x5FEB;&#x901F;&#x5B58;&#x50A8;&#x952E;&#x503C;</p>
-<blockquote>
-<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">set</span><span class="hljs-params">(string $key, string $value)</span>:<span class="hljs-title">boolean</span></span>;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">set</span><span class="hljs-params">(array $data)</span>:<span class="hljs-title">boolean</span>
-</span></code></pre>
-</blockquote>
+<p><code>dev</code>&#x548C;<code>product</code>&#x53EF;&#x4EE5;&#x8986;&#x76D6;&#x516C;&#x7528;&#x914D;&#x7F6E;</p>
+<p>&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x73AF;&#x5883;&#x914D;&#x7F6E;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x4FEE;&#x6539;&#x4EFB;&#x4F55;&#x4EE3;&#x7801;&#x548C;&#x914D;&#x7F6E;&#x540C;&#x6B65;&#x8DDF;&#x65B0;&#x548C;&#x5B9E;&#x65F6;&#x90E8;&#x7F72;&#x3002;</p>
+<h2 id="secret.ini"><a name="secret.ini" class="plugin-anchor" href="#secret.ini"><i class="fa fa-link" aria-hidden="true"></i></a>&#x79C1;&#x5BC6;&#x914D;&#x7F6E; secret.*.ini </h2>
+<p>&#x4E0E;&#x8D26;&#x53F7;API&#x6388;&#x6743;&#x76F8;&#x5173;&#x7684;&#x79C1;&#x5BC6;&#x5185;&#x5BB9;(&#x5982;&#x6570;&#x636E;&#x5E93;&#x8D26;&#x53F7;&#x5BC6;&#x7801;)&#x653E;&#x7F6E;&#x4E8E;<code>secret.*.ini</code>&#x4E2D;</p>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;app.ini&#x4E2D;&#x7684;<code>secret_path</code>&#x6765;&#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x4F4D;&#x7F6E;&#xFF0C;&#x8FD9;&#x6837;&#x4E0D;&#x540C;&#x73AF;&#x5883;&#x53EF;&#x4EE5;&#x65B9;&#x4FBF;&#x7684;&#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x914D;&#x7F6E;</p>
 <ul>
-<li>&#x53CC;&#x53C2;&#x6570;&#xFF1A;<ol>
-<li><code>string</code> $key&#xFF1A;&#x83B7;&#x53D6;&#x7684;&#x952E;&#x503C;</li>
-<li><code>string</code> $value&#xFF1A;&#x503C;&#x5B57;&#x7B26;&#x4E32;</li>
-</ol>
-</li>
-<li><p>&#x6570;&#x7EC4;&#x53C2;&#x6570;&#xFF1A; &#x5173;&#x8054;&#x6570;&#x7EC4;&#x591A;&#x7EC4;&#x952E;&#x503C;&#x540C;&#x65F6;&#x8BBE;&#x7F6E;</p>
-</li>
-<li><p>&#x8FD4;&#x56DE;&#xFF1A; boolean </p>
-</li>
-<li><p>tips: &#x4F7F;&#x7528;redis&#x4F1A;&#x8C03;&#x7528;<code>mset</code>&#x76F8;&#x5F53;&#x4E8E;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x7684;&#x4E8B;&#x52A1;&#xFF0C;&#x53EA;&#x6709;&#x90FD;&#x5199;&#x5165;&#x6210;&#x529F;&#x624D;&#x7EE7;&#x7EED;&#x3002;</p>
-</li>
+<li>secret.commont.ini &#x914D;&#x7F6E;&#x6837;&#x4F8B;</li>
+<li>secret.dev.ini &#x6B64;&#x914D;&#x7F6E;&#x4E0D;&#x4F1A;&#x540C;&#x6B65;&#xFF0C;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;secret_path&#x6765;&#x8BBE;&#x7F6E;&#x4E0D;&#x540C;&#x7684;&#x5F00;&#x53D1;&#x914D;&#x7F6E;&#xFF0C;&#x9002;&#x5408;&#x591A;&#x4EBA;&#x534F;&#x4F5C;</li>
+<li>secret.product.ini &#x751F;&#x4EA7;&#x73AF;&#x5883;&#x914D;&#x7F6E;&#xFF0C;&#x4E0D;&#x540C;&#x6B65;&#xFF0C;&#x4EC5;&#x5728;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x4F7F;&#x7528;</li>
 </ul>
-<pre><code class="lang-php">Kv::set(<span class="hljs-string">&apos;test_key&apos;</span>,<span class="hljs-string">&apos;some value&apos;</span>);
-
-Kv::set([
-    <span class="hljs-string">&apos;key1&apos;</span>=&gt;<span class="hljs-string">&apos;value1&apos;</span>,
-    <span class="hljs-string">&apos;key2&apos;</span>=&gt;<span class="hljs-string">&apos;value2&apos;</span>
-]);
-</code></pre>
-<h2 id="get"><a name="get" class="plugin-anchor" href="#get"><i class="fa fa-link" aria-hidden="true"></i></a><code>get</code>&#x83B7;&#x53D6; </h2>
-<p>get&#x5FEB;&#x901F;&#x83B7;&#x53D6;&#x5B58;&#x50A8;</p>
-<blockquote>
-<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get</span><span class="hljs-params">(string $key, string $defualt=false)</span>:<span class="hljs-title">boolean</span>|<span class="hljs-title">string</span></span>;
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get</span><span class="hljs-params">(string $data)</span>:<span class="hljs-title">array</span></span>;
-</code></pre>
-</blockquote>
-<ul>
-<li>&#x53CC;&#x53C2;&#x6570;&#xFF1A;<ol>
-<li><code>string</code> $key&#xFF1A;&#x83B7;&#x53D6;&#x7684;&#x952E;&#x503C;</li>
-<li><code>string</code> $defualt:&#x9ED8;&#x8BA4;&#x503C;</li>
-</ol>
-</li>
-<li>&#x6570;&#x7EC4;&#x53C2;&#x6570;&#xFF1A; &#x8FD4;&#x56DE;array</li>
-</ul>
-<pre><code class="lang-php">Kv::get(<span class="hljs-string">&apos;test_key&apos;</span>);
-Kv::get(<span class="hljs-string">&apos;no_key&apos;</span>);<span class="hljs-comment">//false</span>
-Kv::get(<span class="hljs-string">&apos;no_key&apos;</span>,<span class="hljs-string">&apos;default&apos;</span>);<span class="hljs-comment">//&#x8FD4;&#x56DE;&apos;default&apos;</span>
-
-Kv::get([<span class="hljs-string">&apos;key1&apos;</span>,<span class="hljs-string">&apos;key2&apos;</span>]);<span class="hljs-comment">//&#x8FD4;&#x56DE;&#x6570;&#x7EC4;[&apos;key1&apos;=&gt;&apos;value1&apos;,&apos;key2&apos;=&gt;&apos;value2&apos;]</span>
-Kv::get([<span class="hljs-string">&apos;key1&apos;</span>,<span class="hljs-string">&apos;key2&apos;</span>,<span class="hljs-string">&apos;no_key&apos;</span>]);<span class="hljs-comment">//&#x8FD4;&#x56DE;&#x6570;&#x7EC4;[&apos;key1&apos;=&gt;&apos;value1&apos;,&apos;key2&apos;=&gt;&apos;value2&apos;,&apos;no_key&apos;=&gt;false]</span>
-</code></pre>
-<h2 id="del"><a name="del" class="plugin-anchor" href="#del"><i class="fa fa-link" aria-hidden="true"></i></a><code>del</code>&#x5220;&#x9664; </h2>
-<p>del&#x5FEB;&#x901F;&#x5220;&#x9664;</p>
-<blockquote>
-<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">del</span><span class="hljs-params">(string $key)</span>:<span class="hljs-title">boolean</span></span>;
-</code></pre>
-</blockquote>
-<ul>
-<li>&#x53C2;&#x6570;&#xFF1A;<code>string</code> $key&#xFF1A;&#x952E;&#x503C;</li>
-</ul>
-<pre><code class="lang-php">Kv::del(<span class="hljs-string">&apos;test_key&apos;</span>);
-</code></pre>
-<h2 id="flush"><a name="flush" class="plugin-anchor" href="#flush"><i class="fa fa-link" aria-hidden="true"></i></a><code>flush</code>&#x6E05;&#x7A7A; </h2>
-<p>&#x6E05;&#x7A7A;&#x5168;&#x90E8;&#x6570;&#x636E;</p>
-<blockquote>
-<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">flush</span><span class="hljs-params">()</span></span>;
-</code></pre>
-</blockquote>
-<pre><code class="lang-php">Kv::flush();
-</code></pre>
-<h2 id="handler"><a name="handler" class="plugin-anchor" href="#handler"><i class="fa fa-link" aria-hidden="true"></i></a><code>handler</code>&#x6E05;&#x7A7A; </h2>
-<p>&#x83B7;&#x53D6;&#x5904;&#x7406;&#x65B9;&#x5F0F;</p>
-<blockquote>
-<pre><code class="lang-php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span><span class="hljs-params">()</span></span>;
-</code></pre>
-</blockquote>
-<pre><code class="lang-php">$handler=Kv::handler();
-</code></pre>
 <footer class="page-footer"><span class="copyright">Copyright &#xA9; NewFuture 2016 all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x6587;&#x6863;&#x7F16;&#x8BD1;&#x65F6;&#x95F4;&#xFF1A;
 2017-03-08 12:46:05
 </span></footer>
@@ -1358,14 +1297,10 @@ Kv::get([<span class="hljs-string">&apos;key1&apos;</span>,<span class="hljs-str
 
             
                 
-                <a href="cache.html" class="navigation navigation-prev " aria-label="Previous page: Cache 缓存">
+                <a href="../architecture/lifecircle.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: 运行生命周期">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="session.html" class="navigation navigation-next " aria-label="Next page: Session 存取">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -1374,7 +1309,7 @@ Kv::get([<span class="hljs-string">&apos;key1&apos;</span>,<span class="hljs-str
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Kv 键值对存储","level":"10.3","depth":1,"next":{"title":"Session 存取","level":"10.4","depth":1,"path":"storage/session.md","ref":"storage/session.md","articles":[]},"previous":{"title":"Cache 缓存","level":"10.2","depth":1,"path":"storage/cache.md","ref":"storage/cache.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr","search-jieba","edit-link","github","anchors","tbfed-pagefooter","back-to-top-button","include-codeblock"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search-jieba":{},"tbfed-pagefooter":{"copyright":"Copyright &copy NewFuture 2016","modify_label":"文档编译时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/YunYinORG/YYF"},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"include-codeblock":{"check":false,"edit":false,"fixlang":false,"lang":"","template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"在GITHUB上修改此页","base":"https://github.com/NewFuture/yyf-book/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{}},"theme":"default","author":"New Future","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"YYF Book | YYF文档","language":"zh","links":{"sidebar":{"YYF":"https://github.com/YunYinORG/YYF"}},"gitbook":"*","description":"YYF框架开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构"},"file":{"path":"storage/kv.md","mtime":"2017-03-08T12:46:05.554Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-08T12:49:11.978Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"配置类型和特点","level":"4.1","depth":1,"next":{"title":"[ini基础配置(更新中)]","level":"4.2","depth":1,"ref":"","articles":[]},"previous":{"title":"运行生命周期","level":"3.5","depth":1,"path":"architecture/lifecircle.md","ref":"architecture/lifecircle.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr","search-jieba","edit-link","github","anchors","tbfed-pagefooter","back-to-top-button","include-codeblock"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"search-jieba":{},"tbfed-pagefooter":{"copyright":"Copyright &copy NewFuture 2016","modify_label":"文档编译时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"github":{"url":"https://github.com/YunYinORG/YYF"},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"back-to-top-button":{},"include-codeblock":{"check":false,"edit":false,"fixlang":false,"lang":"","template":"default","theme":"chrome","unindent":false},"edit-link":{"label":"在GITHUB上修改此页","base":"https://github.com/NewFuture/yyf-book/blob/master/"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":true},"anchors":{}},"theme":"default","author":"New Future","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"YYF Book | YYF文档","language":"zh","links":{"sidebar":{"YYF":"https://github.com/YunYinORG/YYF"}},"gitbook":"*","description":"YYF框架开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构"},"file":{"path":"configure/README.md","mtime":"2017-03-08T12:46:05.542Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-08T12:49:11.978Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
