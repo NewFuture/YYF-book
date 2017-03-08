@@ -1,8 +1,8 @@
 # 配置说明
 
 * [配置格式](#style)
-* [应用配置app.ini](#app.ini)
-* [私密配置secret.*.ini](#secret.ini)
+* [应用配置app.ini](#app-ini)
+* [私密配置secret.*.ini](#secret-ini)
 
 ## 配置格式 {#style}
 
@@ -20,7 +20,7 @@ sub.index = 1234
 
 可以通过不同节([section])区分不同环境
 
-## 应用配置 app.ini {#app.ini}
+## 应用配置 app.ini {#app-ini}
 
 应用配置文件为 `conf/app.ini`
 
@@ -33,7 +33,7 @@ sub.index = 1234
 通过不同环境配置可以不用修改任何代码和配置同步跟新和实时部署。
 
 
-## 私密配置 secret.*.ini {#secret.ini}
+## 私密配置 secret.*.ini {#secret-ini}
 
 与账号API授权相关的私密内容(如数据库账号密码)放置于`secret.*.ini`中
 
