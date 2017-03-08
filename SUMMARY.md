@@ -25,7 +25,7 @@
 * [运行生命周期](architecture/lifecircle.md)
 
 ## \[配置\]
-* [配置类型和特点\(更新中\)]
+* [配置类型和特点](configure/README.md)
 * [ini基础配置\(更新中\)]
 * [特殊配置\(更新中\)]
 * [Config 配置读取](configure/config.md)
