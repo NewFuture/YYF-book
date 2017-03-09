@@ -29,7 +29,7 @@
 * [Config 配置读取](configure/config.md)
 
 ## \[控制器\]
-* [REST控制器\(更新中\)]
+* [REST控制器](controller/rest.md)
 * [YAF控制器](controller/yaf.md)
 * [异常处理\(更新中\)]
 
