@@ -9,7 +9,8 @@ YYF 提供了基于集成运行环境的超小docker镜像: [YYF-docker](https:/
 * [完整YYF环境(60M)](#full)
 * [最小运行环境(12M)](#mini)
 
-1. 演示demo {#demo}
+
+1.演示demo {#demo}
 -------------
 demo中包含仓库代码(不一定最新)
 ```bash
@@ -17,7 +18,7 @@ docker run -it --rm -p 1122:80 newfuture/yyf:demo
 ```
 访问 [localhost:1122](http://localhost:1122)即可看到demo效果.(可以将`1122`修改为其他端口)
 
-2. 完整YYF开发环境 {#full}
+2.完整YYF开发环境 {#full}
 -----------------
 
 完整YYF docker除了上述的php环境，还集成下列服务了:
@@ -34,7 +35,7 @@ docker run -it --rm -p 1122:80 newfuture/yyf:demo
 更多"食用方式“参看仓库地址：[https://github.com/NewFuture/YYF-docker](https://github.com/NewFuture/YYF-docker)
 
 
-3. 最小YAF的docker环境 {#mini}
+3.最小YAF的docker环境 {#mini}
 ----------------
 最小YAF的docker环境仅集成了YAF和php的基本环境，如果不包含数据等，可用使用此镜像开发或者演示。
 
