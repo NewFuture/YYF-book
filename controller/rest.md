@@ -8,7 +8,7 @@ Rest控制器
     - [response($status, $data,$code) 快速响应](#response)
     - [success() 快速响应成功操作](#success)
     - [fail() 快捷响应失败操作](#fail)
-* 配置
+* [配置](#config)
 
 init方法 {#init}
 --------
@@ -93,7 +93,7 @@ protected function fail($data = null, $code = 200)
 ```
 操作成功的操作(status为0)
 
->`$this->success('something wrong');`
+>`$this->fail('something wrong');`
 
 输出:(状态码200)
 >`{"status":0,"data":"something wrong"}`
