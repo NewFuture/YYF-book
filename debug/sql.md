@@ -1,6 +1,9 @@
 数据库调试
 =============
 
+* [配置](#config)
+* [日志](#log)
+* [响应头](#header)
 
 配置 {#config}
 ------
@@ -29,9 +32,10 @@ debug.sql.result = 0;//是否在header中输出结果
 
 响应头 {#header}
 --------
-上述头在开发环境下，也会输出到客户端
-```
+上述头在开发环境下，也会输出到http的响应header中
 
+```
+Yyf-Sql-1: {"T":65.899,"Q":"SELECT `id`FROM`admin`WHERE(`account`= :0)AND(`password`= :1) LIMIT :2 OFFSET :3","P":{":0":"account",":1":"8e0bb8de5b28c0f55abbe516f7b9f89b",":2":1,":3":0},"R":1}
 ```
 
 
