@@ -28,10 +28,10 @@
 * [配置类型和特点](configure/README.md)
 * [Config 配置读取](configure/config.md)
 
-## \[控制器\]
+## 控制器
 * [REST控制器](controller/rest.md)
 * [YAF控制器](controller/yaf.md)
-* [异常处理\(更新中\)]
+* [错误处理](controller/error.md)
 
 ## 数据库与Model
 * [数据库](database/README.md)
