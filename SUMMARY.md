@@ -47,7 +47,7 @@
 * [assert 断言](debug/assert.md)
 * [Logger 日志管理](debug/logger.md)
 * [异常\(更新中\)]
-* [数据库调试\(更新中\)]
+* [数据库调试\(更新中\)](debug/sql.md)
 
 ## \[路由\]
 * [默认路由](route/README.md)
