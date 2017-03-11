@@ -39,7 +39,7 @@ Yyf-Sql-1: {"T":65.899,"Q":"SELECT `id`FROM`admin`WHERE(`account`= :0)AND(`passw
 ```
 
 
-如果前端(客户端)是浏览器,可以使用[chrome插件](http://debugger.newfuture.c)进行方便的查看所有的SQL查询
+如果前端(客户端)是浏览器,可以使用[chrome插件](http://debugger.newfuture.cc)进行方便的查看所有的SQL查询
 
 ![](http://debugger.newfuture.cc/images/sql.png)
 

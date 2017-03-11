@@ -49,11 +49,11 @@
 * [异常\(更新中\)]
 * [数据库调试](debug/sql.md)
 
-## \[路由\]
+## 路由
 * [默认路由](route/README.md)
-* [路由配置\(更新中\)]
-    * [简单路由\(更新中\)]
-    * [正则路由\(更新中\)]
+* [路由配置](route/config.md)
+    * [重写路由](route/config.md#rewrite)
+    * [正则路由](route/config.md#regex)
 
 ## \[输入\]
 * [input\(更新中\)]
