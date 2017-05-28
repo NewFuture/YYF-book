@@ -8,7 +8,7 @@
         "github",
         "anchors",
         "tbfed-pagefooter",
-        "back-to-top-button",
+        "anchor-navigation-ex",
         "include-codeblock"
     ],
     "pluginsConfig": {
@@ -27,17 +27,17 @@
         },
         "tbfed-pagefooter": {
             "copyright": "Copyright &copy NewFuture 2016",
-            "modify_label": "文档编译时间：",
+            "modify_label": "上次修改时间：",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
         }
     },
     "author": "New Future",
     "title": "YYF Book | YYF文档",
     "language": "zh-hans",
+    "description": "YYF框架开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构",
     "links": {
         "sidebar": {
             "YYF": "https://github.com/YunYinORG/YYF"
         }
-    },
-    "description": "YYF框架开发文档,Yunyin Yaf Framework 高性能PHP后端RESTful框架,完全前后端分离架构"
+    }
 }
