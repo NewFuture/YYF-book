@@ -4,6 +4,7 @@
         "-lunr",
         "search-jieba",
         "edit-link",
+        "canonical-link",
         "github",
         "anchors",
         "tbfed-pagefooter",
@@ -15,8 +16,11 @@
             "showLevel": true
         },
         "edit-link": {
-            "base": "https://github.com/NewFuture/yyf-book/blob/master/",
+            "base": "https://github.com/NewFuture/YYF-book/blob/master/",
             "label": "在GITHUB上修改此页"
+        },
+        "canonical-link": {
+            "baseURL": "https://yyf.newfuture.cc"
         },
         "github": {
             "url": "https://github.com/YunYinORG/YYF"
@@ -29,7 +33,7 @@
     },
     "author": "New Future",
     "title": "YYF Book | YYF文档",
-    "language": "zh",
+    "language": "zh-hans",
     "links": {
         "sidebar": {
             "YYF": "https://github.com/YunYinORG/YYF"
