@@ -9,7 +9,7 @@ Documentation for YUNYIN YAF Framework
 * 文档源码: [https://github.com/NewFuture/yyf-book](https://github.com/NewFuture/yyf-book)
 * PDF版下载: [https://yyf.newfuture.xyz/yyf.pdf](https://yyf.newfuture.xyz/yyf.pdf)
 
-YYF( Yunyin Yaf Framework )
+YYF (Yunyin Yaf Framework)
 ---------------------------
 
 基于PHP的YAF扩展构建的高效,安全,简单,优雅的 开源RESTful 框架。
