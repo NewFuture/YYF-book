@@ -6,7 +6,6 @@
         "edit-link",
         "canonical-link",
         "github",
-        "anchors",
         "tbfed-pagefooter",
         "anchor-navigation-ex",
         "include-codeblock"
@@ -24,6 +23,10 @@
         },
         "github": {
             "url": "https://github.com/YunYinORG/YYF"
+        },
+        "anchor-navigation-ex": {
+            "showLevel": false,
+            "associatedWithSummary": false
         },
         "tbfed-pagefooter": {
             "copyright": "Copyright &copy NewFuture 2016",
