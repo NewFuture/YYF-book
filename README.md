@@ -14,7 +14,7 @@ YYF (Yunyin Yaf Framework)
 
 基于PHP的YAF扩展构建的高效,安全,简单,优雅的 开源RESTful 框架。
 
-**项目主页 [https://github.com/YunYinORG/YYF](https://github.com/YunYinORG/YYF/)**
+**项目主页** [https://github.com/YunYinORG/YYF](https://github.com/YunYinORG/YYF/)
 
 设计宗旨：以**生产环境下安全高效运行**为前提,尽量让**开发优雅方便**,尽力提高运行性能和开发便捷。
 
@@ -24,8 +24,9 @@ YYF最初是从第二版云印系统后端核心框架萃取和完善发展而�
 
 如果使用过Laraval或者Thinkphp等任何PHP框架,或者熟悉Rails等类似的web框架,可轻松上手YYF。
 
-主要特点：
+主要特点
 ---------
+
 * 安全: 
     - 数据库完全采用PDO封装从底层防止SQL注入
     - 输入参数类型绑定，提供输入过滤封装
