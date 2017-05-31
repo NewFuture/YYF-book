@@ -1,40 +1,40 @@
 RSA 加密存取
 ==========
 
-RSA是非对称加密，`Rsa`对其简单封装(需要openssl扩展),可以放到加密和解密.
+RSA是非对称加密，`Rsa`对其简单封装(需要openssl扩展),并对密钥进行管理.
 
 
 接口方法
 -----------
-* [Rsa::encode($string, $id=null) Rsa加密](#encode)
-* [Rsa::decode($string, $id=null) Rsa解密](#decode)
+* [Rsa::encrypt($string, $id=null) Rsa加密](#encrypt)
+* [Rsa::decrypt($string, $id=null) Rsa解密](#decrypt)
 * [Rsa::pubKey($id=null) 获取对应的公钥](#pubKey)
 
 
-`encode` 加密 {#encode}
+`encrypt` 加密 {#encrypt}
 ----------
 Rsa加密
 
 >```php
->function encode(string $str, string $id=null);
+>function encrypt(string $str, string $id=null);
 >```
 
 ```php
-Rsa::encode('someidstring');
-Rsa::encode('someidstring',123456);
+Rsa::encrypt('someidstring');
+Rsa::encrypt('someidstring',123456);
 ```
 
-`decode` 解密 {#decode}
+`decrypt` 解密 {#decrypt}
 ----------
 Rsa解密
 
 >```php
->function decode(string $str, string $id=null);
+>function decrypt(string $str, string $id=null);
 >```
 
 ```php
-Rsa::decode('xxxxx');
-Rsa::decode('xxxx','my_rsa');
+Rsa::decrypt('xxxxx');
+Rsa::decrypt('xxxx','my_rsa');
 ```
 
 `pubKey` 获取公钥 {#pubKey}
