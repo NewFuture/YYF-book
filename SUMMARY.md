@@ -70,8 +70,8 @@
 * [Session 存取](storage/session.md)
 
 ## \[安全\]
-* [常用加密\(更新中\)]
-    * [格式保留加密\(更新中\)]
+* [格式保留加密\(更新中\)]
+* [AES对称加密](safety/aes.md)
 * [RSA非对称加密](safety/rsa.md)
 * [安全统计\(更新中\)]
 * [CORS 跨站请求](safety/cors.md)
