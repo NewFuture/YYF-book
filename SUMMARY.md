@@ -69,14 +69,14 @@
 * [Kv 键值对存储](storage/kv.md)
 * [Session 存取](storage/session.md)
 
-## \[安全\]
+## 安全
 * [格式保留加密](safety/cipher.md)
 * [AES对称加密](safety/aes.md)
 * [RSA非对称加密](safety/rsa.md)
 <!--* [安全统计\(更新中\)]-->
 * [CORS 跨站请求](safety/cors.md)
 
-## \[库\]
+## \[其他库\]
 * [文件上传\(更新中\)]
 * [邮件\(更新中\)]
 * [短信\(更新中\)]

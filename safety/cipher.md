@@ -12,8 +12,10 @@ Cipher 加解密库
 -----------
 * [Cipher::encryptEmail($email) 邮箱格式保留加密](#email)
 * [Cipher::decryptEmail($email) 邮箱格式保留解密](#email)
-* [Cipher::encryptPhone($phone) 电话格式保留加密](#phone)
-* [Cipher::decryptPhone($phone) 电话格式保留解密](#phone)
+* [Cipher::encryptPhone($phone, $salt, $id=false)电话格式保留加密](#phone)
+* [Cipher::decryptPhone($phone, $salt, $id=false)电话格式保留解密](#phone)
+* [Cipher::encryptPhoneTail($tail) 电话后四位加密](#encryptPhoneTail)
+
 
 ## 配置 {#config}
 
@@ -62,10 +64,47 @@ Cipher::decryptEmail($en);//12345678@qq.com
 * `string $salt`: 混淆字符，为每个号码生成唯一密码本，可以不随机，但是保证每个用户唯一且不变
 * `string $id`: 偏移量，可以使用用户id 等不变的数据提高加密强调。
 
-只有配置中两个key,以及$salt和$id两个混淆参数，这四个才能还原一个加密后的号码。
+* 只有配置中两个key,以及$salt和$id两个混淆参数，这四个才能还原一个加密后的号码。
+
+
+号码长度与加密位数对照表,为了方便预览，开头几位予以保留。
+
+| 长度 | 加密位数 | 举例 | 说明|
+| :---:| :---:  | :---: | :---: |
+| >=11 | 8~10位 (6+4)| 138******** | 通常只有后8位变化|
+| 8~10 | 8位 (4+4) | 9******** | 最后8位被加密|
+| 4~7  | 4位 | 5**** | 最后4位被加密 |
 
 Example:
 ```php
 $ep = Cipher::encryptPhone('13888888888','salt for user',1); //138*********
-Cipher::decryptEmail($ep,'salt for user',1);//yyf@yunyin.org
+Cipher::decryptEmail($ep,'salt for user',1);//13888888888
+
+$ep = Cipher::encryptPhone('+8613888888888','another salt', 233); //+86138*********
+Cipher::decryptEmail($ep,'another salt', 233);//+8613888888888
 ```
+
+## 电话号反向查找 {#findPhone}
+
+用户登录等情况可能需要根据真实手机号查找对应的用户。
+
+### 尾号加密 {#encryptPhoneTail}
+
+手机尾号后4位全局公用相同的密码表，与混淆参数无关
+
+>```php
+>Cipher::encryptPhoneTail(string $tail):string
+>```
+
+* $tail : 手机后四位尾号
+
+
+### 反向查找
+
+当拿到手机号，缺少两个混淆值不能直接查找到对应的手机号。
+可以通过后四位缩小密码范围。
+
+1. 加密后四位
+2. 查找相同后4位的号码
+3. 再查找结果中匹配验证手机号
+
