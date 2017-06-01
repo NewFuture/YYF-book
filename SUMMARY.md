@@ -55,13 +55,6 @@
     * [重写路由](route/config.md#rewrite)
     * [正则路由](route/config.md#regex)
 
-## \[输入\]
-* [input\(更新中\)]
-    * [请求方式\(更新中\)]
-    * [过滤和回调\(更新中\)]
-* [Cookie加密](input/cookie.md)
-* [参数自动绑定\(更新中\)]
-
 
 ## 存储
 * [快速存储](storage/README.md)
@@ -75,6 +68,14 @@
 * [RSA非对称加密](safety/rsa.md)
 <!--* [安全统计\(更新中\)]-->
 * [CORS 跨站请求](safety/cors.md)
+
+## \[输入\]
+* [input\(更新中\)]
+    * [请求方式\(更新中\)]
+    * [过滤和回调\(更新中\)]
+* [Cookie加密](input/cookie.md)
+* [参数自动绑定\(更新中\)]
+
 
 ## \[其他库\]
 * [文件上传\(更新中\)]
