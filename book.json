@@ -8,7 +8,8 @@
         "github",
         "tbfed-pagefooter",
         "anchor-navigation-ex",
-        "include-codeblock"
+        "include-codeblock",
+        "sitemap"
     ],
     "pluginsConfig": {
         "theme-default": {
@@ -32,6 +33,9 @@
             "copyright": "Copyright &copy NewFuture 2016",
             "modify_label": "上次修改时间：",
             "modify_format": "YYYY-MM-DD HH:mm:ss"
+        },
+        "sitemap": {
+            "hostname": "https://yyf.newfuture.cc/"
         }
     },
     "author": "New Future",
