@@ -38,6 +38,10 @@
             "hostname": "https://yyf.newfuture.cc/"
         }
     },
+    "pdf": {
+        "pageNumber": true,
+        "headerTemplate": "YYF 开发文档"
+    },
     "author": "New Future",
     "title": "YYF Book | YYF文档",
     "language": "zh-hans",
