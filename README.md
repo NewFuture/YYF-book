@@ -1,13 +1,19 @@
+---
+description: YYF 开发文档,一个高效 安全 简单的PHP RESTful 框架使用指南
+---
 YYF-book
 ==========
 YYF 开发文档
 
 Documentation for YUNYIN YAF Framework
-
-* 文档主站(gitbook服务): [https://yyf.newfuture.cc](https://yyf.newfuture.cc)
-* 文档加速站(CDN 加速): [https://yyf.newfuture.xyz](https://yyf.newfuture.xyz)
+* YYF框架: <https://github.com/YunYinORG/YYF/>
+* 文档网址: [https://yyf.newfuture.cc](https://yyf.newfuture.cc)
 * 文档源码: [https://github.com/NewFuture/yyf-book](https://github.com/NewFuture/yyf-book)
-* PDF版下载: [https://yyf.newfuture.xyz/yyf.pdf](https://yyf.newfuture.xyz/yyf.pdf)
+* PDF版下载: <https://www.gitbook.com/download/pdf/book/newfuture/yyf>
+* ePub电子书: <https://www.gitbook.com/download/epub/book/newfuture/yyf>
+* mobi电子书: <https://www.gitbook.com/download/mobi/book/newfuture/yyf>
+
+![YunYin Logo](assets/img/logo.svg)
 
 YYF (Yunyin Yaf Framework)
 ---------------------------
