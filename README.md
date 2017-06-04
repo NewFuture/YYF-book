@@ -13,7 +13,7 @@ Documentation for YUNYIN YAF Framework
 * ePub电子书: <https://www.gitbook.com/download/epub/book/newfuture/yyf>
 * mobi电子书: <https://www.gitbook.com/download/mobi/book/newfuture/yyf>
 
-![YunYin Logo](assets/img/logo.svg)
+![YunYin Logo](assets/img/logo.png)
 
 YYF (Yunyin Yaf Framework)
 ---------------------------
