@@ -18,7 +18,7 @@ sudo apt-get -y install apache2 gcc git &>>$TEMP_PATH/yyf_install.log
 
 echo "INSTALL php"
 #php7
-sudo apt-get -y install php php-mcrypt php-curl php-pdo-sqlite php-pdo-mysql php-dev libapache2-mod-php &>>$TEMP_PATH/yyf_install.log
+sudo apt-get -y install php php-curl php-pdo-sqlite php-pdo-mysql php-dev libapache2-mod-php &>>$TEMP_PATH/yyf_install.log
 #php5
 sudo apt-get -y install php5 php5-mcrypt php5-curl php5-sqlite php5-mysql php5-dev libpcre3-dev &>>$TEMP_PATH/yyf_install.log
 
