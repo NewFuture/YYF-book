@@ -52,7 +52,7 @@ done
 # GET PHP version
 PHP_VERSION=$("$PHP_PATH" -v|grep -oP "(?<=^PHP\W)\d\.\d\.\d+");
 if [[ ${PHP_VERSION} == "7."* ]]; then
-    YAF_VERSION=yaf-3.0.4 #php 7
+    YAF_VERSION=yaf-3.0.8 #php 7
 else
     YAF_VERSION=yaf-2.3.5 #php 5 
 fi;
